@@ -65,8 +65,8 @@ class Agilite {
     return this.config
   }
 
-  executeCRUDRequest (appName = '', reqType = '', data = {}, recordId = '', profileKeys = [], recordIds = [], slimResult = true, publish = false, resetService = false) {
-    return Utilities.executeCRUDRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, recordId, profileKeys, recordIds, slimResult, publish, resetService)
+  executeCRUDRequest (appName = '', reqType = '', data = {}, headers = {}) {
+    return Utilities.executeCRUDRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, headers)
   }
 }
 

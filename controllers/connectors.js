@@ -21,15 +21,28 @@ class Connectors {
   }
 
   getData (profileKeys = [], recordIds = [], slimResult = true) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_GET, null, null, profileKeys, recordIds, slimResult)
+    let headers = {}
+
+    headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
+    headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
+    headers[Enums.HEADER_SLIM_RESULT] = slimResult
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_GET, null, headers)
   }
 
   putData (recordId = '', data = {}, resetService = false) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_PUT, data, recordId, null, null, null, null, resetService)
+    let headers = {}
+    headers[Enums.HEADER_RECORD_ID] = recordId
+    headers[Enums.HEADER_RESET_SERVICE] = resetService
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_PUT, data, headers)
   }
 
   deleteData (recordId = '') {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_DELETE, null, recordId)
+    let headers = {}
+    headers[Enums.HEADER_RECORD_ID] = recordId
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_DELETE, null, headers)
   }
 
   execute (profileKey = '', routeKey = '', data = {}) {
