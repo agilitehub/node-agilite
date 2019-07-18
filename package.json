@@ -1,15 +1,15 @@
 {
   "name": "agilite",
   "license": "MIT",
-  "version": "6.4.1",
+  "version": "6.5.0",
   "description": "A NodeJS module that provides seamless interactions with Agilit-e APIs",
   "homepage": "https://agilite.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/agilitehub/node-modules/tree/master/agilite"
+    "url": "https://github.com/agilitehub/node-agilite"
   },
   "bugs": {
-    "url": "https://github.com/agilitehub/node-modules/issues",
+    "url": "https://github.com/agilitehub/node-agilite/issues",
     "email": "support@agilite.io"
   },
   "author": "Agilit-e",
