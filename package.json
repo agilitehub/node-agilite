@@ -1,0 +1,48 @@
+{
+  "name": "agilite",
+  "license": "MIT",
+  "version": "6.4.1",
+  "description": "A NodeJS module that provides seamless interactions with Agilit-e APIs",
+  "homepage": "https://agilite.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agilitehub/node-modules/tree/master/agilite"
+  },
+  "bugs": {
+    "url": "https://github.com/agilitehub/node-modules/issues",
+    "email": "support@agilite.io"
+  },
+  "author": "Agilit-e",
+  "contributors": [
+    {
+      "name": "John Jardin",
+      "email": "support@agilite.io",
+      "url": "https://agilite.io"
+    }
+  ],
+  "keywords": [
+    "agilit-e",
+    "agilite",
+    "keywords",
+    "numbering",
+    "connectors",
+    "data mapping",
+    "templates",
+    "bpm",
+    "roles",
+    "botbuilder",
+    "tier structures"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "axios": "0.19.0",
+    "chai": "4.2.0",
+    "dotenv": "8.0.0",
+    "mocha": "6.1.4",
+    "type-detect": "4.0.8",
+    "uuid": "3.3.2"
+  }
+}
