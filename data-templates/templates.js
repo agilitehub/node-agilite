@@ -7,7 +7,8 @@ const data = {
       groupName: '',
       data: 'Response',
       mode: 'plain_text',
-      theme: 'monokai'
+      theme: 'monokai',
+      templateType: 'std'
     }
   },
   modified: {
@@ -18,7 +19,8 @@ const data = {
       groupName: 'Test Group Name',
       data: 'Response',
       mode: 'plain_text',
-      theme: 'monokai'
+      theme: 'monokai',
+      templateType: 'std'
     }
   }
 }
