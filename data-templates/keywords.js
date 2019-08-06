@@ -1,4 +1,44 @@
 const data = {
+  emptyObject: {},
+  emptyDataObject: {
+    data: {}
+  },
+  emptyValues: {
+    data: {
+      key: '',
+      values: []
+    }
+  },
+  invalidValues: {
+    invalidObject: {
+      data: {
+        key: '',
+        values: [""]
+      }
+    },
+    invalidLabel: {
+      data: {
+        key: '',
+        values: [
+          {
+            labe: "label1",
+            value: "value1"
+          }
+        ]
+      }
+    },
+    invalidValue: {
+      data: {
+        key: '',
+        values: [
+          {
+            label: "label1",
+            valu: "value1"
+          }
+        ]
+      }
+    }
+  },
   new: {
     data: {
       key: '',
