@@ -5,7 +5,7 @@ const UUID = require('uuid')
 const TypeDetect = require('type-detect')
 const expect = require('chai').expect
 const Agilite = require('../controllers/agilite')
-const Enums = require('../utils/enums')
+const EnumsTypeDetect = require('../utils/enums-type-detect')
 const DataTemplate = require('../data-templates/numbering')
 
 const agilite = new Agilite({
@@ -19,6 +19,83 @@ describe('Agilit-e Numbering', () => {
   let recordId = null
   let key = UUID.v1()
   let groupName = UUID.v1()
+  let error = null
+
+  it('Create New Invalid Record - Empty Body Object', (done) => {
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
+
+    agilite.Numbering.postData(mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("No 'data' property found in JSON Body")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Create New Invalid Record - No Key', (done) => {
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
+
+    agilite.Numbering.postData(mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("Please provide a valid Profile 'key'")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Create New Invalid Record - No Name', (done) => {
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.dataObject))
+    mainEntry.data.key = key
+
+    agilite.Numbering.postData(mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("Please provide a valid Profile 'name'")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
 
   it('Create New Record', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
@@ -27,7 +104,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.postData(mainEntry)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_OBJECT_PROPER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if Optional Fields exists
         expect(response.data.data).to.haveOwnProperty('description')
@@ -55,7 +132,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.getData()
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_ARRAY_PROPER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
 
         for (let x in response.data) {
@@ -81,12 +158,119 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.generate(key, agilite.Numbering.outputFormat.STRING, null)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_NUMBER_LOWER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.NUMBER)
         expect(response.data).to.equal(1)
       })
       //  .catch((err) => {
       //      console.log(err.response.data)
       //  })
+      .then(done, done)
+  })
+
+  it('Update Record - No ID', (done) => {
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
+
+    agilite.Numbering.putData(undefined, mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("No Id was specified in the 'record-id' header parameter")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Update Record - Empty Body Object', (done) => {
+    expect(recordId).to.not.equal(null)
+
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
+
+    agilite.Numbering.putData(recordId, mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("No 'data' property found in JSON Body")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Update Record - No Key', (done) => {
+    expect(recordId).to.not.equal(null)
+
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
+
+    agilite.Numbering.putData(recordId, mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("Please provide a valid Profile 'key'")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Update Record - No Name', (done) => {
+    expect(recordId).to.not.equal(null)
+
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.dataObject))
+    mainEntry.data.key = key
+
+    agilite.Numbering.putData(recordId, mainEntry)
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("Please provide a valid Profile 'name'")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
       .then(done, done)
   })
 
@@ -101,7 +285,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.putData(recordId, mainEntry)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_OBJECT_PROPER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if GroupName exists and contains passed value
         expect(response.data.data).to.haveOwnProperty('groupName')
@@ -118,7 +302,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.generate(key, agilite.Numbering.outputFormat.STRING, null)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_STRING_LOWER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
         expect(response.data).to.equal('PRE00010SUF')
       })
       //  .catch((err) => {
@@ -132,7 +316,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.generate(key, agilite.Numbering.outputFormat.STRING, null)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_STRING_LOWER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
         expect(response.data).to.equal('PRE00011SUF')
       })
       //  .catch((err) => {
@@ -146,7 +330,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.resetCounters(recordId)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_OBJECT_PROPER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
         expect(JSON.stringify(response.data)).to.equal('{}')
       })
       //  .catch((err) => {
@@ -160,7 +344,7 @@ describe('Agilit-e Numbering', () => {
 
     agilite.Numbering.generate(key, agilite.Numbering.outputFormat.STRING, null)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_STRING_LOWER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
         expect(response.data).to.equal('PRE00010SUF')
       })
       //  .catch((err) => {
@@ -169,12 +353,58 @@ describe('Agilit-e Numbering', () => {
       .then(done, done)
   })
 
+  it('Delete Record - No Record ID', (done) => {
+    agilite.Numbering.deleteData()
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("No Id was specified in the 'record-id' header parameter")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
+  it('Delete Record - Non-existant Record ID', (done) => {
+    agilite.Numbering.deleteData("test")
+      .then((response) => {})
+      .catch((err) => {
+        error = err.response.data
+
+        expect(TypeDetect(error)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if statusCode exists and contains correct value
+        expect(error).to.haveOwnProperty('statusCode')
+        expect(error.statusCode).to.equal(400)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(error).to.haveOwnProperty('errorMessage')
+        expect(error.errorMessage).to.equal("Record with id: 'test' cannot be found")
+
+        // Check if additionalMessages exists and is blank array
+        expect(error).to.haveOwnProperty('additionalMessages')
+        expect(TypeDetect(error.additionalMessages)).to.equal(EnumsTypeDetect.ARRAY)
+      })
+      .then(done, done)
+  })
+
   it('Delete Record', (done) => {
     expect(recordId).to.not.equal(null)
 
     agilite.Numbering.deleteData(recordId)
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(Enums.VALUE_OBJECT_PROPER)
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
         expect(JSON.stringify(response.data)).to.equal('{}')
       })
       //  .catch((err) => {
