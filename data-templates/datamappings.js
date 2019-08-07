@@ -1,4 +1,13 @@
 const data = {
+  emptyObject: {},
+  emptyDataObject: {
+    data: {}
+  },
+  dataObject: {
+    data: {
+      name: ''
+    }
+  },
   new: {
     data: {
       fieldMappings: [{
