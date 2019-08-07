@@ -1,4 +1,8 @@
 const data = {
+  emptyObject: {},
+  emptyDataObject: {
+    data: {}
+  },
   new: {
     data: {
       name: '',
