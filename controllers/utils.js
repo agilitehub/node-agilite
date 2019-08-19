@@ -33,8 +33,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -51,8 +54,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -69,8 +75,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -87,8 +96,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -105,8 +117,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -123,8 +138,11 @@ class Utils {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -140,7 +158,9 @@ class Utils {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -156,10 +176,17 @@ class Utils {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (dateTimeValue !== undefined && dateTimeValue !== null) {
+      config.headers[Enums.HEADER_DATE_TIME_VALUE] = dateTimeValue
+    }
 
-    config.headers[Enums.HEADER_DATE_TIME_VALUE] = dateTimeValue
-    config.headers[Enums.HEADER_FORMAT_KEY] = formatKey
+    if (formatKey !== undefined && formatKey !== null) {
+      config.headers[Enums.HEADER_FORMAT_KEY] = formatKey
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -175,7 +202,9 @@ class Utils {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -191,10 +220,17 @@ class Utils {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (startDate !== undefined && startDate !== null) {
+      config.headers[Enums.HEADER_START_DATE] = startDate
+    }
 
-    config.headers[Enums.HEADER_START_DATE] = startDate
-    config.headers[Enums.HEADER_END_DATE] = endDate
+    if (endDate !== undefined && endDate !== null) {
+      config.headers[Enums.HEADER_END_DATE] = endDate
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -211,8 +247,13 @@ class Utils {
       responseType: 'arraybuffer'
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    if (includeModules !== undefined && includeModules !== null) {
+      config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -228,8 +269,13 @@ class Utils {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_FILE_ID] = fileId
+    if (fileId !== undefined && fileId !== null) {
+      config.headers[Enums.HEADER_FILE_ID] = fileId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

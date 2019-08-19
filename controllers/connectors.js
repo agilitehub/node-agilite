@@ -53,11 +53,19 @@ class Connectors {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    config.headers[Enums.HEADER_ROUTE_KEY] = routeKey
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (routeKey !== undefined && routeKey !== null) {
+      config.headers[Enums.HEADER_ROUTE_KEY] = routeKey
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

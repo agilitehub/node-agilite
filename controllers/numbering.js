@@ -58,10 +58,18 @@ class Numbering {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
 
-    config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (outputFormat !== undefined && outputFormat !== null) {
+      config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -77,8 +85,13 @@ class Numbering {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

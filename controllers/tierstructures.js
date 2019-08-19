@@ -64,14 +64,33 @@ class TierStructures {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (tierKeys !== undefined && tierKeys !== null) {
+      config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
+    } 
+ 
+    if (includeValues !== undefined && includeValues !== null) {
+      config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
+    } 
+    
+    if (includeMetaData !== undefined && includeMetaData !== null) {
+      config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData
+    } 
 
-    config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
-    config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
-    config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData
-    config.headers[Enums.HEADER_INCLUDE_TIER_ENTRIES] = includeTierEntries
-    config.headers[Enums.HEADER_SORT_VALUES] = sortValues
-    config.headers[Enums.HEADER_VALUES_OUTPUT_FORMAT] = valuesOutputFormat
+    if (includeTierEntries !== undefined && includeTierEntries !== null) {
+      config.headers[Enums.HEADER_INCLUDE_TIER_ENTRIES] = includeTierEntries
+    }
+
+    if (sortValues !== undefined && sortValues !== null) {
+      config.headers[Enums.HEADER_SORT_VALUES] = sortValues
+    }
+
+    if (valuesOutputFormat !== undefined && valuesOutputFormat !== null) {
+      config.headers[Enums.HEADER_VALUES_OUTPUT_FORMAT] = valuesOutputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

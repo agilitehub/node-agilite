@@ -53,10 +53,18 @@ class Roles {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
 
-    config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
-    config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    if (roleNames !== undefined && roleNames !== null) {
+      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (conditionalLevels !== undefined && conditionalLevels !== null) {
+      config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -72,13 +80,29 @@ class Roles {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+    
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
+    
+    if (roleName !== undefined && roleName !== null) {
+      config.headers[Enums.HEADER_ROLE_NAME] = roleName
+    }
+    
+    if (currentUser !== undefined && currentUser !== null) {
+      config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    }
 
-    config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    config.headers[Enums.HEADER_ROLE_NAME] = roleName
-    config.headers[Enums.HEADER_CURRENT_USER] = currentUser
-    config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
+    if (responsibleUsers !== undefined && responsibleUsers !== null) {
+      config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -94,11 +118,21 @@ class Roles {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+    
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
 
-    config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    if (roleNames !== undefined && roleNames !== null) {
+      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -114,10 +148,17 @@ class Roles {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
 
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
-    config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    if (conditionalLevels !== undefined && conditionalLevels !== null) {
+      config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -132,10 +173,18 @@ class Roles {
       method: Enums.METHOD_GET,
       headers: {}
     }
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
 
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
-    config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (responsibleUser !== undefined && responsibleUser !== null) {
+      config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

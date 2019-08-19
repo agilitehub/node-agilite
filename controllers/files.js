@@ -33,8 +33,13 @@ class Files {
       responseType
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -51,14 +56,16 @@ class Files {
       data
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-
     if (fileName && fileName !== '') {
       config.headers[Enums.HEADER_FILE_NAME] = fileName
     }
 
     if (contentType && contentType !== '') {
       config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
 
     if (this.teamId !== undefined && this.teamId !== null) {
@@ -75,8 +82,13 @@ class Files {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -92,8 +104,13 @@ class Files {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

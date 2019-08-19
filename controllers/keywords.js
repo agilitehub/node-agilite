@@ -64,11 +64,21 @@ class Keywords {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }  
+    
+    if (sort !== undefined && sort !== null) {
+      config.headers[Enums.HEADER_SORT] = sort
+    }  
 
-    config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    config.headers[Enums.HEADER_SORT] = sort
-    config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    if (outputFormat !== undefined && outputFormat !== null) {
+      config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -84,10 +94,17 @@ class Keywords {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (groupName !== undefined && groupName !== null) {
+      config.headers[Enums.HEADER_GROUP_NAME] = groupName
+    }
 
-    config.headers[Enums.HEADER_GROUP_NAME] = groupName
-    config.headers[Enums.HEADER_SORT] = sort
+    if (sort !== undefined && sort !== null) {
+      config.headers[Enums.HEADER_SORT] = sort
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -103,11 +120,21 @@ class Keywords {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
 
-    config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    config.headers[Enums.HEADER_VALUE_KEY] = value
-    config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    if (value !== undefined && value !== null) {
+      config.headers[Enums.HEADER_VALUE_KEY] = value
+    }
+
+    if (outputFormat !== undefined && outputFormat !== null) {
+      config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -123,11 +150,21 @@ class Keywords {
       headers: {}
     }
 
-    config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
 
-    config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    config.headers[Enums.HEADER_LABEL_KEY] = label
-    config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    if (label !== undefined && label !== null) {
+      config.headers[Enums.HEADER_LABEL_KEY] = label
+    }
+
+    if (outputFormat !== undefined && outputFormat !== null) {
+      config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
