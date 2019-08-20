@@ -83,15 +83,15 @@ class Roles {
     if (processKey !== undefined && processKey !== null) {
       config.headers[Enums.HEADER_PROCESS_KEY] = processKey
     }
-    
+
     if (bpmRecordId !== undefined && bpmRecordId !== null) {
       config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
     }
-    
+
     if (roleName !== undefined && roleName !== null) {
       config.headers[Enums.HEADER_ROLE_NAME] = roleName
     }
-    
+
     if (currentUser !== undefined && currentUser !== null) {
       config.headers[Enums.HEADER_CURRENT_USER] = currentUser
     }
@@ -121,7 +121,7 @@ class Roles {
     if (processKey !== undefined && processKey !== null) {
       config.headers[Enums.HEADER_PROCESS_KEY] = processKey
     }
-    
+
     if (bpmRecordId !== undefined && bpmRecordId !== null) {
       config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
     }

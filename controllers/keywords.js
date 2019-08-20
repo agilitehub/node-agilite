@@ -46,7 +46,7 @@ class Keywords {
   putData (recordId = '', data = {}) {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
-    
+
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_PUT, data, headers)
   }
 
@@ -66,11 +66,11 @@ class Keywords {
 
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }  
-    
+    }
+
     if (sort !== undefined && sort !== null) {
       config.headers[Enums.HEADER_SORT] = sort
-    }  
+    }
 
     if (outputFormat !== undefined && outputFormat !== null) {
       config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat

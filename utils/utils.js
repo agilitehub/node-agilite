@@ -15,7 +15,7 @@ const executeCRUDRequest = (apiServerUrl = '', apiKey = '', teamId = null, appNa
     data
   }
 
-  if(apiKey !== undefined && apiKey !== null) {
+  if (apiKey !== undefined && apiKey !== null) {
     config.headers[Enums.HEADER_API_KEY] = apiKey
   }
 
@@ -29,9 +29,8 @@ const executeCRUDRequest = (apiServerUrl = '', apiKey = '', teamId = null, appNa
       config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
       break
-
   }
-  
+
   return executeRequest(config)
 }
 

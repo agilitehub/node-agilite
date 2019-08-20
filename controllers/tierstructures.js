@@ -66,15 +66,15 @@ class TierStructures {
 
     if (tierKeys !== undefined && tierKeys !== null) {
       config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
-    } 
- 
+    }
+
     if (includeValues !== undefined && includeValues !== null) {
       config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
-    } 
-    
+    }
+
     if (includeMetaData !== undefined && includeMetaData !== null) {
       config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData
-    } 
+    }
 
     if (includeTierEntries !== undefined && includeTierEntries !== null) {
       config.headers[Enums.HEADER_INCLUDE_TIER_ENTRIES] = includeTierEntries

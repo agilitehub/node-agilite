@@ -40,7 +40,7 @@ class BPM {
   deleteData (recordId = '') {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
-    
+
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
 
@@ -117,7 +117,7 @@ class BPM {
       method: Enums.METHOD_GET,
       headers: {}
     }
-    
+
     if (processKeys !== undefined && processKeys !== null) {
       config.headers[Enums.HEADER_PROCESS_KEYS] = processKeys.join(Enums.SEPARATOR_COMMA)
     }

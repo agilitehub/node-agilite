@@ -13,7 +13,7 @@ const data = {
     invalidObject: {
       data: {
         key: '',
-        values: [""]
+        values: ['']
       }
     },
     invalidLabel: {
@@ -21,8 +21,8 @@ const data = {
         key: '',
         values: [
           {
-            labe: "label1",
-            value: "value1"
+            labe: 'label1',
+            value: 'value1'
           }
         ]
       }
@@ -32,8 +32,8 @@ const data = {
         key: '',
         values: [
           {
-            label: "label1",
-            valu: "value1"
+            label: 'label1',
+            valu: 'value1'
           }
         ]
       }
