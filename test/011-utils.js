@@ -24,6 +24,14 @@ describe('Agilit-e Utils', () => {
     .catch((err) => {})
   })
 
+  it('XML To JS - Invalid Params', () => {
+    agilite.Utils.XMLToJS(null)
+    .then((response) => {})
+    .catch((err) => {
+      expect(err.response.data.errorMessage).to.equal('Incorrect Object Type: null. string Required')
+    })
+  })
+
   it('JS To XML', () => {
     agilite.Utils.JSToXML(data)
     .then((response) => {
@@ -32,6 +40,14 @@ describe('Agilit-e Utils', () => {
       data = response.data
     })
     .catch((err) => {})
+  })
+
+  it('JS To XML - Invalid Params', () => {
+    agilite.Utils.JSToXML(null)
+    .then((response) => {})
+    .catch((err) => {
+      expect(err.response.data.errorMessage).to.equal('Incorrect Object Type: null. object Required')
+    })
   })
 
   it('Encode XML', () => {
@@ -44,12 +60,28 @@ describe('Agilit-e Utils', () => {
     .catch((err) => {})
   })
 
+  it('Encode XML - Invalid Params', () => {
+    agilite.Utils.encodeXML(null)
+    .then((response) => {})
+    .catch((err) => {
+      expect(err.response.data.errorMessage).to.equal('Incorrect Object Type: null. string Required')
+    })
+  })
+
   it('Decode XML', () => {
     agilite.Utils.decodeXML(data)
     .then((response) => {
       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
     })
     .catch((err) => {})
+  })
+
+  it('Decode XML - Invalid Params', () => {
+    agilite.Utils.decodeXML(null)
+    .then((response) => {})
+    .catch((err) => {
+      expect(err.response.data.errorMessage).to.equal('Incorrect Object Type: null. string Required')
+    })
   })
 
   it('Format Date Time', () => {
@@ -59,6 +91,14 @@ describe('Agilit-e Utils', () => {
       expect(response.data).to.equal('2000/01/01')
     })
     .catch((err) => {})
+  })
+
+  it('Format Date Time - No Value and Format Params', () => {
+    agilite.Utils.formatDateTime()
+    .then((response) => {})
+    .catch((err) => {
+      expect(err.response.data.errorMessage).to.equal("No Date/Time value was specified in the 'date-time-value' header parameter")
+    })
   })
 
   it('Generate UUID', () => {
@@ -81,6 +121,9 @@ describe('Agilit-e Utils', () => {
     agilite.Utils.generatePDF()
     .then((response) => {
       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+      expect(response.data).to.haveOwnProperty('data')
+      expect(response.data.data).to.haveOwnProperty('fileName')
+      expect(response.data.data).to.haveOwnProperty('contentType')
     })
     .catch((err) => {})
   })
