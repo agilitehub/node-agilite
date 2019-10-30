@@ -14,7 +14,7 @@ describe('Initial Setup', () => {
   it('Check API Server URL is valid', (done) => {
     expect(agilite.getConfig()).to.haveOwnProperty('apiServerUrl')
     expect(agilite.getConfig().apiServerUrl).to.not.equal(Enums.STRING_EMPTY)
-    // TODO: Check that it's a valid url string
+    // TODO: Check that apiServerUrl is a valid url string
     done()
   })
 

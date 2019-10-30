@@ -16,9 +16,9 @@ const Utilities = require('../utils/utils')
 
 class Agilite {
   constructor (config) {
-    let apiServerUrl = config.apiServerUrl || Enums.URL_API_SERVER
-    let apiKey = config.apiKey || Enums.STRING_EMPTY
-    let teamId = config.teamId
+    const apiServerUrl = config.apiServerUrl || Enums.URL_API_SERVER
+    const apiKey = config.apiKey || Enums.STRING_EMPTY
+    const teamId = config.teamId
 
     this.config = {
       apiServerUrl,

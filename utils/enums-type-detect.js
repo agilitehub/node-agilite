@@ -4,6 +4,7 @@ let constants = {
   ARRAY: 'Array',
   ARRAY_BUFFER: 'ArrayBuffer',
   ARGS: 'Arguments',
+  BOOLEAN: 'boolean',
   DATA_VIEW: 'DataView',
   DATE: 'Date',
   FUNCTION: 'function',

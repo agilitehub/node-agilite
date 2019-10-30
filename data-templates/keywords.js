@@ -43,8 +43,8 @@ const data = {
     data: {
       key: '',
       values: [{
-        'label': 'key1',
-        'value': 'value1'
+        label: 'key1',
+        value: 'value1'
       }]
     }
   },
@@ -53,8 +53,8 @@ const data = {
       key: '',
       groupName: '',
       values: [{
-        'label': 'key11',
-        'value': 'value11'
+        label: 'key11',
+        value: 'value11'
       }]
     }
   }
