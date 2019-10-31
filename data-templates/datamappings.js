@@ -121,7 +121,7 @@ const data = {
       },
       srcExcel: {
         srcType: '1',
-        fileId: '',
+        fileId: 'test',
         attachments: [],
         deleteAttachments: []
       },
@@ -132,7 +132,7 @@ const data = {
         desType: '1',
         attachments: [],
         deleteAttachments: [],
-        fileName: ''
+        fileName: 'test'
       }
     }
   }

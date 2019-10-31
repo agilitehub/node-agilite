@@ -51,8 +51,8 @@ const data = {
   modified: {
     data: {
       key: '',
-      description: '',
-      notes: '',
+      description: 'This is Tier 1',
+      notes: 'Tier 1 Notes',
       values: [{
         'label': 'key1',
         'value': 'value1'
