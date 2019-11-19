@@ -127,60 +127,6 @@ describe('Agilit-e Keywords', () => {
       .then(done, done)
   })
 
-  it('Create New Record - Invalid Values Array Entry (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidObject))
-    mainEntry.data.key = key
-
-    agilite.Keywords.postData(mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'label\' property in the \'values\' entry')
-      })
-      .then(done, done)
-  })
-
-  it('Create New Record - Invalid Label Property (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidLabel))
-    mainEntry.data.key = key
-
-    agilite.Keywords.postData(mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'label\' property in the \'values\' entry')
-      })
-      .then(done, done)
-  })
-
-  it('Create New Record - Invalid Value Property (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidValue))
-    mainEntry.data.key = key
-
-    agilite.Keywords.postData(mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'value\' property in the \'values\' entry')
-      })
-      .then(done, done)
-  })
-
   it('Create New Record - Success', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
     mainEntry.data.key = key
@@ -364,60 +310,6 @@ describe('Agilit-e Keywords', () => {
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
         expect(err.response.data.errorMessage).to.equal('At least 1 \'values\' JSON entry is required')
-      })
-      .then(done, done)
-  })
-
-  it('Update Existing Record - Invalid Values Array Entry (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidObject))
-    mainEntry.data.key = key
-
-    agilite.Keywords.putData(recordId, mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'label\' property in the \'values\' entry')
-      })
-      .then(done, done)
-  })
-
-  it('Update Existing Record - Invalid Label Property (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidLabel))
-    mainEntry.data.key = key
-
-    agilite.Keywords.putData(recordId, mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'label\' property in the \'values\' entry')
-      })
-      .then(done, done)
-  })
-
-  it('Update Existing Record - Invalid Value Property (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.invalidValues.invalidValue))
-    mainEntry.data.key = key
-
-    agilite.Keywords.putData(recordId, mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid \'value\' property in the \'values\' entry')
       })
       .then(done, done)
   })
