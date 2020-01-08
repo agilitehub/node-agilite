@@ -66,6 +66,7 @@ const Enums = {
   MODULE_KEY_ROLES: 'roles',
   MODULE_KEY_BOT_BUILDER: 'botbuilder',
   MODULE_KEY_TIER_STRUCTURES: 'tierstructures',
+  MODULE_KEY_BATCH_ACTIONS: 'batchactions',
   MODULE_KEY_FILES: 'files',
   MODULE_KEY_UTILS: 'utils',
   MODULE_KEY_REPORTS: 'reports',

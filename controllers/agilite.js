@@ -12,6 +12,7 @@ const Roles = require('./roles')
 const Files = require('./files')
 const Utils = require('./utils')
 const TierStructures = require('./tierstructures')
+const BatchActions = require('./batchactions')
 const Utilities = require('../utils/utils')
 
 class Agilite {
@@ -37,6 +38,7 @@ class Agilite {
     this.Files = new Files(config)
     this.Utils = new Utils(config)
     this.TierStructures = new TierStructures(config)
+    this.BatchActions = new BatchActions(config)
 
     this.appName = {
       MODULE_KEY_API_KEYS: 'apikeys',
@@ -50,7 +52,8 @@ class Agilite {
       MODULE_KEY_BOT_BUILDER: 'botbuilder',
       MODULE_KEY_FILES: 'files',
       MODULE_KEY_UTILS: 'utils',
-      MODULE_KEY_TIER_STRUCTURES: 'tierstructures'
+      MODULE_KEY_TIER_STRUCTURES: 'tierstructures',
+      MODULE_KEY_BATCH_ACTIONS: 'batchactions'
     }
 
     this.reqType = {
