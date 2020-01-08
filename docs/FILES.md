@@ -34,3 +34,12 @@ agilite.Files.deleteFile(recordId)
 ```javascript
 agilite.Files.getFileName(recordId)
 ```
+
+**unzip**
+
+* recordId - Record Id of the file that needs to be unzipped
+
+```javascript
+agilite.Files.unzip(recordId)
+```
+

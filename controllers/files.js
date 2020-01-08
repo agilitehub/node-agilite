@@ -118,6 +118,28 @@ class Files {
 
     return Utils.executeRequest(config)
   }
+
+  unzip (recordId = '') {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/unzip`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
 }
 
 module.exports = Files
