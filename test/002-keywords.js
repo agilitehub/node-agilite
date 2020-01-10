@@ -393,7 +393,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal(`Active Keyword Profile cannot be found - ${invalidValue}`)
+        expect(err.response.data.errorMessage).to.equal(`Active Profile cannot be found - ${invalidValue}`)
       })
       .then(done, done)
   })
@@ -461,7 +461,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal(`Active Keyword Profiles cannot be found for Group - ${invalidValue}`)
+        expect(err.response.data.errorMessage).to.equal(`Active Profiles cannot be found for Group - ${invalidValue}`)
       })
       .then(done, done)
   })
@@ -524,7 +524,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Keyword Profile cannot be found') // TODO: We can provide a better Error Message
+        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found') // TODO: We can provide a better Error Message
       })
       .then(done, done)
   })
@@ -610,7 +610,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Keyword Profile cannot be found') // TODO: We can provide a better Error Message
+        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found') // TODO: We can provide a better Error Message
       })
       .then(done, done)
   })
