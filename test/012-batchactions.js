@@ -250,53 +250,51 @@ describe('Agilit-e Batch Actions', () => {
       .then(done, done)
   })
 
-  // it('Execute Template - No Params (Negative)', (done) => {
-  //   agilite.BatchActions.execute()
-  //     .catch((err) => {
-  //       expect(err).to.haveOwnProperty('response')
-  //       expect(err.response.status).to.equal(400)
-  //       expect(err.response).to.haveOwnProperty('data')
-  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  it('Execute Batch Action - No Params (Negative)', (done) => {
+    agilite.BatchActions.execute()
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-  //       // Check if errorMessage exists and contains correct error message
-  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
-  //       expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
-  //     })
-  //     .then(done, done)
-  // })
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+      })
+      .then(done, done)
+  })
 
-  // it('Execute Template - Invalid Key (Negative)', (done) => {
-  //   agilite.BatchActions.execute('invalid')
-  //     .catch((err) => {
-  //       expect(err).to.haveOwnProperty('response')
-  //       expect(err.response.status).to.equal(400)
-  //       expect(err.response).to.haveOwnProperty('data')
-  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  it('Execute Batch Action - Invalid Key (Negative)', (done) => {
+    agilite.BatchActions.execute('invalid')
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-  //       // Check if errorMessage exists and contains correct error message
-  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
-  //       expect(err.response.data.errorMessage).to.equal('Active Template Profile cannot be found - invalid')
-  //     })
-  //     .then(done, done)
-  // })
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - invalid')
+      })
+      .then(done, done)
+  })
 
-  // it('Execute Template - Null as Data - Success', (done) => {
-  //   agilite.BatchActions.execute(key, null)
-  //     .then((response) => {
-  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
-  //       expect(response.data).to.equal('Response')
-  //     })
-  //     .then(done, done)
-  // })
+  it('Execute Batch Action - Null as Data - Success', (done) => {
+    agilite.BatchActions.execute(key, null)
+      .then((response) => {
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+      })
+      .then(done, done)
+  })
 
-  // it('Execute Template - Object as Data - Success', (done) => {
-  //   agilite.BatchActions.execute(key, null)
-  //     .then((response) => {
-  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
-  //       expect(response.data).to.equal('Response')
-  //     })
-  //     .then(done, done)
-  // })
+  it('Execute Batch Action - Object as Data - Success', (done) => {
+    agilite.BatchActions.execute(key, null)
+      .then((response) => {
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+      })
+      .then(done, done)
+  })
 
   it('Delete Record - No Record Id (Negative)', (done) => {
     agilite.BatchActions.deleteData()

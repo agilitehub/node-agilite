@@ -10,7 +10,11 @@ const data = {
       description: '',
       groupName: '',
       parentId: null,
-      actions: [{}]
+      actions: [{
+        actionType: 'connectors/execute',
+        profileKey: 'key',
+        routeKey: 'route'
+      }]
     }
   },
   modified: {
@@ -20,7 +24,11 @@ const data = {
       description: 'Test Description',
       groupName: 'Test Group Name',
       parentId: null,
-      actions: [{}]
+      actions: [{
+        actionType: 'connectors/execute',
+        profileKey: 'key_modified',
+        routeKey: 'route_modified'
+      }]
     }
   }
 }
