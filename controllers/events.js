@@ -68,6 +68,31 @@ class Events {
 
     return Utils.executeRequest(config)
   }
+
+  subscribe (profileKey = '', data = {}) {
+    const config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_EVENTS}/subscribe`,
+      method: Enums.METHOD_POST,
+      headers: {},
+      data
+    }
+
+    config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
 }
 
 module.exports = Events
