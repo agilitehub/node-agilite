@@ -4,11 +4,12 @@ const Axios = require('axios')
 const Enums = require('../utils/enums')
 
 const executeRequest = (config) => {
+  config.maxContentLength = 99999999
   return Axios.request(config)
 }
 
 const executeCRUDRequest = (apiServerUrl = '', apiKey = '', teamId = null, appName = '', method = '', data = {}, headers = {}) => {
-  let config = {
+  const config = {
     url: `${apiServerUrl}/${appName}/${Enums.STRING_DATA}`,
     method,
     headers,
