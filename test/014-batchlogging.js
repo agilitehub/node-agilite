@@ -7,14 +7,14 @@ const expect = require('chai').expect
 const Agilite = require('../controllers/agilite')
 const EnumsTypeDetect = require('../utils/enums-type-detect')
 const Enums = require('../utils/enums')
-const DataTemplate = require('../data-templates/batchactions')
+const DataTemplate = require('../data-templates/events')
 
 const agilite = new Agilite({
   apiServerUrl: process.env.API_SERVER_URL,
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e Batch Actions', () => {
+describe('Agilit-e Batch Logging', () => {
   const invalidValue = 'invalid_value'
 
   let mainEntry = null
@@ -23,7 +23,7 @@ describe('Agilit-e Batch Actions', () => {
   let key = UUID.v1()
 
   it('Create New Record - No Params (Negative)', (done) => {
-    agilite.BatchActions.postData()
+    agilite.BatchLogging.postData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -40,7 +40,7 @@ describe('Agilit-e Batch Actions', () => {
   it('Create New Record - Empty Object (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
 
-    agilite.BatchActions.postData(mainEntry)
+    agilite.BatchLogging.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -57,7 +57,7 @@ describe('Agilit-e Batch Actions', () => {
   it('Create New Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.BatchActions.postData(mainEntry)
+    agilite.BatchLogging.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -74,8 +74,9 @@ describe('Agilit-e Batch Actions', () => {
   it('Create New Record - Success', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
     mainEntry.data.key = key
+    mainEntry.data.name = key
 
-    agilite.BatchActions.postData(mainEntry)
+    agilite.BatchLogging.postData(mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
@@ -102,10 +103,6 @@ describe('Agilit-e Batch Actions', () => {
         expect(response.data.data.groupName).to.equal(Enums.STRING_EMPTY)
         expect(response.data.data).to.haveOwnProperty('description')
         expect(response.data.data.description).to.equal(Enums.STRING_EMPTY)
-        expect(response.data.data).to.haveOwnProperty('parentId')
-        expect(response.data.data.parentId).to.equal(null)
-        expect(response.data.data).to.haveOwnProperty('actions')
-        expect(response.data.data.actions.length).to.be.greaterThan(0)
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -114,7 +111,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Get Data - Slim Result - Find Record By Id - Success', (done) => {
-    agilite.BatchActions.getData()
+    agilite.BatchLogging.getData()
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -146,7 +143,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Update Existing Record - No Params (Negative)', (done) => {
-    agilite.BatchActions.putData()
+    agilite.BatchLogging.putData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -161,7 +158,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Update Existing Record - No Data Param (Negative)', (done) => {
-    agilite.BatchActions.putData(recordId)
+    agilite.BatchLogging.putData(recordId)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -176,7 +173,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Update Existing Record - Empty Object Data Param (Negative)', (done) => {
-    agilite.BatchActions.putData(recordId, {})
+    agilite.BatchLogging.putData(recordId, {})
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -193,7 +190,7 @@ describe('Agilit-e Batch Actions', () => {
   it('Update Existing Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.BatchActions.putData(recordId, mainEntry)
+    agilite.BatchLogging.putData(recordId, mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -211,8 +208,9 @@ describe('Agilit-e Batch Actions', () => {
     key = 'PUT_' + key
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
     mainEntry.data.key = key
+    mainEntry.data.name = key
 
-    agilite.BatchActions.putData(recordId, mainEntry)
+    agilite.BatchLogging.putData(recordId, mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
@@ -223,10 +221,6 @@ describe('Agilit-e Batch Actions', () => {
         expect(response.data.data.groupName).to.equal(DataTemplate.modified.data.groupName)
         expect(response.data.data).to.haveOwnProperty('description')
         expect(response.data.data.description).to.equal(DataTemplate.modified.data.description)
-        expect(response.data.data).to.haveOwnProperty('parentId')
-        expect(response.data.data.parentId).to.equal(null)
-        expect(response.data.data).to.haveOwnProperty('actions')
-        expect(response.data.data.actions.length).to.be.greaterThan(0)
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -250,8 +244,8 @@ describe('Agilit-e Batch Actions', () => {
       .then(done, done)
   })
 
-  it('Execute Batch Action - No Params (Negative)', (done) => {
-    agilite.BatchActions.execute()
+  it('Get By Profile Key - No Params (Negative)', (done) => {
+    agilite.BatchLogging.getByProfileKey()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -260,13 +254,13 @@ describe('Agilit-e Batch Actions', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('No profile-key was specified in the \'profile-key\' header parameter')
       })
       .then(done, done)
   })
 
-  it('Execute Batch Action - Invalid Key (Negative)', (done) => {
-    agilite.BatchActions.execute('invalid')
+  it('Get By Profile Key - Invalid Key (Negative)', (done) => {
+    agilite.BatchLogging.getByProfileKey('invalid')
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -275,29 +269,67 @@ describe('Agilit-e Batch Actions', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - invalid')
+        expect(err.response.data.errorMessage).to.equal('Active Batch Logging Profile cannot be found - invalid')
       })
       .then(done, done)
   })
 
-  it('Execute Batch Action - Null as Data - Success', (done) => {
-    agilite.BatchActions.execute(key, null)
+  it('Get By Profile Key - Null as Data - Success', (done) => {
+    agilite.BatchLogging.getByProfileKey(key, null)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
       })
       .then(done, done)
   })
 
-  it('Execute Batch Action - Object as Data - Success', (done) => {
-    agilite.BatchActions.execute(key, null)
-      .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-      })
-      .then(done, done)
-  })
+  // it('Execute Profile - No Params (Negative)', (done) => {
+  //   agilite.BatchLogging.execute()
+  //     .catch((err) => {
+  //       expect(err).to.haveOwnProperty('response')
+  //       expect(err.response.status).to.equal(400)
+  //       expect(err.response).to.haveOwnProperty('data')
+  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+  //       // Check if errorMessage exists and contains correct error message
+  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
+  //       expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+  //     })
+  //     .then(done, done)
+  // })
+
+  // it('Execute Profile - Invalid Key (Negative)', (done) => {
+  //   agilite.BatchLogging.execute('invalid')
+  //     .catch((err) => {
+  //       expect(err).to.haveOwnProperty('response')
+  //       expect(err.response.status).to.equal(400)
+  //       expect(err.response).to.haveOwnProperty('data')
+  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+  //       // Check if errorMessage exists and contains correct error message
+  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
+  //       expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - invalid')
+  //     })
+  //     .then(done, done)
+  // })
+
+  // it('Execute Profile - Null as Data - Success', (done) => {
+  //   agilite.BatchLogging.execute(key, null)
+  //     .then((response) => {
+  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  //     })
+  //     .then(done, done)
+  // })
+
+  // it('Execute Profile - Object as Data - Success', (done) => {
+  //   agilite.BatchLogging.execute(key, null)
+  //     .then((response) => {
+  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  //     })
+  //     .then(done, done)
+  // })
 
   it('Delete Record - No Record Id (Negative)', (done) => {
-    agilite.BatchActions.deleteData()
+    agilite.BatchLogging.deleteData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -312,7 +344,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Delete Record - Invalid Record Id (Negative)', (done) => {
-    agilite.BatchActions.deleteData(invalidValue)
+    agilite.BatchLogging.deleteData(invalidValue)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -327,7 +359,7 @@ describe('Agilit-e Batch Actions', () => {
   })
 
   it('Delete Record - Success', (done) => {
-    agilite.BatchActions.deleteData(recordId)
+    agilite.BatchLogging.deleteData(recordId)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
         expect(JSON.stringify(response.data)).to.equal('{}')
