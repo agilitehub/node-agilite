@@ -71,15 +71,37 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  createProcess (profileKey = '') {
+  initProcess (profileKey = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/createProcess`,
-      method: Enums.METHOD_GET,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/initProcess`,
+      method: Enums.METHOD_POST,
       headers: {}
     }
 
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  completeProcess (logProcessId = '') {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/completeProcess`,
+      method: Enums.METHOD_POST,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers['log-process-id'] = logProcessId
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {

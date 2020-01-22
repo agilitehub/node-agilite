@@ -282,51 +282,49 @@ describe('Agilit-e Batch Logging', () => {
       .then(done, done)
   })
 
-  // it('Execute Profile - No Params (Negative)', (done) => {
-  //   agilite.BatchLogging.execute()
-  //     .catch((err) => {
-  //       expect(err).to.haveOwnProperty('response')
-  //       expect(err.response.status).to.equal(400)
-  //       expect(err.response).to.haveOwnProperty('data')
-  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  it('Init Process - No Params (Negative)', (done) => {
+    agilite.BatchLogging.initProcess()
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-  //       // Check if errorMessage exists and contains correct error message
-  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
-  //       expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
-  //     })
-  //     .then(done, done)
-  // })
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(err.response.data.errorMessage).to.equal('No profile-key was specified in the \'profile-key\' header parameter')
+      })
+      .then(done, done)
+  })
 
-  // it('Execute Profile - Invalid Key (Negative)', (done) => {
-  //   agilite.BatchLogging.execute('invalid')
-  //     .catch((err) => {
-  //       expect(err).to.haveOwnProperty('response')
-  //       expect(err.response.status).to.equal(400)
-  //       expect(err.response).to.haveOwnProperty('data')
-  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  it('Complete Process - No Params (Negative)', (done) => {
+    agilite.BatchLogging.completeProcess()
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-  //       // Check if errorMessage exists and contains correct error message
-  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
-  //       expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - invalid')
-  //     })
-  //     .then(done, done)
-  // })
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(err.response.data.errorMessage).to.equal('No Batch Logging Process Id was specified in the \'log-process-id\' header parameter')
+      })
+      .then(done, done)
+  })
 
-  // it('Execute Profile - Null as Data - Success', (done) => {
-  //   agilite.BatchLogging.execute(key, null)
-  //     .then((response) => {
-  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-  //     })
-  //     .then(done, done)
-  // })
+  it('Complete Process - Invalid Key (Negative)', (done) => {
+    agilite.BatchLogging.completeProcess('invalid')
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-  // it('Execute Profile - Object as Data - Success', (done) => {
-  //   agilite.BatchLogging.execute(key, null)
-  //     .then((response) => {
-  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-  //     })
-  //     .then(done, done)
-  // })
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+      })
+      .then(done, done)
+  })
 
   it('Delete Record - No Record Id (Negative)', (done) => {
     agilite.BatchLogging.deleteData()
