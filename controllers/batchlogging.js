@@ -22,7 +22,7 @@ class BatchLogging {
   }
 
   postData (data = {}) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCHLOGGING, Enums.METHOD_POST, data)
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_POST, data)
   }
 
   getData (profileKeys = [], recordIds = [], slimResult = true) {
@@ -32,26 +32,26 @@ class BatchLogging {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCHLOGGING, Enums.METHOD_GET, null, headers)
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_GET, null, headers)
   }
 
   putData (recordId = '', data = {}) {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCHLOGGING, Enums.METHOD_PUT, data, headers)
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_PUT, data, headers)
   }
 
   deleteData (recordId = '') {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCHLOGGING, Enums.METHOD_DELETE, null, headers)
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_DELETE, null, headers)
   }
 
   getByProfileKey (profileKey = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/getByProfileKey`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
@@ -73,7 +73,7 @@ class BatchLogging {
 
   initProcess (profileKey = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/initProcess`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initProcess`,
       method: Enums.METHOD_POST,
       headers: {}
     }
@@ -95,7 +95,29 @@ class BatchLogging {
 
   completeProcess (logProcessId = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCHLOGGING}/completeProcess`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeProcess`,
+      method: Enums.METHOD_POST,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers['log-process-id'] = logProcessId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  createLogEntry (logProcessId = '') {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/createLogEntry`,
       method: Enums.METHOD_POST,
       headers: {}
     }
