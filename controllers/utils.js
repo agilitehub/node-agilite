@@ -130,6 +130,27 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
+  jsonDiff (data = '') {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/jsonDiff`,
+      method: Enums.METHOD_POST,
+      headers: {},
+      data
+    }
+
+    config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utilities.executeRequest(config)
+  }
+
   generatePDF (data = {}) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generatePDF`,
