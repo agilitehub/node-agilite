@@ -151,6 +151,55 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
+  generateOCR (recordId) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateOCR`,
+      method: Enums.METHOD_POST,
+      headers: {}
+    }
+
+    config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    if (recordId !== undefined && recordId !== null) {
+      config.headers[Enums.HEADER_RECORD_ID] = recordId
+    }
+
+    return Utilities.executeRequest(config)
+  }
+
+  generateUsername (fullName, data = []) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUsername`,
+      method: Enums.METHOD_POST,
+      headers: {},
+      data
+    }
+
+    config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    if (fullName !== undefined && fullName !== null) {
+      config.headers[Enums.HEADER_FULL_NAME] = fullName
+    }
+
+    return Utilities.executeRequest(config)
+  }
+
   generatePDF (data = {}) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generatePDF`,
