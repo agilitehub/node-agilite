@@ -71,9 +71,9 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  initProcess (profileKey = '') {
+  initLogProcess (profileKey = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initProcess`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initLogProcess`,
       method: Enums.METHOD_POST,
       headers: {}
     }
@@ -93,9 +93,9 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  completeProcess (logProcessId = '') {
+  completeLogProcess (logProcessId = '') {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeProcess`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeLogProcess`,
       method: Enums.METHOD_POST,
       headers: {}
     }
