@@ -25,7 +25,7 @@ class Utils {
     }
   }
 
-  encodeXML (data = '') {
+  encodeXML (data = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/encodeXML`,
       method: Enums.METHOD_POST,
@@ -35,6 +35,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -46,7 +50,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  decodeXML (data = '') {
+  decodeXML (data = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/decodeXML`,
       method: Enums.METHOD_POST,
@@ -56,6 +60,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -67,7 +75,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  XMLToJS (data = '') {
+  XMLToJS (data = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/XMLToJS`,
       method: Enums.METHOD_POST,
@@ -77,6 +85,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -88,7 +100,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  JSToXML (data = {}) {
+  JSToXML (data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/JSToXML`,
       method: Enums.METHOD_POST,
@@ -98,6 +110,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -109,7 +125,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  html2json (data = '') {
+  html2json (data = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/html2json`,
       method: Enums.METHOD_POST,
@@ -119,6 +135,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -130,7 +150,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  jsonDiff (data = '') {
+  jsonDiff (data = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/jsonDiff`,
       method: Enums.METHOD_POST,
@@ -140,6 +160,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -151,7 +175,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  generateOCR (recordId) {
+  generateOCR (recordId, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateOCR`,
       method: Enums.METHOD_POST,
@@ -159,6 +183,10 @@ class Utils {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -175,7 +203,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  generateUsername (fullName, data = []) {
+  generateUsername (fullName, data = [], logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUsername`,
       method: Enums.METHOD_POST,
@@ -184,6 +212,10 @@ class Utils {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -200,7 +232,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  generatePDF (data = {}) {
+  generatePDF (data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generatePDF`,
       method: Enums.METHOD_POST,
@@ -210,6 +242,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -221,13 +257,17 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  generateUUID () {
+  generateUUID (logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUUID`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -239,11 +279,15 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  formatDateTime (dateTimeValue = '', formatKey = '') {
+  formatDateTime (dateTimeValue = '', formatKey = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/formatDateTime`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (dateTimeValue !== undefined && dateTimeValue !== null) {
@@ -265,11 +309,15 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  account () {
+  account (logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_ADMIN}/account`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -283,11 +331,15 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  dashboardReports (startDate, endDate) {
+  dashboardReports (startDate, endDate, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_REPORTS}/dashboard`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (startDate !== undefined && startDate !== null) {
@@ -309,12 +361,16 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  exportData (includeModules) {
+  exportData (includeModules, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
       method: Enums.METHOD_GET,
       headers: {},
       responseType: 'arraybuffer'
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (includeModules !== undefined && includeModules !== null) {
@@ -332,11 +388,15 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  importData (fileId) {
+  importData (fileId, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/importData`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (fileId !== undefined && fileId !== null) {

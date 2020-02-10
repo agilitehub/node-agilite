@@ -29,12 +29,22 @@ class Keywords {
     }
   }
 
-  postData (data = {}) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_POST, data)
+  postData (data = {}, logProcessId = null) {
+    let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true) {
+  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -43,25 +53,39 @@ class Keywords {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}) {
+  putData (recordId = '', data = {}, logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '') {
+  deleteData (recordId = '', logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_DELETE, null, headers)
   }
 
-  getByProfileKey (profileKey = '', sort = '', outputFormat = '') {
+  getByProfileKey (profileKey = '', sort = '', outputFormat = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (profileKey !== undefined && profileKey !== null) {
@@ -87,11 +111,15 @@ class Keywords {
     return Utils.executeRequest(config)
   }
 
-  getProfileKeysByGroup (groupName = '', sort = '') {
+  getProfileKeysByGroup (groupName = '', sort = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getProfileKeysByGroup`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (groupName !== undefined && groupName !== null) {
@@ -113,11 +141,15 @@ class Keywords {
     return Utils.executeRequest(config)
   }
 
-  getLabelByValue (profileKey = '', value = '', outputFormat = '') {
+  getLabelByValue (profileKey = '', value = '', outputFormat = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getLabelByValue`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (profileKey !== undefined && profileKey !== null) {
@@ -143,11 +175,15 @@ class Keywords {
     return Utils.executeRequest(config)
   }
 
-  getValueByLabel (profileKey = '', label = '', outputFormat = '') {
+  getValueByLabel (profileKey = '', label = '', outputFormat = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getValueByLabel`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (profileKey !== undefined && profileKey !== null) {

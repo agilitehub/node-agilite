@@ -21,12 +21,22 @@ class Numbering {
     }
   }
 
-  postData (data = {}) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_NUMBERING, Enums.METHOD_POST, data)
+  postData (data = {}, logProcessId = null) {
+    let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_NUMBERING, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true) {
+  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -35,21 +45,31 @@ class Numbering {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_NUMBERING, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}) {
+  putData (recordId = '', data = {}, logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_NUMBERING, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '') {
+  deleteData (recordId = '', logProcessId = null) {
     let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_NUMBERING, Enums.METHOD_DELETE, null, headers)
   }
 
-  generate (profileKey = '', outputFormat = '', data = {}) {
+  generate (profileKey = '', outputFormat = '', data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NUMBERING}/generate`,
       method: Enums.METHOD_POST,
@@ -58,6 +78,10 @@ class Numbering {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
@@ -78,11 +102,15 @@ class Numbering {
     return Utils.executeRequest(config)
   }
 
-  resetCounters (recordId = '') {
+  resetCounters (recordId = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NUMBERING}/resetCounters`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (recordId !== undefined && recordId !== null) {

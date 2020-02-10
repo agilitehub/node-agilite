@@ -16,35 +16,55 @@ class Templates {
     }
   }
 
-  postData (data = {}) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TEMPLATES, Enums.METHOD_POST, data)
+  postData (data = {}, logProcessId = null) {
+    let headers = null
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TEMPLATES, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true) {
+  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
     let headers = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TEMPLATES, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}) {
+  putData (recordId = '', data = {}, logProcessId = null) {
     let headers = {}
+
     headers[Enums.HEADER_RECORD_ID] = recordId
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TEMPLATES, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '') {
+  deleteData (recordId = '', logProcessId = null) {
     let headers = {}
+
     headers[Enums.HEADER_RECORD_ID] = recordId
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TEMPLATES, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey = '', data = {}) {
+  execute (profileKey = '', data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_TEMPLATES}/execute`,
       method: Enums.METHOD_POST,
@@ -53,6 +73,10 @@ class Templates {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey

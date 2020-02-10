@@ -16,39 +16,61 @@ class BPM {
     }
   }
 
-  postData (data = {}) {
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_POST, data)
+  postData (data = {}, logProcessId = null) {
+    let headers = {}
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true) {
+  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
     let headers = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}) {
+  putData (recordId = '', data = {}, logProcessId = null) {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '') {
+  deleteData (recordId = '', logProcessId = null) {
     let headers = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
 
-  registerBPMRecord (processKey = '', currentUser = '') {
+  registerBPMRecord (processKey = '', currentUser = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/registerBPMRecord`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (processKey !== undefined && processKey !== null) {
@@ -70,7 +92,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', comments = '', data = {}) {
+  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', comments = '', data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/execute`,
       method: Enums.METHOD_POST,
@@ -79,6 +101,10 @@ class BPM {
     }
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
 
     if (processKey !== undefined && processKey !== null) {
       config.headers[Enums.HEADER_PROCESS_KEY] = processKey
@@ -111,11 +137,15 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined) {
+  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (processKeys !== undefined && processKeys !== null) {
@@ -169,13 +199,17 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getByProfileKey (profileKey = '') {
+  getByProfileKey (profileKey = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     }
@@ -191,13 +225,17 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  clearHistoryData (profileKey = '') {
+  clearHistoryData (profileKey = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/clearHistoryData`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (profileKey !== undefined && profileKey !== null) {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     }
@@ -213,11 +251,15 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getActiveSteps (processKey = '') {
+  getActiveSteps (processKey = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getActiveSteps`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (processKey !== undefined && processKey !== null) {
@@ -235,11 +277,15 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getActiveUsers (processKey = '') {
+  getActiveUsers (processKey = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getActiveUsers`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (processKey !== undefined && processKey !== null) {

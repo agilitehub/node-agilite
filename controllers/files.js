@@ -25,12 +25,16 @@ class Files {
     }
   }
 
-  getFile (recordId = '', responseType = this.responseType.ARRAY_BUFFER) {
+  getFile (recordId = '', responseType = this.responseType.ARRAY_BUFFER, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_GET,
       headers: {},
       responseType
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (recordId !== undefined && recordId !== null) {
@@ -48,12 +52,16 @@ class Files {
     return Utils.executeRequest(config)
   }
 
-  uploadFile (fileName = '', contentType = '', data = {}) {
+  uploadFile (fileName = '', contentType = '', data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_POST,
       headers: {},
       data
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (fileName && fileName !== '') {
@@ -75,13 +83,17 @@ class Files {
     return Utils.executeRequest(config)
   }
 
-  deleteFile (recordId = '') {
+  deleteFile (recordId = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_DELETE,
       headers: {}
     }
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (recordId !== undefined && recordId !== null) {
       config.headers[Enums.HEADER_RECORD_ID] = recordId
     }
@@ -97,13 +109,17 @@ class Files {
     return Utils.executeRequest(config)
   }
 
-  getFileName (recordId = '') {
+  getFileName (recordId = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/getFileName`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
     if (recordId !== undefined && recordId !== null) {
       config.headers[Enums.HEADER_RECORD_ID] = recordId
     }
@@ -119,11 +135,15 @@ class Files {
     return Utils.executeRequest(config)
   }
 
-  unzip (recordId = '') {
+  unzip (recordId = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/unzip`,
       method: Enums.METHOD_GET,
       headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (recordId !== undefined && recordId !== null) {
