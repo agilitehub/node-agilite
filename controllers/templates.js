@@ -17,7 +17,7 @@ class Templates {
   }
 
   postData (data = {}, logProcessId = null) {
-    let headers = null
+    let headers = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId

@@ -283,7 +283,7 @@ describe('Agilit-e Batch Logging', () => {
   })
 
   it('Init Process - No Params (Negative)', (done) => {
-    agilite.BatchLogging.initProcess()
+    agilite.BatchLogging.initLogProcess()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -298,7 +298,7 @@ describe('Agilit-e Batch Logging', () => {
   })
 
   it('Complete Process - No Params (Negative)', (done) => {
-    agilite.BatchLogging.completeProcess()
+    agilite.BatchLogging.completeLogProcess()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -313,7 +313,7 @@ describe('Agilit-e Batch Logging', () => {
   })
 
   it('Complete Process - Invalid Key (Negative)', (done) => {
-    agilite.BatchLogging.completeProcess('invalid')
+    agilite.BatchLogging.completeLogProcess('invalid')
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
