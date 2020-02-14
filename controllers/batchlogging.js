@@ -163,15 +163,33 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  generateLogProcessReport (logProcessId = '') {
+  generateLogProcessReport (logProcessId = '', qry = null, fieldsToReturn = null, qryOptions = null, page = null, pageNumber = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/report`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers['log-process-id'] = logProcessId
+    config.headers['log-process-id'] = logProcessId
+
+    if (qry !== undefined && qry !== null) {
+      config.headers.qry = qry
+    }
+
+    if (fieldsToReturn !== undefined && fieldsToReturn !== null) {
+      config.headers['fields-to-return'] = fieldsToReturn
+    }
+
+    if (qryOptions !== undefined && qryOptions !== null) {
+      config.headers['qry-options'] = qryOptions
+    }
+
+    if (page !== undefined && page !== null) {
+      config.headers.page = page
+    }
+
+    if (pageNumber !== undefined && pageNumber !== null) {
+      config.headers['page-number'] = pageNumber
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
