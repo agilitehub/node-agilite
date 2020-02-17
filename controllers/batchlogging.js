@@ -163,7 +163,7 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  generateLogProcessReport (logProcessId = '', qry = null, fieldsToReturn = null, qryOptions = null, page = null, pageNumber = null) {
+  generateLogProcessReport (logProcessId = '', qry = null, fieldsToReturn = null, qryOptions = null, page = null, pageLimit = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/report`,
       method: Enums.METHOD_GET,
@@ -188,8 +188,8 @@ class BatchLogging {
       config.headers.page = page
     }
 
-    if (pageNumber !== undefined && pageNumber !== null) {
-      config.headers['page-number'] = pageNumber
+    if (pageLimit !== undefined && pageLimit !== null) {
+      config.headers['page-limit'] = pageLimit
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
