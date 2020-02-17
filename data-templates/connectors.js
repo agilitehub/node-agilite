@@ -10,11 +10,11 @@ const data = {
   },
   new: {
     data: {
-      webAPI: {
-        urlParams: [],
+      connectionData: {
+        queryParams: [],
         headerParams: [],
-        baseURL: 'http://127.0.0.1:6010',
-        bodyData: ''
+        url: 'http://127.0.0.1:6010',
+        body: ''
       },
       feb: {
         baseURL: '',
@@ -83,13 +83,13 @@ const data = {
         key: 'ping',
         name: 'Ping',
         description: '',
-        webAPI: {
+        routeData: {
           requestType: 'get',
           responseIsFile: '0',
           routePath: '/ping',
-          urlParams: [],
+          queryParams: [],
           headerParams: [],
-          bodyData: ''
+          body: ''
         }
       }],
       isActive: true,
@@ -102,11 +102,11 @@ const data = {
   },
   modified: {
     data: {
-      webAPI: {
-        urlParams: [],
+      connectionData: {
+        queryParams: [],
         headerParams: [],
-        baseURL: 'http://127.0.0.1:6010',
-        bodyData: ''
+        url: 'http://127.0.0.1:6010',
+        body: ''
       },
       feb: {
         baseURL: '',
@@ -175,13 +175,13 @@ const data = {
         key: 'ping',
         name: 'Ping',
         description: '',
-        webAPI: {
+        routeData: {
           requestType: 'get',
           responseIsFile: '0',
           routePath: '/ping',
-          urlParams: [],
+          queryParams: [],
           headerParams: [],
-          bodyData: ''
+          body: ''
         }
       }],
       isActive: true,
