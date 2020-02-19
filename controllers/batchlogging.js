@@ -93,11 +93,12 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  initLogProcess (profileKey = '', logProcessId = null) {
+  initLogProcess (profileKey = '', data = {}, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initLogProcess`,
       method: Enums.METHOD_POST,
-      headers: {}
+      headers: {},
+      data
     }
 
     if (logProcessId !== undefined && logProcessId !== null) {
@@ -119,15 +120,16 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  completeLogProcess (logProcessId = '') {
+  completeLogProcess (logProcessId = '', data = {}) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeLogProcess`,
       method: Enums.METHOD_POST,
-      headers: {}
+      headers: {},
+      data
     }
 
     if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers['log-process-id'] = logProcessId
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -141,15 +143,16 @@ class BatchLogging {
     return Utils.executeRequest(config)
   }
 
-  createLogEntry (logProcessId = '') {
+  createLogEntry (logProcessId = '', data = {}) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/createLogEntry`,
       method: Enums.METHOD_POST,
-      headers: {}
+      headers: {},
+      data
     }
 
     if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers['log-process-id'] = logProcessId
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -170,7 +173,7 @@ class BatchLogging {
       headers: {}
     }
 
-    config.headers['log-process-id'] = logProcessId
+    config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     if (qry !== undefined && qry !== null) {
       config.headers.qry = qry
