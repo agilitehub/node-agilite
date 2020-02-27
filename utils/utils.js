@@ -35,6 +35,21 @@ const executeCRUDRequest = (apiServerUrl = '', apiKey = '', teamId = null, appNa
   return executeRequest(config)
 }
 
+const authenticateToken = (apiServerUrl = '', apiKey = '') => {
+  const config = {
+    url: `${apiServerUrl}/user/authenticatetoken`,
+    method: 'GET',
+    headers: {}
+  }
+
+  if (apiKey !== undefined && apiKey !== null) {
+    config.headers[Enums.HEADER_API_KEY] = apiKey
+  }
+
+  return executeRequest(config)
+}
+
 // EXPORTS
 exports.executeRequest = executeRequest
 exports.executeCRUDRequest = executeCRUDRequest
+exports.authenticateToken = authenticateToken
