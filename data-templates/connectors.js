@@ -31,7 +31,7 @@ const data = {
         username: '',
         password: ''
       },
-      imap: {
+      smtp: {
         smtpHost: '',
         smtpPort: '',
         smtpIgnoreTLS: '0',
@@ -123,7 +123,7 @@ const data = {
         username: '',
         password: ''
       },
-      imap: {
+      smtp: {
         smtpHost: '',
         smtpPort: '',
         smtpIgnoreTLS: '0',
