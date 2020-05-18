@@ -15,6 +15,7 @@ const TierStructures = require('./tierstructures')
 const BatchActions = require('./batchactions')
 const Events = require('./events')
 const BatchLogging = require('./batchlogging')
+const NodeRed = require('./nodered')
 const Utilities = require('../utils/utils')
 
 class Agilite {
@@ -43,6 +44,7 @@ class Agilite {
     this.BatchActions = new BatchActions(config)
     this.Events = new Events(config)
     this.BatchLogging = new BatchLogging(config)
+    this.NodeRed = new NodeRed(config)
 
     this.appName = {
       MODULE_KEY_API_KEYS: 'apikeys',
@@ -59,7 +61,8 @@ class Agilite {
       MODULE_KEY_TIER_STRUCTURES: 'tierstructures',
       MODULE_KEY_BATCH_ACTIONS: 'batchactions',
       MODULE_KEY_EVENTS: 'events',
-      MODULE_KEY_BATCH_LOGGING: 'batchlogging'
+      MODULE_KEY_BATCH_LOGGING: 'batchlogging',
+      MODULE_KEY_NODE_RED: 'nodered'
     }
 
     this.reqType = {
@@ -75,7 +78,7 @@ class Agilite {
   }
 
   executeCRUDRequest (appName = '', reqType = '', data = {}, headers = {}) {
-    return Utilities.executeCRUDRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, headers)
+    return Utilities.executeRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, headers)
   }
 
   authenticateToken (apiKey = '') {
