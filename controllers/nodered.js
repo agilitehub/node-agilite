@@ -42,6 +42,10 @@ class NodeRED {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
 
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
     return Utils.executeRequest(config)
   }
 
@@ -54,6 +58,10 @@ class NodeRED {
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
     return Utils.executeRequest(config)
@@ -71,6 +79,10 @@ class NodeRED {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
 
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
     return Utils.executeRequest(config)
   }
 
@@ -83,6 +95,10 @@ class NodeRED {
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
     return Utils.executeRequest(config)
@@ -100,6 +116,10 @@ class NodeRED {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
 
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
     return Utils.executeRequest(config)
   }
 
@@ -112,6 +132,10 @@ class NodeRED {
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
     return Utils.executeRequest(config)
@@ -127,6 +151,32 @@ class NodeRED {
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  getAllData (profileKey) {
+    const config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getAllData`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     }
 
     return Utils.executeRequest(config)

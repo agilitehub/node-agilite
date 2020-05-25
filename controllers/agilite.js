@@ -78,7 +78,7 @@ class Agilite {
   }
 
   executeCRUDRequest (appName = '', reqType = '', data = {}, headers = {}) {
-    return Utilities.executeRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, headers)
+    return Utilities.executeCRUDRequest(this.config.apiServerUrl, this.config.apiKey, this.config.teamId, appName, reqType, data, headers)
   }
 
   authenticateToken (apiKey = '') {
