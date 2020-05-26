@@ -16,6 +16,7 @@ const BatchActions = require('./batchactions')
 const Events = require('./events')
 const BatchLogging = require('./batchlogging')
 const NodeRed = require('./nodered')
+const AdminSolutions = require('./admin-solutions')
 const Utilities = require('../utils/utils')
 
 class Agilite {
@@ -45,6 +46,7 @@ class Agilite {
     this.Events = new Events(config)
     this.BatchLogging = new BatchLogging(config)
     this.NodeRed = new NodeRed(config)
+    this.AdminSolutions = new AdminSolutions(config)
 
     this.appName = {
       MODULE_KEY_API_KEYS: 'apikeys',
@@ -62,7 +64,8 @@ class Agilite {
       MODULE_KEY_BATCH_ACTIONS: 'batchactions',
       MODULE_KEY_EVENTS: 'events',
       MODULE_KEY_BATCH_LOGGING: 'batchlogging',
-      MODULE_KEY_NODE_RED: 'nodered'
+      MODULE_KEY_NODE_RED: 'nodered',
+      MODULE_KEY_ADMIN_SOLUTIONS: 'solutions'
     }
 
     this.reqType = {

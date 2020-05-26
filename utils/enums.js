@@ -76,6 +76,7 @@ const Enums = {
   MODULE_KEY_REPORTS: 'reports',
   MODULE_KEY_ADMIN: 'admin',
   MODULE_KEY_NODE_RED: 'nodered',
+  MODULE_KEY_ADMIN_SOLUTIONS: 'solutions',
   VALUE_ARRAY_PROPER: 'Array',
   VALUE_ARRAY_LOWER: 'array',
   VALUE_OBJECT_PROPER: 'Object',
