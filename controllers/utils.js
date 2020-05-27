@@ -361,7 +361,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  exportData (includeModules, logProcessId = null) {
+  exportData (includeModules, solutionsArray, includeData, includeCredentials, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
       method: Enums.METHOD_GET,
@@ -375,6 +375,18 @@ class Utils {
 
     if (includeModules !== undefined && includeModules !== null) {
       config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    }
+
+    if (solutionsArray !== undefined && solutionsArray !== null) {
+      config.headers.solutions = solutionsArray
+    }
+
+    if (includeData !== undefined && includeData !== null) {
+      config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
+    }
+
+    if (includeCredentials !== undefined && includeCredentials !== null) {
+      config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {

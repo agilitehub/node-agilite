@@ -54,6 +54,8 @@ const Enums = {
   HEADER_SORT_VALUES: 'sort-values',
   HEADER_VALUES_OUTPUT_FORMAT: 'values-output-format',
   HEADER_LOG_PROCESS_ID: 'log-process-id',
+  HEADER_INCLUDE_DATA: 'include-data',
+  HEADER_INCLUDE_CREDENTIALS: 'include-credentials',
   METHOD_DELETE: 'delete',
   METHOD_GET: 'get',
   METHOD_POST: 'post',
