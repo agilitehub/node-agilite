@@ -160,9 +160,9 @@ class NodeRED {
     return Utils.executeRequest(config)
   }
 
-  getAllData (profileKey) {
+  getFlowData (profileKey) {
     const config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getAllData`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getFlowData`,
       method: Enums.METHOD_GET,
       headers: {}
     }
