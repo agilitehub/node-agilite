@@ -361,7 +361,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  exportData (includeModules, solutionsArray, includeData, includeCredentials, logProcessId = null) {
+  exportData (includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
       method: Enums.METHOD_GET,
