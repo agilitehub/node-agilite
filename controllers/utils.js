@@ -400,7 +400,7 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
-  importData (fileId, logProcessId = null) {
+  importData (fileId, includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/importData`,
       method: Enums.METHOD_GET,
@@ -413,6 +413,22 @@ class Utils {
 
     if (fileId !== undefined && fileId !== null) {
       config.headers[Enums.HEADER_FILE_ID] = fileId
+    }
+
+    if (includeModules !== undefined && includeModules !== null) {
+      config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    }
+
+    if (solutionsArray !== undefined && solutionsArray !== null) {
+      config.headers.solutions = solutionsArray
+    }
+
+    if (includeData !== undefined && includeData !== null) {
+      config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
+    }
+
+    if (includeCredentials !== undefined && includeCredentials !== null) {
+      config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
