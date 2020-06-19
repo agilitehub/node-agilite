@@ -38,6 +38,7 @@ const Enums = {
   HEADER_PAGE: 'page',
   HEADER_PAGE_LIMIT: 'page-limit',
   HEADER_APPLICATION_JSON: 'application/json',
+  HEADER_OCTET_STREAM: 'application/octet-stream',
   HEADER_TEXT_PLAIN: 'text/plain',
   HEADER_SORT: 'sort',
   HEADER_OUTPUT_FORMAT: 'output-format',

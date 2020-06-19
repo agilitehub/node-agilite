@@ -65,7 +65,7 @@ class Connectors {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey = '', routeKey = '', data = {}, logProcessId = null) {
+  execute (profileKey = '', routeKey = '', data = {}, fileName = null, contentType = null, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_CONNECTORS}/execute`,
       method: Enums.METHOD_POST,
@@ -73,7 +73,15 @@ class Connectors {
       data
     }
 
-    config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+    if (fileName !== undefined && fileName !== null && fileName !== '') {
+      config.headers[Enums.HEADER_FILE_NAME] = fileName
+    }
+
+    if (contentType !== undefined && contentType !== null) {
+      config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
+    } else {
+      config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
+    }
 
     if (logProcessId !== undefined && logProcessId !== null) {
       config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
