@@ -137,7 +137,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, logProcessId = null) {
+  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, sort = undefined, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
@@ -194,6 +194,10 @@ class BPM {
 
     if (pageLimit !== undefined && pageLimit !== null) {
       config.headers[Enums.HEADER_PAGE_LIMIT] = pageLimit
+    }
+
+    if (sort !== undefined && sort !== null) {
+      config.headers['sort-date-created'] = sort
     }
 
     return Utils.executeRequest(config)
