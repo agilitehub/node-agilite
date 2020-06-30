@@ -197,7 +197,7 @@ class BPM {
     }
 
     if (sort !== undefined && sort !== null) {
-      config.headers['sort-date-created'] = sort
+      config.headers[Enums.HEADER_SORT_BY] = sort
     }
 
     return Utils.executeRequest(config)

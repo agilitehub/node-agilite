@@ -41,6 +41,7 @@ const Enums = {
   HEADER_OCTET_STREAM: 'application/octet-stream',
   HEADER_TEXT_PLAIN: 'text/plain',
   HEADER_SORT: 'sort',
+  HEADER_SORT_BY: 'sort-by',
   HEADER_OUTPUT_FORMAT: 'output-format',
   HEADER_GROUP_NAME: 'group-name',
   HEADER_VALUE_KEY: 'value-key',
