@@ -8,6 +8,8 @@ const Enums = {
   HEADER_API_KEY: 'api-key',
   HEADER_TEAM_NAME: 'team-name',
   HEADER_CONTENT_TYPE: 'Content-Type',
+  HEADER_PERSIST_FILE: 'persist-file',
+  HEADER_IS_PUBLIC: 'is-public',
   HEADER_PROFILE_KEY: 'profile-key',
   HEADER_PROFILE_KEYS: 'profile-keys',
   HEADER_ROUTE_KEY: 'route-key',

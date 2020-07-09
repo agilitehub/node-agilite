@@ -112,9 +112,13 @@ describe('Agilit-e Utils', () => {
     agilite.Utils.generatePDF()
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-        expect(response.data).to.haveOwnProperty('data')
-        expect(response.data.data).to.haveOwnProperty('fileName')
-        expect(response.data.data).to.haveOwnProperty('contentType')
+        expect(response.data).to.haveOwnProperty('_id')
+        expect(response.data).to.haveOwnProperty('filename')
+        expect(response.data).to.haveOwnProperty('contentType')
+        expect(response.data.metadata).to.haveOwnProperty('persistFile')
+        expect(response.data.metadata).to.haveOwnProperty('isPublic')
+        expect(response.data.metadata).to.haveOwnProperty('createdBy')
+        expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
       })
   })
 

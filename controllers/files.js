@@ -52,7 +52,7 @@ class Files {
     return Utils.executeRequest(config)
   }
 
-  uploadFile (fileName = '', contentType = '', data = {}, logProcessId = null) {
+  uploadFile (fileName = '', contentType = '', data = {}, persistFile = false, isPublic = false, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_POST,
@@ -70,6 +70,14 @@ class Files {
 
     if (contentType && contentType !== '') {
       config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
+    }
+
+    if (persistFile) {
+      config.headers[Enums.HEADER_PERSIST_FILE] = persistFile
+    }
+
+    if (isPublic) {
+      config.headers[Enums.HEADER_IS_PUBLIC] = isPublic
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
