@@ -387,14 +387,14 @@ describe('Agilit-e Files', () => {
       .then(done, done)
   })
 
-  // it('Upload New File - Array of Files (Negative)', (done) => {
-  //   agilite.Files.uploadFile('test', '', [excelFile, pdfFile], '', '')
-  //     .catch((err) => {
-  //       console.log(err)
-  //       expect(err).to.haveOwnProperty('errorMessage')
-  //     })
-  //     .then(done, done)
-  // })
+  it('Upload New File - Array of Files (Negative)', (done) => {
+    agilite.Files.uploadFile('test', '', [excelFile, pdfFile], '', '')
+      .catch((err) => {
+        console.log(err)
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+      })
+      .then(done, done)
+  })
 
   it('Upload New File - Successful File (Positive)', (done) => {
     agilite.Files.uploadFile('test', '', excelFile, '', '')
