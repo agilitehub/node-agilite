@@ -62,8 +62,8 @@ describe('Agilit-e Batch Logging \n', function () {
   let key = UUID.v1()
 
   describe('Create New Record', () => {
-    describe('  Negative Tests', () => {
-      it('Create New Record - No Params (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.BatchLogging.postData()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -78,7 +78,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Create New Record - Empty Object (NEGATIVE)', (done) => {
+      it('Empty Object (NEGATIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
 
         agilite.BatchLogging.postData(mainEntry)
@@ -95,7 +95,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Create New Record - No Profile Key (NEGATIVE)', (done) => {
+      it('No Profile Key (NEGATIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
         agilite.BatchLogging.postData(mainEntry)
@@ -111,10 +111,14 @@ describe('Agilit-e Batch Logging \n', function () {
           })
           .then(done, done)
       })
+
+      // TODO: Create New Record - Negative Tests
+      // Empty Data Object
+      // No Profile Name
     })
 
-    describe('  Positive Tests', () => {
-      it('Create New Record - Success (POSITIVE)', (done) => {
+    describe('Positive Tests', () => {
+      it('Success (POSITIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
         mainEntry.data.key = key
         mainEntry.data.name = key
@@ -152,15 +156,18 @@ describe('Agilit-e Batch Logging \n', function () {
           })
           .then(done, done)
       })
+
+      // TODO: Create New Record - Positive Tests
+      // isActive = false
     })
   })
 
   describe('Get Data', () => {
-    describe('  Negative Tests', () => {
+    describe('Negative Tests', () => {
     })
 
-    describe('  Positive Tests', () => {
-      it('Get Data - Slim Result - Find Record By Id - Success (POSITIVE)', (done) => {
+    describe('Positive Tests', () => {
+      it('Slim Result - Find Record By Id - Success (POSITIVE)', (done) => {
         agilite.BatchLogging.getData()
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
@@ -195,8 +202,8 @@ describe('Agilit-e Batch Logging \n', function () {
   })
 
   describe('Update Existing Record', () => {
-    describe('  Negative Tests', () => {
-      it('Update Existing Record - No Params (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.BatchLogging.putData()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -211,7 +218,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Update Existing Record - No Data Param (NEGATIVE)', (done) => {
+      it('No Data Param (NEGATIVE)', (done) => {
         agilite.BatchLogging.putData(recordId)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -226,7 +233,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Update Existing Record - Empty Object Data Param (NEGATIVE)', (done) => {
+      it('Empty Object Data Param (NEGATIVE)', (done) => {
         agilite.BatchLogging.putData(recordId, {})
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -241,7 +248,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Update Existing Record - No Profile Key (NEGATIVE)', (done) => {
+      it('No Profile Key (NEGATIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
         agilite.BatchLogging.putData(recordId, mainEntry)
@@ -259,8 +266,8 @@ describe('Agilit-e Batch Logging \n', function () {
       })
     })
 
-    describe('  Positive Tests', () => {
-      it('Update Existing Record - Success (POSITIVE)', (done) => {
+    describe('Positive Tests', () => {
+      it('Success (POSITIVE)', (done) => {
         key = 'PUT_' + key
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
         mainEntry.data.key = key
@@ -299,12 +306,15 @@ describe('Agilit-e Batch Logging \n', function () {
           })
           .then(done, done)
       })
+
+      // TODO: Update Existing Record - Positive Tests
+      // Update the inactive profile to active
     })
   })
 
   describe('Get By Profile Key', () => {
-    describe('  Negative Tests', () => {
-      it('Get By Profile Key - No Params (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.BatchLogging.getByProfileKey()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -319,7 +329,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Get By Profile Key - Invalid Key (NEGATIVE)', (done) => {
+      it('Invalid Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.getByProfileKey('invalid')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -335,8 +345,8 @@ describe('Agilit-e Batch Logging \n', function () {
       })
     })
 
-    describe('  Positive Tests', () => {
-      it('Get By Profile Key - Null as Data - Success (POSITIVE)', (done) => {
+    describe('Positive Tests', () => {
+      it('Null as Data - Success (POSITIVE)', (done) => {
         agilite.BatchLogging.getByProfileKey(key, null)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -347,8 +357,8 @@ describe('Agilit-e Batch Logging \n', function () {
   })
 
   describe('Init Process', () => {
-    describe('  Negative Tests', () => {
-      it('Init Process - No Params (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.BatchLogging.initLogProcess()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -364,13 +374,13 @@ describe('Agilit-e Batch Logging \n', function () {
       })
     })
 
-    describe('  Positive Tests', () => {
+    describe('Positive Tests', () => {
     })
   })
 
   describe('Complete Process', () => {
-    describe('  Negative Tests', () => {
-      it('Complete Process - No Params (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.BatchLogging.completeLogProcess()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -385,7 +395,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Complete Process - Invalid Key (NEGATIVE)', (done) => {
+      it('Invalid Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.completeLogProcess('invalid')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -400,13 +410,13 @@ describe('Agilit-e Batch Logging \n', function () {
       })
     })
 
-    describe('  Positive Tests', () => {
+    describe('Positive Tests', () => {
     })
   })
 
   describe('Delete Record', () => {
-    describe('  Negative Tests', () => {
-      it('Delete Record - No Record Id (NEGATIVE)', (done) => {
+    describe('Negative Tests', () => {
+      it('No Record Id (NEGATIVE)', (done) => {
         agilite.BatchLogging.deleteData()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -421,7 +431,7 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it('Delete Record - Invalid Record Id (NEGATIVE)', (done) => {
+      it('Invalid Record Id (NEGATIVE)', (done) => {
         agilite.BatchLogging.deleteData(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -437,8 +447,8 @@ describe('Agilit-e Batch Logging \n', function () {
       })
     })
 
-    describe('  Positive Tests', () => {
-      it('Delete Record - Success (POSITIVE)', (done) => {
+    describe('Positive Tests', () => {
+      it('Success (POSITIVE)', (done) => {
         agilite.BatchLogging.deleteData(recordId)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)

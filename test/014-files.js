@@ -13,7 +13,7 @@ const agilite = new Agilite({
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e Files', function () {
+describe('Agilit-e Files \n', function () {
   this.bail(true)
   const invalidValue = 'invalid_value'
 
@@ -30,11 +30,11 @@ describe('Agilit-e Files', function () {
 
   excelFile = fs.readFileSync(`${__dirname}/../data-templates/files/excelFile.xlsx`)
   pdfFile = fs.readFileSync(`${__dirname}/../data-templates/files/pdfFile.pdf`)
-  zippedFile = fs.readFileSync(`${__dirname}/../data-templates/files/zippedFolder.zip`)
+  zippedFile = fs.readFileSync(`${__dirname}/../data-templates/files/zippedFile.zip`)
 
   describe('Upload New File', () => {
     describe('Negative Tests', () => {
-      it('Upload New File - No Params (Negative)', function (done) {
+      it('No Params (NEGATIVE)', function (done) {
         agilite.Files.uploadFile()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -50,7 +50,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Empty File Name (Negative)', (done) => {
+      it('Empty File Name (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -66,7 +66,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Empty Content-Type (String) & Empty Data (String) (Negative)', (done) => {
+      it('Empty Content-Type (String) & Empty Data (String) (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('test', '', '', '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -82,7 +82,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Empty Content-Type (String) & Empty Data (Null) (Negative)', (done) => {
+      it('Empty Content-Type (String) & Empty Data (Null) (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('test', '', null, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -98,7 +98,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Empty Content-Type (Null) & Empty Data (Null) (Negative)', (done) => {
+      it('Empty Content-Type (Null) & Empty Data (Null) (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('test', null, null, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -114,7 +114,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Empty Data (Negative)', (done) => {
+      it('Empty Data (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('test', 'application/octet-stream', null, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -130,7 +130,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Only Valid Data (Negative)', (done) => {
+      it('Only Valid Data (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('', '', excelFile, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -146,7 +146,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - No File Name, Valid Data & Content-Type (Negative)', (done) => {
+      it('No File Name, Valid Data & Content-Type (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('', 'application/octet-stream', excelFile, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -162,7 +162,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Array of Files (Negative)', (done) => {
+      it('Array of Files (NEGATIVE)', (done) => {
         agilite.Files.uploadFile('test', '', [excelFile, pdfFile], '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -180,7 +180,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it('Upload New File - String persistFile (Positive)', (done) => {
+      it('String persistFile (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, 'asdasd', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -218,7 +218,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Number persistFile (Positive)', (done) => {
+      it('Number persistFile (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, 123123123, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -256,7 +256,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Array persistFile (Positive)', (done) => {
+      it('Array persistFile (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, [], '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -294,7 +294,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - String isPublic (Positive)', (done) => {
+      it('String isPublic (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', 'asdasdasd')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -332,7 +332,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Number isPublic (Positive)', (done) => {
+      it('Number isPublic (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', 123123)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -370,7 +370,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Array isPublic (Positive)', (done) => {
+      it('Array isPublic (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', [])
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -408,7 +408,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Successful File (Positive)', (done) => {
+      it('Successful File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -448,7 +448,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Successful Zipped File (Positive)', (done) => {
+      it('Successful Zipped File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', zippedFile, '', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -488,7 +488,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Successful Public File (Positive)', (done) => {
+      it('Successful Public File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', true)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -531,7 +531,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Successful Persisted File (Positive)', (done) => {
+      it('Successful Persisted File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, true, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -571,7 +571,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Upload New File - Successful Persisted Public File (Positive)', (done) => {
+      it('Successful Persisted Public File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, true, true)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
@@ -615,7 +615,7 @@ describe('Agilit-e Files', function () {
 
   describe('Get File', () => {
     describe('Negative Tests', () => {
-      it('Get File - No Params (Negative)', (done) => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.Files.getFile()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -632,7 +632,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id (Negative)', (done) => {
+      it('Empty Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -649,7 +649,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Invalid String Record Id (Negative)', (done) => {
+      it('Invalid String Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -666,7 +666,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Invalid Number Record Id (Negative)', (done) => {
+      it('Invalid Number Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile(123123123213, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -682,7 +682,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Array Record Id (Negative)', (done) => {
+      it('Array Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile([], '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -698,7 +698,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Object Record Id (Negative)', (done) => {
+      it('Object Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile({}, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -714,7 +714,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, String Response Type (Negative)', (done) => {
+      it('Empty Record Id, String Response Type (NEGATIVE)', (done) => {
         agilite.Files.getFile('', 'string', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -730,7 +730,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, Number Response Type (Negative)', (done) => {
+      it('Empty Record Id, Number Response Type (NEGATIVE)', (done) => {
         agilite.Files.getFile('', 123123123, '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -746,7 +746,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, Array Response Type (Negative)', (done) => {
+      it('Empty Record Id, Array Response Type (NEGATIVE)', (done) => {
         agilite.Files.getFile('', [], '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -762,7 +762,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, Empty Response Type, String Log Process Id (Negative)', (done) => {
+      it('Empty Record Id, Empty Response Type, String Log Process Id (NEGATIVE)', (done) => {
         agilite.Files.getFile('', '', 'asdasdasd')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -778,7 +778,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, Empty Response Type, Number Log Process Id  (Negative)', (done) => {
+      it('Empty Record Id, Empty Response Type, Number Log Process Id  (NEGATIVE)', (done) => {
         agilite.Files.getFile('', '', 123123)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -794,7 +794,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Empty Record Id, Empty Response Type, Array Log Process Id  (Negative)', (done) => {
+      it('Empty Record Id, Empty Response Type, Array Log Process Id  (NEGATIVE)', (done) => {
         agilite.Files.getFile('', '', [])
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -812,7 +812,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it('Get File - Valid Record Id, Number Response Type (Positive)', (done) => {
+      it('Valid Record Id, Number Response Type (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 123123123, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -822,7 +822,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Array Response Type (Positive)', (done) => {
+      it('Valid Record Id, Array Response Type (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, [], '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -832,7 +832,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Object Response Type (Positive)', (done) => {
+      it('Valid Record Id, Object Response Type (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, {}, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -842,7 +842,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Random String Response Type (Positive)', (done) => {
+      it('Valid Record Id, Random String Response Type (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'gibberish', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -852,7 +852,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Empty Response Type (Positive)', (done) => {
+      it('Valid Record Id, Empty Response Type (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, '', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -862,7 +862,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Valid Response Type, Number Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Valid Response Type, Number Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'string', 123123)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -872,7 +872,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Valid Response Type, Array Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Valid Response Type, Array Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'string', [])
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -882,7 +882,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Valid Response Type, Object Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Valid Response Type, Object Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'string', {})
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -892,7 +892,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Valid Response Type, Invalid String Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Valid Response Type, Invalid String Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'string', invalidValue)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -902,7 +902,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File - Valid Record Id, Valid Response Type, Empty Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Valid Response Type, Empty Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFile(recordId, 'string', '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -916,7 +916,7 @@ describe('Agilit-e Files', function () {
 
   describe('Get Public File', () => {
     describe('Negative Tests', () => {
-      it('Get Public File - No Params (Negative)', (done) => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -932,7 +932,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get Public File - Empty Public Id (Negative)', (done) => {
+      it('Empty Public Id (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -948,7 +948,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get Public File - Number Public Id (Negative)', (done) => {
+      it('Number Public Id (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile(12312312)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -964,7 +964,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get Public File - String Public Id (Negative)', (done) => {
+      it('String Public Id (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -980,7 +980,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get Public File - Object Public Id (Negative)', (done) => {
+      it('Object Public Id (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile({})
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -996,7 +996,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get Public File - Array Public Id (Negative)', (done) => {
+      it('Array Public Id (NEGATIVE)', (done) => {
         agilite.Files.getPublicFile([])
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1014,7 +1014,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it('Get Public File - Valid Public Id (Positive)', (done) => {
+      it('Valid Public Id (POSITIVE)', (done) => {
         agilite.Files.getPublicFile(publicToken)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
@@ -1028,7 +1028,7 @@ describe('Agilit-e Files', function () {
 
   describe('Get File Name', () => {
     describe('Negative Tests', () => {
-      it('Get File Name - Empty Record Id (Negative)', (done) => {
+      it('Empty Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1044,7 +1044,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Invalid Record Id (Negative)', (done) => {
+      it('Invalid Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1060,7 +1060,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Number Record Id (Negative)', (done) => {
+      it('Number Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName(123123123)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1076,7 +1076,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Object Record Id (Negative)', (done) => {
+      it('Object Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName({})
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1092,7 +1092,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Array Record Id (Negative)', (done) => {
+      it('Array Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName([])
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1110,7 +1110,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it('Get File Name - Valid Record Id, Empty Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Empty Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFileName(recordId, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1121,7 +1121,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Valid Record Id, Number Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Number Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFileName(recordId, 123123123)
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1132,7 +1132,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Valid Record Id, Invalid Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Invalid Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFileName(recordId, invalidValue)
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1143,7 +1143,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Valid Record Id, Array Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Array Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFileName(recordId, [])
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1154,7 +1154,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Get File Name - Valid Record Id, Object Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Object Log Process Id (POSITIVE)', (done) => {
         agilite.Files.getFileName(recordId, {})
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1169,7 +1169,7 @@ describe('Agilit-e Files', function () {
 
   describe('Unzip File', () => {
     describe('Negative Tests', () => {
-      it('Unzip File - No Params (Negative)', (done) => {
+      it('No Params (NEGATIVE)', (done) => {
         agilite.Files.unzip()
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1185,7 +1185,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Unzip File - Empty Record Id (Negative)', (done) => {
+      it('Empty Record Id (NEGATIVE)', (done) => {
         agilite.Files.unzip('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1201,7 +1201,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Unzip File - Invalid Record Id (Negative)', (done) => {
+      it('Invalid Record Id (NEGATIVE)', (done) => {
         agilite.Files.unzip(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1217,7 +1217,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Unzip File - Object Record Id (Negative)', (done) => {
+      it('Object Record Id (NEGATIVE)', (done) => {
         agilite.Files.unzip({})
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1233,7 +1233,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Unzip File - Array Record Id (Negative)', (done) => {
+      it('Array Record Id (NEGATIVE)', (done) => {
         agilite.Files.unzip([])
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1251,7 +1251,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it.skip('Unzip File - Valid Record Id (Positive)', (done) => {
+      it.skip('Valid Record Id (POSITIVE)', (done) => {
         agilite.Files.unzip(zippedRecordId)
           .catch((err) => {
             console.log(err)
@@ -1263,7 +1263,7 @@ describe('Agilit-e Files', function () {
 
   describe('Delete File', () => {
     describe('Negative Tests', () => {
-      it('Delete File - Empty Record Id (Negative)', (done) => {
+      it('Empty Record Id (NEGATIVE)', (done) => {
         agilite.Files.deleteFile('')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1279,7 +1279,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Invalid Record Id (Negative)', (done) => {
+      it('Invalid Record Id (NEGATIVE)', (done) => {
         agilite.Files.deleteFile(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1295,7 +1295,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Number Record Id (Negative)', (done) => {
+      it('Number Record Id (NEGATIVE)', (done) => {
         agilite.Files.deleteFile(123123123)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1311,7 +1311,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Object Record Id (Negative)', (done) => {
+      it('Object Record Id (NEGATIVE)', (done) => {
         agilite.Files.deleteFile({})
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1327,7 +1327,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Array Record Id (Negative)', (done) => {
+      it('Array Record Id (NEGATIVE)', (done) => {
         agilite.Files.deleteFile([])
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1345,7 +1345,7 @@ describe('Agilit-e Files', function () {
     })
 
     describe('Positive Tests', () => {
-      it('Delete File - Valid Record Id, Empty Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Empty Log Process Id (POSITIVE)', (done) => {
         agilite.Files.deleteFile(recordId, '')
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1356,7 +1356,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Valid Record Id, Number Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Number Log Process Id (POSITIVE)', (done) => {
         agilite.Files.deleteFile(recordId2, 123123123)
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1367,7 +1367,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Valid Record Id, Invalid Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Invalid Log Process Id (POSITIVE)', (done) => {
         agilite.Files.deleteFile(recordId3, invalidValue)
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
@@ -1378,7 +1378,7 @@ describe('Agilit-e Files', function () {
           .then(done, done)
       })
 
-      it('Delete File - Valid Record Id, Object Log Process Id (Positive)', (done) => {
+      it('Valid Record Id, Object Log Process Id (POSITIVE)', (done) => {
         agilite.Files.deleteFile(recordId4, {})
           .then((response) => {
             expect(TypeDetect(response.data)).to.not.equal(EnumsTypeDetect.STRING_EMPTY)
