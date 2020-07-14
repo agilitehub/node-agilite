@@ -1,4 +1,5 @@
 const data = {
+  tmpData: {},
   emptyObject: {},
   emptyDataObject: {
     data: {}
