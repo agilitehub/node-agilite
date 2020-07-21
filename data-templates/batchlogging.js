@@ -1,5 +1,4 @@
 const data = {
-  tmpData: {},
   emptyObject: {},
   emptyDataObject: {
     data: {}
@@ -25,6 +24,11 @@ const data = {
       notes: 'Test Notes',
       logLevel: 'advanced'
     }
+  },
+  logEntry: {
+    error: 'Error 401',
+    status: '400',
+    module: 'TestBatch'
   }
 }
 

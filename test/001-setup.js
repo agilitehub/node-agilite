@@ -22,7 +22,7 @@ const agilite = new Agilite({
 })
 
 describe('Agilit-e Initial Setup \n', function () {
-  this.bail(true)
+  // this.bail(true)
   // let pattern = null
   describe('API Server URL', () => {
     describe('Negative Tests', () => {})

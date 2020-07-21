@@ -14,23 +14,26 @@ const agilite = new Agilite({
 })
 
 describe('Agilit-e Files \n', function () {
-  this.bail(true)
+  // this.bail(true)
   const invalidValue = 'invalid_value'
 
   let recordId = null
   let recordId2 = null
   let recordId3 = null
   let recordId4 = null
-  let zippedRecordId = null
+  let zippedFileRecordId = null
+  let zippedFolderRecordId = null
   let publicToken = null
 
   let excelFile = null
   let pdfFile = null
   let zippedFile = null
+  let zippedFolder = null
 
   excelFile = fs.readFileSync(`${__dirname}/../data-templates/files/excelFile.xlsx`)
   pdfFile = fs.readFileSync(`${__dirname}/../data-templates/files/pdfFile.pdf`)
   zippedFile = fs.readFileSync(`${__dirname}/../data-templates/files/zippedFile.zip`)
+  zippedFolder = fs.readFileSync(`${__dirname}/../data-templates/files/zippedFolder.zip`)
 
   describe('Upload New File', () => {
     describe('Negative Tests', () => {
@@ -66,7 +69,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Empty Content-Type (String) & Empty Data (String) (NEGATIVE)', (done) => {
+      it('Empty Content-Type (String) & Empty Data (String) (NEGATIVE)', (done) => { // TODO: Breaks in Node-RED
         agilite.Files.uploadFile('test', '', '', '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -98,7 +101,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Empty Content-Type (Null) & Empty Data (Null) (NEGATIVE)', (done) => {
+      it('Empty Content-Type (Null) & Empty Data (Null) (NEGATIVE)', (done) => { // TODO: Odd error message in Node-RED
         agilite.Files.uploadFile('test', null, null, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -180,234 +183,6 @@ describe('Agilit-e Files \n', function () {
     })
 
     describe('Positive Tests', () => {
-      it('String persistFile (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, 'asdasd', '')
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
-      it('Number persistFile (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, 123123123, '')
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
-      it('Array persistFile (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', 'application/octet-stream', excelFile, [], '')
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
-      it('String isPublic (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', '', excelFile, '', 'asdasdasd')
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
-      it('Number isPublic (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', '', excelFile, '', 123123)
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
-      it('Array isPublic (POSITIVE)', (done) => {
-        agilite.Files.uploadFile('test', '', excelFile, '', [])
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if File Name provided matches
-            expect(response.data).to.haveOwnProperty('filename')
-            expect(response.data.filename).to.equal('test')
-            expect(response.data.metadata).to.haveOwnProperty('persistFile')
-            expect(response.data.metadata.persistFile).to.equal(false)
-            expect(response.data.metadata).to.haveOwnProperty('isPublic')
-            expect(response.data.metadata.isPublic).to.equal(false)
-
-            // Check if unprovided values exist and have defaults
-            expect(response.data).to.haveOwnProperty('_id')
-            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('createdAt')
-            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('updatedAt')
-            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('length')
-            expect(response.data.length).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('chunkSize')
-            expect(response.data.chunkSize).to.not.lessThan(1)
-            expect(response.data).to.haveOwnProperty('uploadDate')
-            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('md5')
-            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data).to.haveOwnProperty('contentType')
-            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('createdBy')
-            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
-            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
-            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
-          })
-          .then(done, done)
-      })
-
       it('Successful File (POSITIVE)', (done) => {
         agilite.Files.uploadFile('test', '', excelFile, '', '')
           .then((response) => {
@@ -483,7 +258,47 @@ describe('Agilit-e Files \n', function () {
             expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
             expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
 
-            zippedRecordId = response.data._id
+            zippedFileRecordId = response.data._id
+          })
+          .then(done, done)
+      })
+
+      it('Successful Zipped Folder (POSITIVE)', (done) => {
+        agilite.Files.uploadFile('test', '', zippedFolder, '', '')
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check if File Name provided matches
+            expect(response.data).to.haveOwnProperty('filename')
+            expect(response.data.filename).to.equal('test')
+            expect(response.data.metadata).to.haveOwnProperty('persistFile')
+            expect(response.data.metadata.persistFile).to.equal(false)
+            expect(response.data.metadata).to.haveOwnProperty('isPublic')
+            expect(response.data.metadata.isPublic).to.equal(false)
+
+            // Check if unprovided values exist and have defaults
+            expect(response.data).to.haveOwnProperty('_id')
+            expect(response.data._id).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data).to.haveOwnProperty('createdAt')
+            expect(response.data.createdAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data).to.haveOwnProperty('updatedAt')
+            expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data).to.haveOwnProperty('length')
+            expect(response.data.length).to.not.lessThan(1)
+            expect(response.data).to.haveOwnProperty('chunkSize')
+            expect(response.data.chunkSize).to.not.lessThan(1)
+            expect(response.data).to.haveOwnProperty('uploadDate')
+            expect(response.data.uploadDate).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data).to.haveOwnProperty('md5')
+            expect(response.data.md5).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data).to.haveOwnProperty('contentType')
+            expect(response.data.contentType).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data.metadata).to.haveOwnProperty('createdBy')
+            expect(response.data.metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data.metadata).to.haveOwnProperty('modifiedBy')
+            expect(response.data.metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
+
+            zippedFolderRecordId = response.data._id
           })
           .then(done, done)
       })
@@ -649,7 +464,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Invalid String Record Id (NEGATIVE)', (done) => {
+      it('Invalid String Record Id (NEGATIVE)', (done) => { // TODO: Not a descriptive enough error message in Node-RED
         agilite.Files.getFile(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -698,7 +513,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Object Record Id (NEGATIVE)', (done) => {
+      it('Object Record Id (NEGATIVE)', (done) => { // TODO: Not a descriptive enough error message in Node-RED
         agilite.Files.getFile({}, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -1028,6 +843,22 @@ describe('Agilit-e Files \n', function () {
 
   describe('Get File Name', () => {
     describe('Negative Tests', () => {
+      it('No Params (NEGATIVE)', (done) => {
+        agilite.Files.getFileName()
+          .catch((err) => {
+            expect(err).to.haveOwnProperty('response')
+            expect(err.response.status).to.equal(400)
+            expect(err.response).to.haveOwnProperty('data')
+            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check if errorMessage exists and contains correct error message
+
+            expect(err.response.data).to.haveOwnProperty('errorMessage')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
+          })
+          .then(done, done)
+      })
+
       it('Empty Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFileName('')
           .catch((err) => {
@@ -1251,10 +1082,94 @@ describe('Agilit-e Files \n', function () {
     })
 
     describe('Positive Tests', () => {
-      it.skip('Valid Record Id (POSITIVE)', (done) => {
-        agilite.Files.unzip(zippedRecordId)
-          .catch((err) => {
-            console.log(err)
+      it('Valid File Record Id (POSITIVE)', (done) => {
+        agilite.Files.unzip(zippedFileRecordId)
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
+
+            // Check if File Name provided matches
+            expect(response.data[0]).to.haveOwnProperty('filename')
+            expect(response.data[0].filename).to.equal('excelFile.xlsx')
+
+            // Check if unprovided values exist and have defaults
+            expect(response.data[0]).to.haveOwnProperty('_id')
+            expect(response.data[0]._id).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('createdAt')
+            expect(response.data[0].createdAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('updatedAt')
+            expect(response.data[0].updatedAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('length')
+            expect(response.data[0].length).to.not.lessThan(1)
+            expect(response.data[0]).to.haveOwnProperty('chunkSize')
+            expect(response.data[0].chunkSize).to.not.lessThan(1)
+            expect(response.data[0]).to.haveOwnProperty('uploadDate')
+            expect(response.data[0].uploadDate).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('md5')
+            expect(response.data[0].md5).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('contentType')
+            expect(response.data[0].contentType).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0].metadata).to.haveOwnProperty('createdBy')
+            expect(response.data[0].metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0].metadata).to.haveOwnProperty('modifiedBy')
+            expect(response.data[0].metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
+          })
+          .then(done, done)
+      })
+
+      it('Valid Folder Record Id (POSITIVE)', (done) => {
+        agilite.Files.unzip(zippedFolderRecordId)
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
+            // Check if File Name provided matches
+            expect(response.data[0]).to.haveOwnProperty('filename')
+            expect(response.data[0].filename).to.equal('excelFile.xlsx')
+
+            // Check if unprovided values exist and have defaults
+            expect(response.data[0]).to.haveOwnProperty('_id')
+            expect(response.data[0]._id).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('createdAt')
+            expect(response.data[0].createdAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('updatedAt')
+            expect(response.data[0].updatedAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('length')
+            expect(response.data[0].length).to.not.lessThan(1)
+            expect(response.data[0]).to.haveOwnProperty('chunkSize')
+            expect(response.data[0].chunkSize).to.not.lessThan(1)
+            expect(response.data[0]).to.haveOwnProperty('uploadDate')
+            expect(response.data[0].uploadDate).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('md5')
+            expect(response.data[0].md5).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0]).to.haveOwnProperty('contentType')
+            expect(response.data[0].contentType).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0].metadata).to.haveOwnProperty('createdBy')
+            expect(response.data[0].metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[0].metadata).to.haveOwnProperty('modifiedBy')
+            expect(response.data[0].metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
+
+            expect(response.data[1]).to.haveOwnProperty('filename')
+            expect(response.data[1].filename).to.equal('pdfFile.pdf')
+
+            // Check if unprovided values exist and have defaults
+            expect(response.data[1]).to.haveOwnProperty('_id')
+            expect(response.data[1]._id).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1]).to.haveOwnProperty('createdAt')
+            expect(response.data[1].createdAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1]).to.haveOwnProperty('updatedAt')
+            expect(response.data[1].updatedAt).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1]).to.haveOwnProperty('length')
+            expect(response.data[1].length).to.not.lessThan(1)
+            expect(response.data[1]).to.haveOwnProperty('chunkSize')
+            expect(response.data[1].chunkSize).to.not.lessThan(1)
+            expect(response.data[1]).to.haveOwnProperty('uploadDate')
+            expect(response.data[1].uploadDate).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1]).to.haveOwnProperty('md5')
+            expect(response.data[1].md5).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1]).to.haveOwnProperty('contentType')
+            expect(response.data[1].contentType).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1].metadata).to.haveOwnProperty('createdBy')
+            expect(response.data[1].metadata.createdBy).to.not.equal(Enums.STRING_EMPTY)
+            expect(response.data[1].metadata).to.haveOwnProperty('modifiedBy')
+            expect(response.data[1].metadata.modifiedBy).to.not.equal(Enums.STRING_EMPTY)
           })
           .then(done, done)
       })
