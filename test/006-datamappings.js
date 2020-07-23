@@ -22,6 +22,7 @@ describe('Agilit-e Data Mapping', () => {
   let tmpEntry = null
   let recordId = null
   let key = UUID.v1()
+  console.log(key)
 
   it('Create New Record - No Params (Negative)', (done) => {
     agilite.DataMappings.postData()
@@ -396,13 +397,13 @@ describe('Agilit-e Data Mapping', () => {
       .then(done, done)
   })
 
-  it('Update Existing Record - Success', (done) => {
+  it('Update Existing Record - Success', (done) => { // TODO: This will need fileIds for Excel
     key = 'PUT_' + key
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
     mainEntry.data.key = key
     mainEntry.data.name = key
-    mainEntry.data.sourceType = '2'
-    mainEntry.data.destinationType = '2'
+    mainEntry.data.sourceType = '1'
+    mainEntry.data.destinationType = '1'
 
     agilite.DataMappings.putData(recordId, mainEntry)
       .then((response) => {
@@ -414,9 +415,9 @@ describe('Agilit-e Data Mapping', () => {
         expect(response.data.data).to.haveOwnProperty('name')
         expect(response.data.data.name).to.equal(key)
         expect(response.data.data).to.haveOwnProperty('sourceType')
-        expect(response.data.data.sourceType).to.equal('2')
+        expect(response.data.data.sourceType).to.equal('1')
         expect(response.data.data).to.haveOwnProperty('destinationType')
-        expect(response.data.data.destinationType).to.equal('2')
+        expect(response.data.data.destinationType).to.equal('1')
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -456,28 +457,40 @@ describe('Agilit-e Data Mapping', () => {
 
   it('Execute - No Data (Negative)', (done) => {
     agilite.DataMappings.execute(key, null)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+      .then((response) => {
+        expect(TypeDetect(response)).to.equal(EnumsTypeDetect.OBJECT)
+        expect(response).to.haveOwnProperty('status')
+        expect(TypeDetect(response.status)).to.equal(EnumsTypeDetect.NUMBER)
+        expect(response.status).to.equal(200)
+        expect(response).to.haveOwnProperty('data')
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(response.data).to.haveOwnProperty('desParam1')
+        expect(TypeDetect(response.data.desParam1)).to.equal(EnumsTypeDetect.STRING)
+        expect(response.data.desParam1).to.equal('')
+        expect(response.data).to.haveOwnProperty('desParam2')
+        expect(TypeDetect(response.data.desParam2)).to.equal(EnumsTypeDetect.STRING)
+        expect(response.data.desParam2).to.equal('')
       })
       .then(done, done)
   })
 
-  it('Execute - Success', (done) => {
+  it.skip('Execute - Success', (done) => { // TODO: Add response validation
     agilite.DataMappings.execute(key, {})
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+      .then((response) => {
+        expect(TypeDetect(response)).to.equal(EnumsTypeDetect.OBJECT)
+        expect(response).to.haveOwnProperty('status')
+        expect(TypeDetect(response.status)).to.equal(EnumsTypeDetect.NUMBER)
+        expect(response.status).to.equal(200)
+        expect(response).to.haveOwnProperty('data')
+        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(response.data).to.haveOwnProperty('desParam1')
+        expect(TypeDetect(response.data.desParam1)).to.equal(EnumsTypeDetect.STRING)
+        expect(response.data.desParam1).to.equal('')
+        expect(response.data).to.haveOwnProperty('desParam2')
+        expect(TypeDetect(response.data.desParam2)).to.equal(EnumsTypeDetect.STRING)
+        expect(response.data.desParam2).to.equal('')
       })
       .then(done, done)
   })

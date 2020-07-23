@@ -52,6 +52,7 @@ const data = {
       groupName: '',
       sourceType: '1',
       destinationType: '1',
+      solutions: [],
       srcJson: {
         startingPoint: ''
       },
@@ -116,6 +117,7 @@ const data = {
       groupName: 'Test Group Name',
       sourceType: '1',
       destinationType: '1',
+      solutions: [],
       srcJson: {
         startingPoint: ''
       },

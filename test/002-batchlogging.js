@@ -184,11 +184,9 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO:
-      it.skip('String Data (NEGATIVE)', (done) => {
+      it('String Data (NEGATIVE)', (done) => {
         agilite.BatchLogging.postData(invalidValue)
           .catch((err) => {
-            console.log(err)
             expect(err).to.haveOwnProperty('response')
             expect(err.response.status).to.equal(400)
             expect(err.response).to.haveOwnProperty('data')
@@ -331,10 +329,6 @@ describe('Agilit-e Batch Logging \n', function () {
   })
 
   describe('Get Data', () => {
-    describe('Negative Tests', () => {
-      // TODO: Are there any Negative tests here? I cannot think of any, unless I try to give it weird data structures?
-    })
-
     describe('Positive Tests', () => {
       it('Slim Result - Find All - Success (POSITIVE)', (done) => {
         agilite.BatchLogging.getData()
@@ -616,7 +610,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix once John refactors API Server
       it('Object Record Id (NEGATIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
         mainEntry.data.key = key1
@@ -636,7 +629,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix once John refactors API Server
       it('Array Record Id (NEGATIVE)', (done) => {
         mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
         mainEntry.data.key = key1
@@ -820,8 +812,6 @@ describe('Agilit-e Batch Logging \n', function () {
           })
           .then(done, done)
       })
-      // TODO: Update Existing Record - Positive Tests
-      // Update the inactive profile to active
     })
   })
 
@@ -887,7 +877,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix this once John has refactored API Server
       it('Object Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.getByProfileKey({})
           .catch((err) => {
@@ -903,7 +892,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix this once John has refactored API Server
       it('Array Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.getByProfileKey([])
           .catch((err) => {
@@ -1033,7 +1021,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix this once John has refactored API Server
       it('Object Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.initLogProcess({})
           .catch((err) => {
@@ -1049,7 +1036,6 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      // TODO: Fix this once John has refactored API Server
       it('Array Key (NEGATIVE)', (done) => {
         agilite.BatchLogging.initLogProcess([])
           .catch((err) => {
@@ -1275,7 +1261,7 @@ describe('Agilit-e Batch Logging \n', function () {
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(TypeDetect(err.response.data.errorMessage)).to.equal(EnumsTypeDetect.STRING)
-            expect(err.response.data.errorMessage).to.equal('Active Batch Process cannot be found - invalid_value')
+            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1291,7 +1277,7 @@ describe('Agilit-e Batch Logging \n', function () {
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(TypeDetect(err.response.data.errorMessage)).to.equal(EnumsTypeDetect.STRING)
-            expect(err.response.data.errorMessage).to.equal('Active Batch Process cannot be found - 123123')
+            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1307,7 +1293,7 @@ describe('Agilit-e Batch Logging \n', function () {
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(TypeDetect(err.response.data.errorMessage)).to.equal(EnumsTypeDetect.STRING)
-            expect(err.response.data.errorMessage).to.equal('Active Batch Process cannot be found - [object Object]')
+            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1323,7 +1309,7 @@ describe('Agilit-e Batch Logging \n', function () {
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(TypeDetect(err.response.data.errorMessage)).to.equal(EnumsTypeDetect.STRING)
-            expect(err.response.data.errorMessage).to.equal('Active Batch Process cannot be found - [object Object]')
+            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1362,6 +1348,7 @@ describe('Agilit-e Batch Logging \n', function () {
     })
   })
 
+  // TODO: Need to add a few more here
   describe('Generate Log Process Report', () => {
     describe('Negative Tests', () => {
       it('No Params (NEGATIVE)', (done) => {
@@ -1394,10 +1381,9 @@ describe('Agilit-e Batch Logging \n', function () {
           .then(done, done)
       })
 
-      it.skip('Number Id (NEGATIVE)', (done) => {
+      it('Number Id (NEGATIVE)', (done) => {
         agilite.BatchLogging.generateLogProcessReport(123123123)
           .catch((err) => {
-            console.log(err)
             expect(err).to.haveOwnProperty('response')
             expect(err.response.status).to.equal(400)
             expect(err.response).to.haveOwnProperty('data')
@@ -1405,7 +1391,7 @@ describe('Agilit-e Batch Logging \n', function () {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No Batch Logging Process Id was specified in the \'log-process-id\' header parameter')
+            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
