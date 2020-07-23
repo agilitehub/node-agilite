@@ -13,7 +13,7 @@ const data = {
       connectionData: {
         queryParams: [],
         headerParams: [],
-        url: 'http://127.0.0.1:6010',
+        url: 'https://apidemo.agilite.io', // 'http://127.0.0.1:6010'
         body: ''
       },
       feb: {
@@ -105,7 +105,7 @@ const data = {
       connectionData: {
         queryParams: [],
         headerParams: [],
-        url: 'http://127.0.0.1:6010',
+        url: 'https://apidemo.agilite.io', // 'http://127.0.0.1:6010'
         body: ''
       },
       feb: {
