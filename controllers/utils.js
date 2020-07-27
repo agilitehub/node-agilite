@@ -441,6 +441,42 @@ class Utils {
 
     return Utilities.executeRequest(config)
   }
+
+  getIP () {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/ip`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utilities.executeRequest(config)
+  }
+
+  getUserAgent () {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/useragent`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utilities.executeRequest(config)
+  }
 }
 
 module.exports = Utils
