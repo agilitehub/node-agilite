@@ -1,11 +1,11 @@
 'use strict'
 
-require('dotenv').config()
+require('agilite-utils/dotenv').config()
 const fs = require('fs')
-const TypeDetect = require('type-detect')
+const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
 const Agilite = require('../controllers/agilite')
-const EnumsTypeDetect = require('../utils/enums-type-detect')
+const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
 const Enums = require('../utils/enums')
 
 const agilite = new Agilite({

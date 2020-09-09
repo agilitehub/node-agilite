@@ -1,6 +1,6 @@
 'use strict'
 
-const Axios = require('axios')
+const Axios = require('agilite-utils/axios')
 const Enums = require('../utils/enums')
 
 const executeRequest = (config) => {

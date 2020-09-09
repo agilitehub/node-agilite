@@ -1,11 +1,11 @@
 'use strict'
 
-require('dotenv').config()
-const UUID = require('uuid')
-const TypeDetect = require('type-detect')
+require('agilite-utils/dotenv').config()
+const UUID = require('agilite-utils/uuid')
+const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
 const Agilite = require('../controllers/agilite')
-const EnumsTypeDetect = require('../utils/enums-type-detect')
+const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
 const Enums = require('../utils/enums')
 const DataTemplate = require('../data-templates/connectors')
 

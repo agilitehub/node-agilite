@@ -11,7 +11,7 @@
  *    + Check that API Key is valid        - (POSITIVE)
  */
 
-require('dotenv').config()
+require('agilite-utils/dotenv').config()
 const expect = require('chai').expect
 const Agilite = require('../controllers/agilite')
 const Enums = require('../utils/enums')
