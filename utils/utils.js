@@ -37,7 +37,7 @@ const executeCRUDRequest = (apiServerUrl = '', apiKey = '', teamId = null, appNa
 
 const authenticateToken = (apiServerUrl = '', apiKey = '') => {
   const config = {
-    url: `${apiServerUrl}/user/authenticatetoken`,
+    url: `${apiServerUrl}`,
     method: 'GET',
     headers: {}
   }
