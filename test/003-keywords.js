@@ -67,7 +67,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'key\'')
+        expect(err.response.data.errorMessage).to.equal('Invalid request body. \'key\' property required')
       })
       .then(done, done)
   })
@@ -85,7 +85,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('At least 1 \'values\' JSON entry is required')
+        expect(err.response.data.errorMessage).to.equal('Array property \'values\' not properly defined')
       })
       .then(done, done)
   })
@@ -155,8 +155,6 @@ describe('Agilit-e Keywords', () => {
         expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
         expect(response.data.data).to.haveOwnProperty('isActive')
         expect(response.data.data.isActive).to.equal(true)
-        expect(response.data.data).to.haveOwnProperty('groupName')
-        expect(response.data.data.groupName).to.equal(Enums.STRING_EMPTY)
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -182,8 +180,6 @@ describe('Agilit-e Keywords', () => {
             expect(tmpEntry.data).to.haveOwnProperty('values')
             expect(tmpEntry.data).to.haveOwnProperty('isActive')
             expect(TypeDetect(tmpEntry.data.isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
-            expect(tmpEntry.data).to.haveOwnProperty('groupName')
-            expect(TypeDetect(tmpEntry.data.groupName)).to.equal(EnumsTypeDetect.STRING)
 
             // Check that the values NOT part of the slim result aren't returned
             expect(tmpEntry.createdBy).to.equal(undefined)
@@ -207,7 +203,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'record-id\' Header parameter required')
       })
       .then(done, done)
   })
@@ -254,7 +250,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'key\'')
+        expect(err.response.data.errorMessage).to.equal('Invalid request body. \'key\' property required')
       })
       .then(done, done)
   })
@@ -272,7 +268,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('At least 1 \'values\' JSON entry is required')
+        expect(err.response.data.errorMessage).to.equal('Array property \'values\' not properly defined')
       })
       .then(done, done)
   })
@@ -333,7 +329,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Update Existing Record - Success', (done) => {
-    key = 'PUT_' + key
+    key = 'put_' + key
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
     mainEntry.data.key = key
     mainEntry.data.groupName = groupName
@@ -378,7 +374,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'profile-key\' Header parameter required')
       })
       .then(done, done)
   })
@@ -446,7 +442,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No value was specified in the \'group-name\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'group-name\' Header parameter required')
       })
       .then(done, done)
   })
@@ -494,7 +490,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'profile-key\' Header parameter required')
       })
       .then(done, done)
   })
@@ -509,7 +505,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Value Key was specified in the \'value-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'value-key\' Header parameter required')
       })
       .then(done, done)
   })
@@ -524,7 +520,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found') // TODO: We can provide a better Error Message
+        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - ' + invalidValue) // TODO: We can provide a better Error Message
       })
       .then(done, done)
   })
@@ -539,7 +535,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal(`Value Entry cannot be found - ${invalidValue}`) // TODO: We can provide a better Error Message
+        expect(err.response.data.errorMessage).to.equal(`Label Entry cannot be found - ${invalidValue}`) 
       })
       .then(done, done)
   })
@@ -580,7 +576,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'profile-key\' Header parameter required')
       })
       .then(done, done)
   })
@@ -595,7 +591,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Label Key was specified in the \'label-key\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'label-key\' Header parameter required')
       })
       .then(done, done)
   })
@@ -610,7 +606,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found') // TODO: We can provide a better Error Message
+        expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - ' + invalidValue) 
       })
       .then(done, done)
   })
@@ -666,7 +662,7 @@ describe('Agilit-e Keywords', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
+        expect(err.response.data.errorMessage).to.equal('Validation Failed. \'record-id\' Header parameter required')
       })
       .then(done, done)
   })

@@ -22,7 +22,6 @@ describe('Agilit-e Data Mapping', () => {
   let tmpEntry = null
   let recordId = null
   let key = UUID.v1()
-  console.log(key)
 
   it('Create New Record - No Params (Negative)', (done) => {
     agilite.DataMappings.postData()

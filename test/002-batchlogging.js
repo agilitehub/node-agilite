@@ -107,7 +107,7 @@ const agilite = new Agilite({
 })
 
 describe('Agilit-e Batch Logging \n', function () {
-  this.bail(true)
+  // this.bail(true)
   const invalidValue = 'invalid_value'
 
   let mainEntry = null

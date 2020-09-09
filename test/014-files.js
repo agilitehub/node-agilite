@@ -14,7 +14,7 @@ const agilite = new Agilite({
 })
 
 describe('Agilit-e Files \n', function () {
-  this.bail(true)
+  // this.bail(true)
   const invalidValue = 'invalid_value'
 
   let recordId = null
