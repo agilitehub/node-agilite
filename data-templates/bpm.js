@@ -55,7 +55,8 @@ const data = {
           notes: ''
         }],
         notes: '',
-        referenceUrl: ''
+        referenceUrl: '',
+        notificationTemplate: ''
       }]
     }
   }

@@ -306,6 +306,82 @@ class BPM {
 
     return Utils.executeRequest(config)
   }
+
+  assignRole (processKey = '', bpmRecordId = '', roleName = '', currentUser = '', responsibleUsers = [], logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/assignRole`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
+
+    if (roleName !== undefined && roleName !== null) {
+      config.headers[Enums.HEADER_ROLE_NAME] = roleName
+    }
+
+    if (currentUser !== undefined && currentUser !== null) {
+      config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    }
+
+    if (responsibleUsers !== undefined && responsibleUsers !== null) {
+      config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  getAssignedRoles (processKey = '', bpmRecordId = '', roleNames = [], logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getAssignedRoles`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
+
+    if (roleNames !== undefined && roleNames !== null) {
+      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
 }
 
 module.exports = BPM
