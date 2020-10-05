@@ -902,7 +902,7 @@ describe('Agilit-e Batch Logging \n', function () {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Active Batch Logging Profile cannot be found - [object Object]')
+            expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
           })
           .then(done, done)
       })
@@ -1046,7 +1046,7 @@ describe('Agilit-e Batch Logging \n', function () {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Active Batch Logging Profile cannot be found - [object Object]')
+            expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
           })
           .then(done, done)
       })
@@ -1309,7 +1309,7 @@ describe('Agilit-e Batch Logging \n', function () {
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(TypeDetect(err.response.data.errorMessage)).to.equal(EnumsTypeDetect.STRING)
-            expect(err.response.data.errorMessage).to.equal('Invalid Batch Logging Process Id was provided in the \'log-process-id\' header parameter')
+            expect(err.response.data.errorMessage).to.equal('No Batch Logging Process Id was specified in the \'log-process-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1487,7 +1487,7 @@ describe('Agilit-e Batch Logging \n', function () {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Record with id: \'[object Object]\' cannot be found')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })

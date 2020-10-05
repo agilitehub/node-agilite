@@ -304,7 +304,7 @@ describe('Agilit-e Connectors', () => {
     agilite.Connectors.execute(key, 'ping')
       .then((response) => {
         expect(response).to.haveOwnProperty('data')
-        expect(response.data).to.equal('Greetings from Agilit-e API Server')
+        expect(response.data).to.equal('pong')
       })
       .then(done, done)
   })

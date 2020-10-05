@@ -464,7 +464,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Invalid String Record Id (NEGATIVE)', (done) => { // TODO: Not a descriptive enough error message in Node-RED
+      it('String Record Id (NEGATIVE)', (done) => { // TODO: Not a descriptive enough error message in Node-RED
         agilite.Files.getFile(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -481,7 +481,7 @@ describe('Agilit-e Files \n', function () {
           .then(done, done)
       })
 
-      it('Invalid Number Record Id (NEGATIVE)', (done) => {
+      it('Number Record Id (NEGATIVE)', (done) => {
         agilite.Files.getFile(123123123213, '', '')
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')
@@ -508,7 +508,7 @@ describe('Agilit-e Files \n', function () {
             // Check if errorMessage exists and contains correct error message
 
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Argument passed in must be a single String of 12 bytes or a string of 24 hex characters')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })
@@ -822,7 +822,7 @@ describe('Agilit-e Files \n', function () {
             // Check if errorMessage exists and contains correct error message
 
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Argument passed in must be a single String of 12 bytes or a string of 24 hex characters')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })
@@ -934,7 +934,7 @@ describe('Agilit-e Files \n', function () {
             // Check if errorMessage exists and contains correct error message
 
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Argument passed in must be a single String of 12 bytes or a string of 24 hex characters')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1075,7 +1075,7 @@ describe('Agilit-e Files \n', function () {
             // Check if errorMessage exists and contains correct error message
 
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Argument passed in must be a single String of 12 bytes or a string of 24 hex characters')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })
@@ -1253,7 +1253,7 @@ describe('Agilit-e Files \n', function () {
             // Check if errorMessage exists and contains correct error message
 
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Argument passed in must be a single String of 12 bytes or a string of 24 hex characters')
+            expect(err.response.data.errorMessage).to.equal('No Id was specified in the \'record-id\' header parameter')
           })
           .then(done, done)
       })

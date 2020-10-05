@@ -14,7 +14,7 @@ const agilite = new Agilite({
   apiKey: process.env.API_KEY
 })
 
-describe.only('Agilit-e BPM', () => {
+describe('Agilit-e BPM', () => {
   const invalidValue = 'invalid_value'
 
   let mainEntry = null
@@ -502,35 +502,6 @@ describe.only('Agilit-e BPM', () => {
     })
   })
 
-  describe('Clear History Data', () => {
-    describe('Negative Tests', () => {
-      it('No Param (Negative)', (done) => {
-        agilite.BPM.clearHistoryData()
-          .catch((err) => {
-            expect(err).to.haveOwnProperty('response')
-            expect(err.response.status).to.equal(400)
-            expect(err.response).to.haveOwnProperty('data')
-            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if errorMessage exists and contains correct error message
-            expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'profile-key\' Header parameter required')
-          })
-          .then(done, done)
-      })
-    })
-
-    describe('Positive Test', () => {
-      it('Clear History Data - Success', (done) => {
-        agilite.BPM.clearHistoryData(key)
-          .then((response) => {
-            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-          })
-          .then(done, done)
-      })
-    })
-  })
-
   describe('Assign Role', () => {
     describe('Negative Tests', () => {
       it('No Params (Negative)', (done) => {
@@ -573,7 +544,7 @@ describe.only('Agilit-e BPM', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No Current User was specified in the \'current-user\' header parameter')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'current-user\' Header parameter required')
           })
           .then(done, done)
       })
@@ -596,13 +567,41 @@ describe.only('Agilit-e BPM', () => {
 
     describe('Positive Test', () => {
       it('Success', (done) => {
-        agilite.BPM.assignRole(invalidValue, invalidValue, name, name, DataTemplate.new.data.responsibleUser)
-          .then((response) => {
+        agilite.BPM.assignRole(processKey, bpmRecordId, DataTemplate.modified.data.processSteps[0].responsibleRole, 'johann@agilite.io', ['users'])
+          .then(response => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
             expect(response.data).to.haveOwnProperty('hasChanged')
             expect(TypeDetect(response.data.hasChanged)).to.equal(EnumsTypeDetect.BOOLEAN)
-            expect(response.data).to.haveOwnProperty('id')
-            expect(TypeDetect(response.data.id)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.hasChanged).to.equal(true)
+          })
+          .then(done, done)
+      })
+    })
+  })
+
+  describe('Clear History Data', () => {
+    describe('Negative Tests', () => {
+      it('No Param (Negative)', (done) => {
+        agilite.BPM.clearHistoryData()
+          .catch((err) => {
+            expect(err).to.haveOwnProperty('response')
+            expect(err.response.status).to.equal(400)
+            expect(err.response).to.haveOwnProperty('data')
+            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check if errorMessage exists and contains correct error message
+            expect(err.response.data).to.haveOwnProperty('errorMessage')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'profile-key\' Header parameter required')
+          })
+          .then(done, done)
+      })
+    })
+
+    describe('Positive Test', () => {
+      it('Clear History Data - Success', (done) => {
+        agilite.BPM.clearHistoryData(key)
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
           })
           .then(done, done)
       })
@@ -628,15 +627,9 @@ describe.only('Agilit-e BPM', () => {
 
       it('No BPM Record Id (Negative)', (done) => {
         agilite.BPM.getAssignedRoles(invalidValue)
-          .catch((err) => {
-            expect(err).to.haveOwnProperty('response')
-            expect(err.response.status).to.equal(400)
-            expect(err.response).to.haveOwnProperty('data')
-            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-            // Check if errorMessage exists and contains correct error message
-            expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('At least one header property of (\'process-key\', \'bpm-record-id\', \'role-names\') needs to be provided')
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
+            expect(JSON.stringify(response.data)).to.equal('[]')
           })
           .then(done, done)
       })
@@ -702,7 +695,7 @@ describe.only('Agilit-e BPM', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No Process Key was specified in the \'process-key\' header parameter')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'process-key\' Header parameter required')
           })
           .then(done, done)
       })
@@ -714,6 +707,51 @@ describe.only('Agilit-e BPM', () => {
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
             expect(response.data.lenght).to.not.equal(0)
+          })
+          .then(done, done)
+      })
+    })
+  })
+
+  describe('Delete BPM Stubs', () => {
+    describe('Negative Tests', () => {
+      it('No Params', (done) => {
+        agilite.BPM.deleteBPMStubs()
+          .catch((err) => {
+            expect(err).to.haveOwnProperty('response')
+            expect(err.response.status).to.equal(400)
+            expect(err.response).to.haveOwnProperty('data')
+            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check if errorMessage exists and contains correct error message
+            expect(err.response.data).to.haveOwnProperty('errorMessage')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'process-key\' Header parameter required')
+          })
+          .then(done, done)
+      })
+
+      it('No BPM Record Ids', (done) => {
+        agilite.BPM.deleteBPMStubs(key, '')
+          .catch((err) => {
+            expect(err).to.haveOwnProperty('response')
+            expect(err.response.status).to.equal(400)
+            expect(err.response).to.haveOwnProperty('data')
+            expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check if errorMessage exists and contains correct error message
+            expect(err.response.data).to.haveOwnProperty('errorMessage')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'bpm-record-ids\' Header parameter required')
+          })
+          .then(done, done)
+      })
+    })
+
+    describe('Positive Test', () => {
+      it('Success', (done) => {
+        agilite.BPM.deleteBPMStubs(key, recordId)
+          .then((response) => {
+            expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(JSON.stringify(response.data)).to.equal('{}')
           })
           .then(done, done)
       })
@@ -737,7 +775,7 @@ describe.only('Agilit-e BPM', () => {
           .then(done, done)
       })
 
-      it('Invalid Record Id (Negative)', (done) => {
+      it.skip('Invalid Record Id (Negative)', (done) => {
         agilite.BPM.deleteData(invalidValue)
           .catch((err) => {
             expect(err).to.haveOwnProperty('response')

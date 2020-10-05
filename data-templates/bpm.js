@@ -1,5 +1,6 @@
 const data = {
   emptyObject: {},
+  responsibleUser: ['johann@agilite.io'],
   emptyDataObject: {
     data: {}
   },

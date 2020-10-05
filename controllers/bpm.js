@@ -307,6 +307,36 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
+  deleteBPMStubs (processKey = '', bpmRecordIds = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/deleteBPMStubs`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (bpmRecordIds !== undefined && bpmRecordIds !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_IDS] = bpmRecordIds
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
   assignRole (processKey = '', bpmRecordId = '', roleName = '', currentUser = '', responsibleUsers = [], logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/assignRole`,
