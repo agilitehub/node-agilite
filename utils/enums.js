@@ -2,6 +2,7 @@ const Enums = {
   URL_API_SERVER: 'https://api.agilite.io',
   STRING_EMPTY: '',
   STRING_DATA: 'data',
+  HEADER_ISO_LANGUAGE: 'iso-language',
   HEADER_START_DATE: 'start-date',
   HEADER_END_DATE: 'end-date',
   HEADER_INCLUDE_MODULES: 'include-modules',

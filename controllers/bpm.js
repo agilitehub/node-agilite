@@ -62,7 +62,7 @@ class BPM {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
 
-  registerBPMRecord (processKey = '', currentUser = '', logProcessId = null) {
+  registerBPMRecord (processKey = '', currentUser = '', isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/registerBPMRecord`,
       method: Enums.METHOD_GET,
@@ -81,6 +81,10 @@ class BPM {
       config.headers[Enums.HEADER_CURRENT_USER] = currentUser
     }
 
+    if (isoLanguage !== undefined && isoLanguage !== null) {
+      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -92,7 +96,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', comments = '', data = {}, logProcessId = null) {
+  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', comments = '', data = {}, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/execute`,
       method: Enums.METHOD_POST,
@@ -126,6 +130,10 @@ class BPM {
       config.headers[Enums.HEADER_COMMENTS] = comments
     }
 
+    if (isoLanguage !== undefined && isoLanguage !== null) {
+      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
+    }
+
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
@@ -137,7 +145,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, sort = undefined, logProcessId = null) {
+  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, sort = undefined, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
@@ -178,6 +186,10 @@ class BPM {
 
     if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
       config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    }
+
+    if (isoLanguage !== undefined && isoLanguage !== null) {
+      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -255,7 +267,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getActiveSteps (processKey = '', logProcessId = null) {
+  getActiveSteps (processKey = '', isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getActiveSteps`,
       method: Enums.METHOD_GET,
@@ -268,6 +280,10 @@ class BPM {
 
     if (processKey !== undefined && processKey !== null) {
       config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (isoLanguage !== undefined && isoLanguage !== null) {
+      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
