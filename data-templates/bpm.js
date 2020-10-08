@@ -46,6 +46,7 @@ const data = {
           _id: '',
           isNewEntry: false,
           isActive: true,
+          key: 'submit',
           name: 'Submit',
           description: 'Auto Generated Option. This can be modified',
           eventStamp: [

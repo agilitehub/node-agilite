@@ -14,7 +14,7 @@ const agilite = new Agilite({
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e BPM', () => {
+describe('Agilit-e BPM \n', () => {
   const invalidValue = 'invalid_value'
 
   let mainEntry = null
@@ -338,7 +338,7 @@ describe('Agilit-e BPM', () => {
 
     describe('Positive Test', () => {
       it('Success', (done) => {
-        agilite.BPM.execute(processKey, bpmRecordId, 'Submit', 'user')
+        agilite.BPM.execute(processKey, bpmRecordId, 'submit', 'user')
           .then((response) => {
             expect(response.data).to.haveOwnProperty('isNewEntry')
             expect(response.data.isNewEntry).to.not.equal(Enums.STRING_EMPTY)
@@ -725,7 +725,7 @@ describe('Agilit-e BPM', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'process-key\' Header parameter required')
+            expect(err.response.data.errorMessage).to.equal('Validation Failed. \'bpm-record-ids\' Header parameter required')
           })
           .then(done, done)
       })

@@ -390,7 +390,7 @@ describe('Agilit-e Numbering', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(error).to.haveOwnProperty('errorMessage')
-        expect(error.errorMessage).to.equal('Cast to ObjectId failed for value "test" at path "_id" for model "test_numbering"')
+        expect(error.errorMessage).to.equal('Cast to ObjectId failed for value "test" at path "_id" for model "unit_testing_team_numbering"')
 
         // Check if additionalMessages exists and is blank array
         expect(error).to.haveOwnProperty('additionalMessages')

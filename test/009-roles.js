@@ -14,7 +14,7 @@ const agilite = new Agilite({
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e Roles', () => {
+describe('Agilit-e Roles \n', () => {
   const groupName = UUID.v1()
   const invalidValue = 'invalid_value'
 
