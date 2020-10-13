@@ -1,9 +1,16 @@
 'use strict'
 
+const expect = require('chai').expect
 const TypeDetect = require('agilite-utils/type-detect')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const expect = require('chai').expect
+const CrudUtils = require('./crud-utils')
+const Enums = require('./enums')
 
+// GLOBALS
+const requiredFields = {}
+const memoryStore = {}
+
+// EXPORTS
 exports.init = (moduleKey, hasCRUDOperations, model) => {
   return new Promise((resolve, reject) => {
     (async () => {
@@ -13,7 +20,7 @@ exports.init = (moduleKey, hasCRUDOperations, model) => {
       try {
         // Generate Tests if includes CRUD Operations
         if (hasCRUDOperations) {
-          tmpData = await _testsCRUDNegativeCreateRecord(moduleKey)
+          tmpData = await CrudUtils.testsNegativeCreateRecord(moduleKey, model)
           result.push(...tmpData)
 
           // Return Tests
@@ -27,13 +34,13 @@ exports.init = (moduleKey, hasCRUDOperations, model) => {
 }
 
 exports.execute = (test, agilite) => {
-  it(test.title, (done) => { // eslint-disable-line
+  it(`-- AUTO: ${test.title}`, (done) => { // eslint-disable-line
     switch (test.type) {
-      case 'crud':
+      case Enums.testTypes.CREATE_POST_NEGATIVE:
         agilite.executeCRUDRequest(test.moduleKey, test.method, test.data, test.headers)
           .catch(err => {
             expect(err).to.haveOwnProperty('response')
-            expect(err.response.status).to.equal(400)
+            expect(err.response.status).to.equal(Enums.statusCodes.ERROR)
             expect(err.response).to.haveOwnProperty('data')
             expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
             expect(err.response.data).to.haveOwnProperty('additionalMessages')
@@ -51,41 +58,18 @@ exports.execute = (test, agilite) => {
   })
 }
 
-// PRIVATE FUNCTIONS
-const _testsCRUDNegativeCreateRecord = (moduleKey) => {
-  return new Promise((resolve, reject) => {
-    const result = []
+exports.getMemoryStore = (key) => {
+  return memoryStore[key]
+}
 
-    let method = null
-    let type = null
-    let data = null
-    let errMsg = null
-    let title = null
+exports.setMemoryStore = (key, value) => {
+  memoryStore[key] = value
+}
 
-    try {
-      // Generate generic negative tests for creating a new record
-      method = 'post'
-      type = 'crud'
-      errMsg = 'No \'data\' property found in JSON Body'
+exports.getRequiredField = (key) => {
+  return requiredFields[key]
+}
 
-      // First we post undefined data
-      title = 'Create Record - Undefined Data (Negative)'
-      result.push({ title, type, method, moduleKey })
-
-      // Next, we post null data
-      title = 'Create Record - Null Data (Negative)'
-      data = null
-      result.push({ title, type, method, moduleKey, data })
-
-      // Next, we post empty object
-      title = 'Create Record - Empty Data (Negative)'
-      data = {}
-      result.push({ title, type, method, moduleKey, data, errMsg })
-
-      // Return Tests
-      resolve(result)
-    } catch (e) {
-      reject(e)
-    }
-  })
+exports.setRequiredField = (key) => {
+  requiredFields[key] = true
 }

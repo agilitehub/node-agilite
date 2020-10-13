@@ -17,7 +17,7 @@ module.exports = {
         appAdmin: { type: 'string' },
         notificationTemplate: { type: 'string' },
         iln: {},
-        processSteps: { type: 'array', items: {}, required: true },
+        processSteps: { type: 'array', items: {} },
         solutions: { type: 'array', items: {} },
         notes: { type: 'string' },
         numberingId: { type: 'string' }

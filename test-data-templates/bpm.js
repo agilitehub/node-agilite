@@ -1,10 +1,6 @@
 module.exports = [
   {
-    data: {
-      name: ''
-    }
-  },
-  {
+    title: '--No Name Prop',
     data: {
       key: '',
       name: ''
