@@ -25,6 +25,7 @@ const data = {
       referenceUrl: '',
       appAdmin: '',
       notes: '',
+      solutions: [],
       processSteps: [{
         _id: '',
         isActive: true,
