@@ -316,7 +316,7 @@ describe('Agilit-e Roles \n', () => {
 
     describe('Positive Tests', () => {
       it('No Conditional Levels - Success', (done) => {
-        agilite.Roles.changeConditionalLevels(recordId)
+        agilite.Roles.changeConditionalLevels(recordId, [])
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
           })
@@ -324,7 +324,7 @@ describe('Agilit-e Roles \n', () => {
       })
 
       it('Success', (done) => {
-        agilite.Roles.changeConditionalLevels(recordId, DataTemplate.new.data.responsibleUser)
+        agilite.Roles.changeConditionalLevels(recordId, DataTemplate.modified.data.levels)
           .then((response) => {
             expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
           })

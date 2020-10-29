@@ -109,6 +109,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.data).to.haveOwnProperty('solutions')
           expect(TypeDetect(response.data.data.solutions)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data.data).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data.data.keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Store Record Id to be used later
           recordId = response.data._id
           numberingId = response.data.data.numberingId
@@ -121,6 +124,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.putData(recordId, mainEntry)
         .then((response) => {
@@ -187,6 +191,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.data).to.haveOwnProperty('solutions')
           expect(TypeDetect(response.data.data.solutions)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data.data).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data.data.keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           expect(response.data.data).to.haveOwnProperty('iln')
           expect(TypeDetect(response.data.data.iln)).to.equal(EnumsTypeDetect.OBJECT)
           expect(response.data.data.iln).to.haveOwnProperty('name')
@@ -207,9 +214,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.data.processSteps[0].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
           expect(response.data.data.processSteps[0].isActive).to.equal(mainEntry.data.processSteps[0].isActive)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('firstStep')
-          expect(TypeDetect(response.data.data.processSteps[0].firstStep)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.data.processSteps[0].firstStep).to.equal(mainEntry.data.processSteps[0].firstStep)
+          expect(response.data.data.processSteps[0]).to.haveOwnProperty('isNewEntry')
+          expect(TypeDetect(response.data.data.processSteps[0].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+          expect(response.data.data.processSteps[0].isNewEntry).to.equal(mainEntry.data.processSteps[0].isNewEntry)
 
           expect(response.data.data.processSteps[0]).to.haveOwnProperty('key')
           expect(TypeDetect(response.data.data.processSteps[0].key)).to.equal(EnumsTypeDetect.STRING)
@@ -257,7 +264,10 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
           expect(response.data.data.processSteps[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data.data.processSteps[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
-          expect(response.data.data.processSteps[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(TypeDetect(response.data.data.processSteps[0].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+          expect(response.data.data.processSteps[0].eventStamp[0]).to.haveOwnProperty('value')
+          expect(TypeDetect(response.data.data.processSteps[0].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+          expect(response.data.data.processSteps[0].eventStamp[0].value).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data.data.processSteps[0]).to.haveOwnProperty('roleLevels')
           expect(TypeDetect(response.data.data.processSteps[0].roleLevels)).to.equal(EnumsTypeDetect.ARRAY)
@@ -295,7 +305,10 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
           expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
-          expect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].stepOptions[0].eventStamp[0])
+          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+          expect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0]).to.haveOwnProperty('value')
+          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+          expect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0].value).to.equal(mainEntry.data.processSteps[0].stepOptions[0].eventStamp[0].value)
 
           expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('nextStep')
           expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].nextStep)).to.equal(EnumsTypeDetect.STRING)
@@ -316,6 +329,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.registerBPMRecord(key, 'user')
         .then((response) => {
@@ -421,7 +435,8 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
           expect(response.data.stepOptions[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data.stepOptions[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
-          expect(response.data.stepOptions[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].stepOptions[0].eventStamp[0])
+          expect(TypeDetect(response.data.stepOptions[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
+          expect(response.data.stepOptions[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].stepOptions[0].eventStamp[0].value)
 
           expect(response.data.stepOptions[0]).to.haveOwnProperty('nextStep')
           expect(TypeDetect(response.data.stepOptions[0].nextStep)).to.equal(EnumsTypeDetect.STRING)
@@ -433,6 +448,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.stepOptions[0]).to.haveOwnProperty('notes')
           expect(TypeDetect(response.data.stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
+
+          expect(response.data.stepOptions[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data.stepOptions[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
 
           // Check Roles Values
           expect(response.data.roles[0]).to.haveOwnProperty('name')
@@ -449,7 +467,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           // Check Event Stamp History
           expect(response.data.eventStampHistory[0]).to.haveOwnProperty('eventName')
           expect(TypeDetect(response.data.eventStampHistory[0].eventName)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data.eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data.eventStampHistory[0]).to.haveOwnProperty('timeStamp')
           expect(TypeDetect(response.data.eventStampHistory[0].timeStamp)).to.equal(EnumsTypeDetect.STRING)
@@ -523,7 +541,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.history[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data.history[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
           expect(TypeDetect(response.data.history[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data.history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data.history[0]).to.haveOwnProperty('responsibleUsers')
           expect(TypeDetect(response.data.history[0].responsibleUsers)).to.equal(EnumsTypeDetect.ARRAY)
@@ -541,6 +559,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.getRecordState([processKey])
         .then((response) => {
@@ -619,6 +638,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0]).to.haveOwnProperty('history')
           expect(TypeDetect(response.data[0].history)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check stepOptions values
           expect(response.data[0].stepOptions[0]).to.haveOwnProperty('_id')
           expect(TypeDetect(response.data[0].stepOptions[0]._id)).to.equal(EnumsTypeDetect.STRING)
@@ -659,6 +681,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data[0].stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data[0].stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
 
+          expect(response.data[0].stepOptions[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].stepOptions[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check Roles Values
           expect(response.data[0].roles[0]).to.haveOwnProperty('name')
           expect(TypeDetect(response.data[0].roles[0].name)).to.equal(EnumsTypeDetect.STRING)
@@ -674,7 +699,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           // Check Event Stamp History
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('eventName')
           expect(TypeDetect(response.data[0].eventStampHistory[0].eventName)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('timeStamp')
           expect(TypeDetect(response.data[0].eventStampHistory[0].timeStamp)).to.equal(EnumsTypeDetect.STRING)
@@ -748,7 +773,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0].history[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data[0].history[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
           expect(TypeDetect(response.data[0].history[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].history[0]).to.haveOwnProperty('responsibleUsers')
           expect(TypeDetect(response.data[0].history[0].responsibleUsers)).to.equal(EnumsTypeDetect.ARRAY)
@@ -841,6 +866,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0]).to.haveOwnProperty('history')
           expect(TypeDetect(response.data[0].history)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check stepOptions values
           expect(response.data[0].stepOptions[0]).to.haveOwnProperty('_id')
           expect(TypeDetect(response.data[0].stepOptions[0]._id)).to.equal(EnumsTypeDetect.STRING)
@@ -881,6 +909,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data[0].stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data[0].stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
 
+          expect(response.data[0].stepOptions[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].stepOptions[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check Roles Values
           expect(response.data[0].roles[0]).to.haveOwnProperty('name')
           expect(TypeDetect(response.data[0].roles[0].name)).to.equal(EnumsTypeDetect.STRING)
@@ -896,7 +927,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           // Check Event Stamp History
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('eventName')
           expect(TypeDetect(response.data[0].eventStampHistory[0].eventName)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('timeStamp')
           expect(TypeDetect(response.data[0].eventStampHistory[0].timeStamp)).to.equal(EnumsTypeDetect.STRING)
@@ -970,7 +1001,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0].history[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data[0].history[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
           expect(TypeDetect(response.data[0].history[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].history[0]).to.haveOwnProperty('responsibleUsers')
           expect(TypeDetect(response.data[0].history[0].responsibleUsers)).to.equal(EnumsTypeDetect.ARRAY)
@@ -985,6 +1016,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.execute(processKey, bpmRecordId, 'submit', 'user')
         .then((response) => {
@@ -1004,9 +1036,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
           expect(response.data.isActive).to.equal(true)
 
-          expect(response.data).to.haveOwnProperty('firstStep')
-          expect(TypeDetect(response.data.firstStep)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.firstStep).to.equal(false)
+          expect(response.data).to.haveOwnProperty('isNewEntry')
+          expect(TypeDetect(response.data.isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+          expect(response.data.isNewEntry).to.equal(true)
 
           expect(response.data).to.haveOwnProperty('key')
           expect(TypeDetect(response.data.key)).to.equal(EnumsTypeDetect.STRING)
@@ -1078,6 +1110,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
           expect(response.data).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data.eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
+
+          expect(response.data).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data.keywords)).to.equal(EnumsTypeDetect.ARRAY)
         })
         .then(done, done)
     })
@@ -1087,6 +1122,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.getRecordState([processKey])
         .then((response) => {
@@ -1164,6 +1200,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0]).to.haveOwnProperty('history')
           expect(TypeDetect(response.data[0].history)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check stepOptions values
           expect(response.data[0].stepOptions[0]).to.haveOwnProperty('_id')
           expect(TypeDetect(response.data[0].stepOptions[0]._id)).to.equal(EnumsTypeDetect.STRING)
@@ -1204,6 +1243,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data[0].stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data[0].stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
 
+          expect(response.data[0].stepOptions[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].stepOptions[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check Roles Values
           expect(response.data[0].roles[0]).to.haveOwnProperty('name')
           expect(TypeDetect(response.data[0].roles[0].name)).to.equal(EnumsTypeDetect.STRING)
@@ -1226,7 +1268,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           // Check Event Stamp History
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('eventName')
           expect(TypeDetect(response.data[0].eventStampHistory[0].eventName)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('timeStamp')
           expect(TypeDetect(response.data[0].eventStampHistory[0].timeStamp)).to.equal(EnumsTypeDetect.STRING)
@@ -1308,7 +1350,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0].history[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data[0].history[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
           expect(TypeDetect(response.data[0].history[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].history[0]).to.haveOwnProperty('responsibleUsers')
           expect(TypeDetect(response.data[0].history[0].responsibleUsers)).to.equal(EnumsTypeDetect.ARRAY)
@@ -1395,6 +1437,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
       mainEntry.data.numberingId = numberingId
+      mainEntry.data.iln.name.en = 'PUT_' + key
 
       agilite.BPM.getRecordState(null, [bpmRecordId])
         .then((response) => {
@@ -1472,6 +1515,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0]).to.haveOwnProperty('history')
           expect(TypeDetect(response.data[0].history)).to.equal(EnumsTypeDetect.ARRAY)
 
+          expect(response.data[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check stepOptions values
           expect(response.data[0].stepOptions[0]).to.haveOwnProperty('_id')
           expect(TypeDetect(response.data[0].stepOptions[0]._id)).to.equal(EnumsTypeDetect.STRING)
@@ -1512,6 +1558,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data[0].stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data[0].stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
 
+          expect(response.data[0].stepOptions[0]).to.haveOwnProperty('keywords')
+          expect(TypeDetect(response.data[0].stepOptions[0].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
           // Check Roles Values
           expect(response.data[0].roles[0]).to.haveOwnProperty('name')
           expect(TypeDetect(response.data[0].roles[0].name)).to.equal(EnumsTypeDetect.STRING)
@@ -1534,7 +1583,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           // Check Event Stamp History
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('eventName')
           expect(TypeDetect(response.data[0].eventStampHistory[0].eventName)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].eventStampHistory[0].eventName).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].eventStampHistory[0]).to.haveOwnProperty('timeStamp')
           expect(TypeDetect(response.data[0].eventStampHistory[0].timeStamp)).to.equal(EnumsTypeDetect.STRING)
@@ -1616,7 +1665,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data[0].history[0]).to.haveOwnProperty('eventStamp')
           expect(TypeDetect(response.data[0].history[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
           expect(TypeDetect(response.data[0].history[0].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0])
+          expect(response.data[0].history[0].eventStamp[0]).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
 
           expect(response.data[0].history[0]).to.haveOwnProperty('responsibleUsers')
           expect(TypeDetect(response.data[0].history[0].responsibleUsers)).to.equal(EnumsTypeDetect.ARRAY)
@@ -1708,7 +1757,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
     })
   })
 
-  describe('Old Logic, need to refactor this', () => { // eslint-disable-line
+  describe.skip('Old Logic, need to refactor this', () => { // eslint-disable-line
     describe('Get Data', () => { // eslint-disable-line
       describe('Negative Tests', () => { // eslint-disable-line 
       })
