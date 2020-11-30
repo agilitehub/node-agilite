@@ -33,6 +33,8 @@ const Enums = {
   HEADER_DATE_TIME_VALUE: 'date-time-value',
   HEADER_FORMAT_KEY: 'format-key',
   HEADER_RESPONSIBLE_USER: 'responsible-user',
+  HEADER_CURRENT_RESPONSIBLE_USER: 'current-responsible-user',
+  HEADER_NEW_RESPONSIBLE_USER: 'new-responsible-user',
   HEADER_RESPONSIBLE_USERS: 'responsible-users',
   HEADER_RELEVANT_USERS: 'relevant-users',
   HEADER_INCLUDE_HISTORY: 'include-history',

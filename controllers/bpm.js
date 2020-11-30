@@ -428,6 +428,74 @@ class BPM {
 
     return Utils.executeRequest(config)
   }
+
+  reAssignResponsibleUser (processKey = '', currentResponsibleUser = '', newResponsibleUser = '', roleNames = [], logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/reAssignResponsibleUser`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (currentResponsibleUser !== undefined && currentResponsibleUser !== null) {
+      config.headers[Enums.HEADER_CURRENT_RESPONSIBLE_USER] = currentResponsibleUser
+    }
+
+    if (newResponsibleUser !== undefined && newResponsibleUser !== null) {
+      config.headers[Enums.HEADER_NEW_RESPONSIBLE_USER] = newResponsibleUser
+    }
+
+    if (roleNames !== undefined && roleNames !== null) {
+      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  getResponsibleRoles (processKey = '', responsibleUser = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getResponsibleRoles`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (processKey !== undefined && processKey !== null) {
+      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    }
+
+    if (responsibleUser !== undefined && responsibleUser !== null) {
+      config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
 }
 
 module.exports = BPM
