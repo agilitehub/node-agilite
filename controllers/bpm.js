@@ -81,9 +81,7 @@ class BPM {
       config.headers[Enums.HEADER_CURRENT_USER] = currentUser
     }
 
-    if (isoLanguage !== undefined && isoLanguage !== null) {
-      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
-    }
+    if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
