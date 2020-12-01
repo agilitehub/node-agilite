@@ -94,7 +94,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', comments = '', data = {}, isoLanguage = '', logProcessId = null) {
+  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', currentStep = '', comments = '', data = {}, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/execute`,
       method: Enums.METHOD_POST,
@@ -122,6 +122,10 @@ class BPM {
 
     if (currentUser !== undefined && currentUser !== null) {
       config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    }
+
+    if (currentStep !== undefined && currentStep !== null) {
+      config.headers[Enums.HEADER_CURRENT_STEP] = currentStep
     }
 
     if (comments !== undefined && comments !== null) {
