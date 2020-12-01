@@ -28,7 +28,6 @@ const Enums = {
   HEADER_PUBLISH: 'publish',
   HEADER_RESET_SERVICE: 'reset-service',
   HEADER_CURRENT_USER: 'current-user',
-  HEADER_CURRENT_STEP: 'current-step',
   HEADER_OPTION_SELECTED: 'option-selected',
   HEADER_COMMENTS: 'comments',
   HEADER_DATE_TIME_VALUE: 'date-time-value',
