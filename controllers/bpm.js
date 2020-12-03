@@ -125,7 +125,7 @@ class BPM {
     }
 
     if (currentStep !== undefined && currentStep !== null) {
-      config.headers[Enums.HEADER_CURRENT_USER] = currentStep
+      config.headers[Enums.HEADER_CURRENT_STEP] = currentStep
     }
 
     if (comments !== undefined && comments !== null) {
