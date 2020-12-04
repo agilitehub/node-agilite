@@ -361,6 +361,24 @@ class Utils {
     return Utilities.executeRequest(config)
   }
 
+  homePageReports () {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_REPORTS}/homePage`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utilities.executeRequest(config)
+  }
+
   exportData (includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
