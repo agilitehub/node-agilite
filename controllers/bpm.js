@@ -147,7 +147,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, page = undefined, pageLimit = undefined, sort = undefined, isoLanguage = '', logProcessId = null) {
+  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], relevantRoles = [], eventStamps = [], eventStartDate = '', eventEndDate = '', includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, page = undefined, pageLimit = undefined, sort = undefined, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
@@ -178,6 +178,14 @@ class BPM {
       config.headers[Enums.HEADER_RELEVANT_USERS] = relevantUsers.join(Enums.SEPARATOR_COMMA)
     }
 
+    if (relevantRoles !== undefined && relevantRoles !== null) {
+      config.headers[Enums.HEADER_RELEVANT_ROLES] = relevantRoles.join(Enums.SEPARATOR_COMMA)
+    }
+
+    if (eventStamps !== undefined && eventStamps !== null) {
+      config.headers[Enums.HEADER_EVENT_STAMPS] = eventStamps.join(Enums.SEPARATOR_COMMA)
+    }
+
     if (includeHistory !== undefined && includeHistory !== null) {
       config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
     }
@@ -188,6 +196,10 @@ class BPM {
 
     if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
       config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    }
+
+    if (includeKeywords !== undefined && includeKeywords !== null) {
+      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
     }
 
     if (isoLanguage !== undefined && isoLanguage !== null) {
@@ -212,6 +224,14 @@ class BPM {
 
     if (sort !== undefined && sort !== null) {
       config.headers[Enums.HEADER_SORT_BY] = sort
+    }
+
+    if (eventStartDate !== undefined && eventStartDate !== null) {
+      config.headers[Enums.HEADER_EVENT_START_DATE] = eventStartDate
+    }
+
+    if (eventEndDate !== undefined && eventEndDate !== null) {
+      config.headers[Enums.HEADER_EVENT_END_DATE] = eventEndDate
     }
 
     return Utils.executeRequest(config)
