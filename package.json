@@ -1,7 +1,7 @@
 {
   "name": "agilite",
   "license": "MIT",
-  "version": "7.2.4",
+  "version": "7.2.5",
   "description": "A NodeJS module that provides seamless interactions with Agilit-e APIs",
   "homepage": "https://agilite.io",
   "repository": {
