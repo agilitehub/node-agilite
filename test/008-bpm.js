@@ -32,7 +32,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
   let bpmRecordId = null
   let numberingId = null
 
-  describe('Process Flow', () => { // eslint-disable-line
+  describe.only('Process Flow', () => { // eslint-disable-line
     it('Create New Record', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
       mainEntry.data.key = key
@@ -42,8 +42,6 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
         .then((response) => {
           expect(response).to.haveOwnProperty('data')
           expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-          expect(response.data).to.haveOwnProperty('data')
-          expect(TypeDetect(response.data.data)).to.equal(EnumsTypeDetect.OBJECT)
 
           // Check 1st level properties
           expect(response.data).to.haveOwnProperty('_id')
@@ -60,21 +58,23 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
 
           // Check if provided values match
+          expect(response.data).to.haveOwnProperty('data')
+          expect(TypeDetect(response.data.data)).to.equal(EnumsTypeDetect.OBJECT)
           expect(response.data.data).to.haveOwnProperty('key')
           expect(TypeDetect(response.data.data.key)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.data.key).to.equal(key)
           expect(response.data.data).to.haveOwnProperty('name')
           expect(TypeDetect(response.data.data.name)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.name).to.equal(key)
+          expect(response.data.data.name).to.equal(mainEntry.data.name)
 
-          // Check if unprovided values exist and have defaults
+          // Check if provided values exist and have defaults
           expect(response.data.data).to.haveOwnProperty('isActive')
           expect(TypeDetect(response.data.data.isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
           expect(response.data.data.isActive).to.equal(true)
 
           expect(response.data.data).to.haveOwnProperty('description')
           expect(TypeDetect(response.data.data.description)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.description).to.equal(Enums.STRING_EMPTY)
+          expect(response.data.data.description).to.equal(mainEntry.data.description)
 
           expect(response.data.data).to.haveOwnProperty('groupName')
           expect(TypeDetect(response.data.data.groupName)).to.equal(EnumsTypeDetect.STRING)
@@ -100,19 +100,198 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.data.numberingId)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.data.numberingId).to.not.equal(Enums.STRING_EMPTY)
 
-          expect(response.data.data).to.haveOwnProperty('iln')
-          expect(TypeDetect(response.data.data.iln)).to.equal(EnumsTypeDetect.OBJECT)
-
-          expect(response.data.data).to.haveOwnProperty('processSteps')
-          expect(TypeDetect(response.data.data.processSteps)).to.equal(EnumsTypeDetect.ARRAY)
-
+          // Check for Arrays and objects
           expect(response.data.data).to.haveOwnProperty('solutions')
           expect(TypeDetect(response.data.data.solutions)).to.equal(EnumsTypeDetect.ARRAY)
 
           expect(response.data.data).to.haveOwnProperty('keywords')
           expect(TypeDetect(response.data.data.keywords)).to.equal(EnumsTypeDetect.ARRAY)
 
-          // Store Record Id to be used later
+          expect(response.data.data).to.haveOwnProperty('iln')
+          expect(TypeDetect(response.data.data.iln)).to.equal(EnumsTypeDetect.OBJECT)
+
+          // Check iln Object properties
+          expect(response.data.data.iln).to.haveOwnProperty('name')
+          expect(TypeDetect(response.data.data.iln.name)).to.equal(EnumsTypeDetect.OBJECT)
+          expect(response.data.data.iln.name).to.haveOwnProperty('en')
+          expect(TypeDetect(response.data.data.iln.name.en)).to.equal(EnumsTypeDetect.STRING)
+          expect(response.data.data.iln.name.en).to.equal(mainEntry.data.name)
+          expect(response.data.data.iln).to.haveOwnProperty('description')
+          expect(TypeDetect(response.data.data.iln.description)).to.equal(EnumsTypeDetect.OBJECT)
+          expect(response.data.data.iln.description).to.haveOwnProperty('en')
+          expect(TypeDetect(response.data.data.iln.description.en)).to.equal(EnumsTypeDetect.STRING)
+          expect(response.data.data.iln.description.en).to.equal(mainEntry.data.description)
+
+          expect(response.data.data).to.haveOwnProperty('processSteps')
+          expect(TypeDetect(response.data.data.processSteps)).to.equal(EnumsTypeDetect.ARRAY)
+
+          // Check processStep values
+          for (const x in response.data.data.processSteps) {
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('_id')
+            expect(TypeDetect(response.data.data.processSteps[x]._id)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x]._id).to.equal(mainEntry.data.processSteps[x]._id)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('isNewEntry')
+            expect(TypeDetect(response.data.data.processSteps[x].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+            expect(response.data.data.processSteps[x].isNewEntry).to.equal(mainEntry.data.processSteps[x].isNewEntry)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('isActive')
+            expect(TypeDetect(response.data.data.processSteps[x].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
+            expect(response.data.data.processSteps[x].isActive).to.equal(mainEntry.data.processSteps[x].isActive)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('stepType')
+            expect(TypeDetect(response.data.data.processSteps[x].stepType)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].stepType).to.equal(mainEntry.data.processSteps[x].stepType)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('key')
+            expect(TypeDetect(response.data.data.processSteps[x].key)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].key).to.equal(mainEntry.data.processSteps[x].key)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('name')
+            expect(TypeDetect(response.data.data.processSteps[x].name)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].name).to.equal(mainEntry.data.processSteps[x].name)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('description')
+            expect(TypeDetect(response.data.data.processSteps[x].description)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].description).to.equal(mainEntry.data.processSteps[x].description)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('instructions')
+            expect(TypeDetect(response.data.data.processSteps[x].instructions)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].instructions).to.equal(mainEntry.data.processSteps[x].instructions)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('duration')
+            expect(TypeDetect(response.data.data.processSteps[x].duration)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].duration).to.equal(mainEntry.data.processSteps[x].duration)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('processStage')
+            expect(TypeDetect(response.data.data.processSteps[x].processStage)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].processStage).to.equal(mainEntry.data.processSteps[x].processStage)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('responsibility')
+            expect(TypeDetect(response.data.data.processSteps[x].responsibility)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].responsibility).to.equal(mainEntry.data.processSteps[x].responsibility)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('responsibleRole')
+            expect(TypeDetect(response.data.data.processSteps[x].responsibleRole)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].responsibleRole).to.equal(mainEntry.data.processSteps[x].responsibleRole)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('notes')
+            expect(TypeDetect(response.data.data.processSteps[x].notes)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].notes).to.equal(mainEntry.data.processSteps[x].notes)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('referenceUrl')
+            expect(TypeDetect(response.data.data.processSteps[x].referenceUrl)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].referenceUrl).to.equal(mainEntry.data.processSteps[x].referenceUrl)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('notificationTemplate')
+            expect(TypeDetect(response.data.data.processSteps[x].notificationTemplate)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].notificationTemplate).to.equal(mainEntry.data.processSteps[x].notificationTemplate)
+
+            // Check Arrays and Objects
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('roleLevels')
+            expect(TypeDetect(response.data.data.processSteps[x].roleLevels)).to.equal(EnumsTypeDetect.ARRAY)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('visibleObjects')
+            expect(TypeDetect(response.data.data.processSteps[x].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('keywords')
+            expect(TypeDetect(response.data.data.processSteps[x].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('eventStamp')
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
+
+            // Check Event Stamp Values
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].eventStamp[0]).to.haveOwnProperty('value')
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].eventStamp[0].value).to.equal(mainEntry.data.processSteps[x].eventStamp[0].value)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('iln')
+            expect(TypeDetect(response.data.data.processSteps[x].iln)).to.equal(EnumsTypeDetect.OBJECT)
+
+            // Check Iln Object Values
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('name')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.name)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.name).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.name.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.name.en).to.equal(mainEntry.data.processSteps[x].name)
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('description')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.description)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.description).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.description.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.description.en).to.equal(mainEntry.data.processSteps[x].description)
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('processStage')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.processStage)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.processStage).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.processStage.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.processStage.en).to.equal(mainEntry.data.processSteps[x].processStage)
+
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('stepOptions')
+            expect(TypeDetect(response.data.data.processSteps[x].stepOptions)).to.equal(EnumsTypeDetect.ARRAY)
+
+            // Check stepOptions values
+            for (const y in response.data.data.processSteps[x].stepOptions) {
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('_id')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y]._id)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y]._id).to.equal(mainEntry.data.processSteps[x].stepOptions[y]._id)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('isNewEntry')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+              expect(response.data.data.processSteps[x].stepOptions[y].isNewEntry).to.equal(mainEntry.data.processSteps[x].stepOptions[y].isNewEntry)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('isActive')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
+              expect(response.data.data.processSteps[x].stepOptions[y].isActive).to.equal(mainEntry.data.processSteps[x].stepOptions[y].isActive)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('key')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].key)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].key).to.equal(mainEntry.data.processSteps[x].stepOptions[y].key)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('name')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].name)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].name).to.equal(mainEntry.data.processSteps[x].stepOptions[y].name)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('description')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].description)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].description).to.equal(mainEntry.data.processSteps[x].stepOptions[y].description)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('nextStep')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].nextStep)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].nextStep).to.equal(mainEntry.data.processSteps[x].stepOptions[y].nextStep)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('notes')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].notes)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].notes).to.equal(mainEntry.data.processSteps[x].stepOptions[y].notes)
+
+              // Check Arrays and Objects
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('visibleObjects')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('keywords')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('eventStamp')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
+
+              // Check Event Stamp values
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0]).to.haveOwnProperty('value')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0].value).to.equal(mainEntry.data.processSteps[x].stepOptions[y].eventStamp[0].value)
+
+              expect(response.data.data.processSteps[x].stepOptions[y].iln).to.haveOwnProperty('name')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.name)).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.name).to.haveOwnProperty('en')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.name.en)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.name.en).to.equal(mainEntry.data.processSteps[x].stepOptions[y].name)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln).to.haveOwnProperty('description')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.description)).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.description).to.haveOwnProperty('en')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.description.en)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.description.en).to.equal(mainEntry.data.processSteps[x].stepOptions[y].description)
+            }
+          }
+
           recordId = response.data._id
           numberingId = response.data.data.numberingId
         })
@@ -128,10 +307,9 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
       agilite.BPM.putData(recordId, mainEntry)
         .then((response) => {
+          // TODO: Ensure that all props are being checked - JM
           expect(response).to.haveOwnProperty('data')
           expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
-          expect(response.data).to.haveOwnProperty('data')
-          expect(TypeDetect(response.data.data)).to.equal(EnumsTypeDetect.OBJECT)
 
           // Check 1st level properties
           expect(response.data).to.haveOwnProperty('_id')
@@ -148,6 +326,8 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
 
           // Check if provided values match
+          expect(response.data).to.haveOwnProperty('data')
+          expect(TypeDetect(response.data.data)).to.equal(EnumsTypeDetect.OBJECT)
           expect(response.data.data).to.haveOwnProperty('key')
           expect(TypeDetect(response.data.data.key)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.data.key).to.equal(key)
@@ -155,14 +335,14 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.data.name)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.data.name).to.equal(mainEntry.data.name)
 
-          // Check if unprovided values exist and have defaults
+          // Check if provided values exist and have defaults
           expect(response.data.data).to.haveOwnProperty('isActive')
           expect(TypeDetect(response.data.data.isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
           expect(response.data.data.isActive).to.equal(true)
 
           expect(response.data.data).to.haveOwnProperty('description')
           expect(TypeDetect(response.data.data.description)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.description).to.equal(Enums.STRING_EMPTY)
+          expect(response.data.data.description).to.equal(mainEntry.data.description)
 
           expect(response.data.data).to.haveOwnProperty('groupName')
           expect(TypeDetect(response.data.data.groupName)).to.equal(EnumsTypeDetect.STRING)
@@ -188,6 +368,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.data.numberingId)).to.equal(EnumsTypeDetect.STRING)
           expect(response.data.data.numberingId).to.not.equal(Enums.STRING_EMPTY)
 
+          // Check for Arrays and objects
           expect(response.data.data).to.haveOwnProperty('solutions')
           expect(TypeDetect(response.data.data.solutions)).to.equal(EnumsTypeDetect.ARRAY)
 
@@ -196,6 +377,8 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
           expect(response.data.data).to.haveOwnProperty('iln')
           expect(TypeDetect(response.data.data.iln)).to.equal(EnumsTypeDetect.OBJECT)
+
+          // Check iln Object properties
           expect(response.data.data.iln).to.haveOwnProperty('name')
           expect(TypeDetect(response.data.data.iln.name)).to.equal(EnumsTypeDetect.OBJECT)
           expect(response.data.data.iln.name).to.haveOwnProperty('en')
@@ -206,124 +389,176 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
           expect(TypeDetect(response.data.data.processSteps)).to.equal(EnumsTypeDetect.ARRAY)
 
           // Check processStep values
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('_id')
-          expect(TypeDetect(response.data.data.processSteps[0]._id)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0]._id).to.equal(mainEntry.data.processSteps[0]._id)
+          for (const x in response.data.data.processSteps) {
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('_id')
+            expect(TypeDetect(response.data.data.processSteps[x]._id)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x]._id).to.equal(mainEntry.data.processSteps[x]._id)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('isActive')
-          expect(TypeDetect(response.data.data.processSteps[0].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.data.processSteps[0].isActive).to.equal(mainEntry.data.processSteps[0].isActive)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('isNewEntry')
+            expect(TypeDetect(response.data.data.processSteps[x].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+            expect(response.data.data.processSteps[x].isNewEntry).to.equal(mainEntry.data.processSteps[x].isNewEntry)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('isNewEntry')
-          expect(TypeDetect(response.data.data.processSteps[0].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.data.processSteps[0].isNewEntry).to.equal(mainEntry.data.processSteps[0].isNewEntry)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('isActive')
+            expect(TypeDetect(response.data.data.processSteps[x].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
+            expect(response.data.data.processSteps[x].isActive).to.equal(mainEntry.data.processSteps[x].isActive)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('key')
-          expect(TypeDetect(response.data.data.processSteps[0].key)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].key).to.equal(mainEntry.data.processSteps[0].key)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('stepType')
+            expect(TypeDetect(response.data.data.processSteps[x].stepType)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].stepType).to.equal(mainEntry.data.processSteps[x].stepType)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('name')
-          expect(TypeDetect(response.data.data.processSteps[0].name)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].name).to.equal(mainEntry.data.processSteps[0].name)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('key')
+            expect(TypeDetect(response.data.data.processSteps[x].key)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].key).to.equal(mainEntry.data.processSteps[x].key)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('description')
-          expect(TypeDetect(response.data.data.processSteps[0].description)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].description).to.equal(mainEntry.data.processSteps[0].description)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('name')
+            expect(TypeDetect(response.data.data.processSteps[x].name)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].name).to.equal(mainEntry.data.processSteps[x].name)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('instructions')
-          expect(TypeDetect(response.data.data.processSteps[0].instructions)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].instructions).to.equal(mainEntry.data.processSteps[0].instructions)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('description')
+            expect(TypeDetect(response.data.data.processSteps[x].description)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].description).to.equal(mainEntry.data.processSteps[x].description)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('duration')
-          expect(TypeDetect(response.data.data.processSteps[0].duration)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].duration).to.equal(mainEntry.data.processSteps[0].duration)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('instructions')
+            expect(TypeDetect(response.data.data.processSteps[x].instructions)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].instructions).to.equal(mainEntry.data.processSteps[x].instructions)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('processStage')
-          expect(TypeDetect(response.data.data.processSteps[0].processStage)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].processStage).to.equal(mainEntry.data.processSteps[0].processStage)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('duration')
+            expect(TypeDetect(response.data.data.processSteps[x].duration)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].duration).to.equal(mainEntry.data.processSteps[x].duration)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('responsibility')
-          expect(TypeDetect(response.data.data.processSteps[0].responsibility)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].responsibility).to.equal(mainEntry.data.processSteps[0].responsibility)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('processStage')
+            expect(TypeDetect(response.data.data.processSteps[x].processStage)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].processStage).to.equal(mainEntry.data.processSteps[x].processStage)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('responsibleRole')
-          expect(TypeDetect(response.data.data.processSteps[0].responsibleRole)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].responsibleRole).to.equal(mainEntry.data.processSteps[0].responsibleRole)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('responsibility')
+            expect(TypeDetect(response.data.data.processSteps[x].responsibility)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].responsibility).to.equal(mainEntry.data.processSteps[x].responsibility)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('notes')
-          expect(TypeDetect(response.data.data.processSteps[0].notes)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].notes).to.equal(mainEntry.data.processSteps[0].notes)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('responsibleRole')
+            expect(TypeDetect(response.data.data.processSteps[x].responsibleRole)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].responsibleRole).to.equal(mainEntry.data.processSteps[x].responsibleRole)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('referenceUrl')
-          expect(TypeDetect(response.data.data.processSteps[0].referenceUrl)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].referenceUrl).to.equal(mainEntry.data.processSteps[0].referenceUrl)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('notes')
+            expect(TypeDetect(response.data.data.processSteps[x].notes)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].notes).to.equal(mainEntry.data.processSteps[x].notes)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('notificationTemplate')
-          expect(TypeDetect(response.data.data.processSteps[0].notificationTemplate)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].notificationTemplate).to.equal(mainEntry.data.processSteps[0].notificationTemplate)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('referenceUrl')
+            expect(TypeDetect(response.data.data.processSteps[x].referenceUrl)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].referenceUrl).to.equal(mainEntry.data.processSteps[x].referenceUrl)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('eventStamp')
-          expect(TypeDetect(response.data.data.processSteps[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
-          expect(TypeDetect(response.data.data.processSteps[0].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
-          expect(response.data.data.processSteps[0].eventStamp[0]).to.haveOwnProperty('value')
-          expect(TypeDetect(response.data.data.processSteps[0].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].eventStamp[0].value).to.equal(mainEntry.data.processSteps[0].eventStamp[0].value)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('notificationTemplate')
+            expect(TypeDetect(response.data.data.processSteps[x].notificationTemplate)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].notificationTemplate).to.equal(mainEntry.data.processSteps[x].notificationTemplate)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('roleLevels')
-          expect(TypeDetect(response.data.data.processSteps[0].roleLevels)).to.equal(EnumsTypeDetect.ARRAY)
+            // Check Arrays and Objects
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('roleLevels')
+            expect(TypeDetect(response.data.data.processSteps[x].roleLevels)).to.equal(EnumsTypeDetect.ARRAY)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('visibleObjects')
-          expect(TypeDetect(response.data.data.processSteps[0].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('visibleObjects')
+            expect(TypeDetect(response.data.data.processSteps[x].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
 
-          expect(response.data.data.processSteps[0]).to.haveOwnProperty('stepOptions')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions)).to.equal(EnumsTypeDetect.ARRAY)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('keywords')
+            expect(TypeDetect(response.data.data.processSteps[x].keywords)).to.equal(EnumsTypeDetect.ARRAY)
 
-          // Check stepOptions values
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('_id')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0]._id)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0]._id).to.equal(mainEntry.data.processSteps[0].stepOptions[0]._id)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('eventStamp')
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('isNewEntry')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.data.processSteps[0].stepOptions[0].isNewEntry).to.equal(mainEntry.data.processSteps[0].stepOptions[0].isNewEntry)
+            // Check Event Stamp Values
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].eventStamp[0]).to.haveOwnProperty('value')
+            expect(TypeDetect(response.data.data.processSteps[x].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].eventStamp[0].value).to.equal(mainEntry.data.processSteps[x].eventStamp[0].value)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('isActive')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
-          expect(response.data.data.processSteps[0].stepOptions[0].isActive).to.equal(mainEntry.data.processSteps[0].stepOptions[0].isActive)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('iln')
+            expect(TypeDetect(response.data.data.processSteps[x].iln)).to.equal(EnumsTypeDetect.OBJECT)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('key')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].key)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].key).to.equal(mainEntry.data.processSteps[0].stepOptions[0].key)
+            // Check Iln Object Values
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('name')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.name)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.name).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.name.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.name.en).to.equal(mainEntry.data.processSteps[x].name)
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('description')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.description)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.description).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.description.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.description.en).to.equal(mainEntry.data.processSteps[x].description)
+            expect(response.data.data.processSteps[x].iln).to.haveOwnProperty('processStage')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.processStage)).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.processSteps[x].iln.processStage).to.haveOwnProperty('en')
+            expect(TypeDetect(response.data.data.processSteps[x].iln.processStage.en)).to.equal(EnumsTypeDetect.STRING)
+            expect(response.data.data.processSteps[x].iln.processStage.en).to.equal(mainEntry.data.processSteps[x].processStage)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('name')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].name)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].name).to.equal(mainEntry.data.processSteps[0].stepOptions[0].name)
+            expect(response.data.data.processSteps[x]).to.haveOwnProperty('stepOptions')
+            expect(TypeDetect(response.data.data.processSteps[x].stepOptions)).to.equal(EnumsTypeDetect.ARRAY)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('description')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].description)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].description).to.equal(mainEntry.data.processSteps[0].stepOptions[0].description)
+            // Check stepOptions values
+            for (const y in response.data.data.processSteps[x].stepOptions) {
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('_id')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y]._id)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y]._id).to.equal(mainEntry.data.processSteps[x].stepOptions[y]._id)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('eventStamp')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
-          expect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0]).to.haveOwnProperty('value')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].eventStamp[0].value).to.equal(mainEntry.data.processSteps[0].stepOptions[0].eventStamp[0].value)
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('isNewEntry')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].isNewEntry)).to.equal(EnumsTypeDetect.BOOLEAN)
+              expect(response.data.data.processSteps[x].stepOptions[y].isNewEntry).to.equal(mainEntry.data.processSteps[x].stepOptions[y].isNewEntry)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('nextStep')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].nextStep)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].nextStep).to.equal(mainEntry.data.processSteps[0].stepOptions[0].nextStep)
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('isActive')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].isActive)).to.equal(EnumsTypeDetect.BOOLEAN)
+              expect(response.data.data.processSteps[x].stepOptions[y].isActive).to.equal(mainEntry.data.processSteps[x].stepOptions[y].isActive)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('visibleObjects')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('key')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].key)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].key).to.equal(mainEntry.data.processSteps[x].stepOptions[y].key)
 
-          expect(response.data.data.processSteps[0].stepOptions[0]).to.haveOwnProperty('notes')
-          expect(TypeDetect(response.data.data.processSteps[0].stepOptions[0].notes)).to.equal(EnumsTypeDetect.STRING)
-          expect(response.data.data.processSteps[0].stepOptions[0].notes).to.equal(mainEntry.data.processSteps[0].stepOptions[0].notes)
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('name')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].name)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].name).to.equal(mainEntry.data.processSteps[x].stepOptions[y].name)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('description')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].description)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].description).to.equal(mainEntry.data.processSteps[x].stepOptions[y].description)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('nextStep')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].nextStep)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].nextStep).to.equal(mainEntry.data.processSteps[x].stepOptions[y].nextStep)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('notes')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].notes)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].notes).to.equal(mainEntry.data.processSteps[x].stepOptions[y].notes)
+
+              // Check Arrays and Objects
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('visibleObjects')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].visibleObjects)).to.equal(EnumsTypeDetect.ARRAY)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('keywords')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].keywords)).to.equal(EnumsTypeDetect.ARRAY)
+
+              expect(response.data.data.processSteps[x].stepOptions[y]).to.haveOwnProperty('eventStamp')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
+
+              // Check Event Stamp values
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0])).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0]).to.haveOwnProperty('value')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0].value)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].eventStamp[0].value).to.equal(mainEntry.data.processSteps[x].stepOptions[y].eventStamp[0].value)
+
+              expect(response.data.data.processSteps[x].stepOptions[y].iln).to.haveOwnProperty('name')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.name)).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.name).to.haveOwnProperty('en')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.name.en)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.name.en).to.equal(mainEntry.data.processSteps[x].stepOptions[y].name)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln).to.haveOwnProperty('description')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.description)).to.equal(EnumsTypeDetect.OBJECT)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.description).to.haveOwnProperty('en')
+              expect(TypeDetect(response.data.data.processSteps[x].stepOptions[y].iln.description.en)).to.equal(EnumsTypeDetect.STRING)
+              expect(response.data.data.processSteps[x].stepOptions[y].iln.description.en).to.equal(mainEntry.data.processSteps[x].stepOptions[y].description)
+            }
+          }
         })
         .then(done, done)
     })
 
+    // TODO: Fix from here downwards
     it('Register BPM Record', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
       mainEntry.data.key = key
