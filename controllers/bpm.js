@@ -62,7 +62,7 @@ class BPM {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
 
-  registerBPMRecord (processKey = '', currentUser = '', isoLanguage = '', logProcessId = null) {
+  registerBPMRecord (processKey = '', currentUser = '', includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/registerBPMRecord`,
       method: Enums.METHOD_GET,
@@ -81,6 +81,22 @@ class BPM {
       config.headers[Enums.HEADER_CURRENT_USER] = currentUser
     }
 
+    if (includeHistory !== undefined && includeHistory !== null) {
+      config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
+    }
+
+    if (includeStepOptions !== undefined && includeStepOptions !== null) {
+      config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
+    }
+
+    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
+      config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    }
+
+    if (includeKeywords !== undefined && includeKeywords !== null) {
+      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
+    }
+
     if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -94,7 +110,7 @@ class BPM {
     return Utils.executeRequest(config)
   }
 
-  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', currentStep = '', comments = '', data = {}, isoLanguage = '', logProcessId = null) {
+  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', currentStep = '', comments = '', data = {}, includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, isoLanguage = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/execute`,
       method: Enums.METHOD_POST,
@@ -130,6 +146,22 @@ class BPM {
 
     if (comments !== undefined && comments !== null) {
       config.headers[Enums.HEADER_COMMENTS] = comments
+    }
+
+    if (includeHistory !== undefined && includeHistory !== null) {
+      config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
+    }
+
+    if (includeStepOptions !== undefined && includeStepOptions !== null) {
+      config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
+    }
+
+    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
+      config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    }
+
+    if (includeKeywords !== undefined && includeKeywords !== null) {
+      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
     }
 
     if (isoLanguage !== undefined && isoLanguage !== null) {
@@ -514,6 +546,58 @@ class BPM {
 
     if (this.teamId !== undefined && this.teamId !== null) {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  lockRecord (bpmRecordId = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/lockRecord`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  unlockRecord (bpmRecordId = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/unlockRecord`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (bpmRecordId !== undefined && bpmRecordId !== null) {
+      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
     return Utils.executeRequest(config)
