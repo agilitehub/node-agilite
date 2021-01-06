@@ -15,11 +15,11 @@ const data = {
       name: '',
       isActive: true,
       description: 'This is the description for the BPM Profile',
-      groupName: '',
-      appUrl: '',
-      referenceUrl: '',
-      appAdmin: '',
-      notes: '',
+      groupName: 'Group Name',
+      appUrl: 'App URL',
+      referenceUrl: 'www.referenceURL.com',
+      appAdmin: 'App Admin',
+      notes: 'Notes',
       solutions: [],
       keywords: [],
       processSteps: [{
@@ -368,7 +368,12 @@ const data = {
         }
       }
     }
-  }
+  },
+  historyProps: [
+    {
+      fromStep: 'first_step'
+    }
+  ]
 }
 
 module.exports = data
