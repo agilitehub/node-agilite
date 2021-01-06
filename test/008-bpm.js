@@ -784,7 +784,6 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
       agilite.BPM.registerBPMRecord(key, user)
         .then((response) => {
-          console.log(response.data)
           expect(response).to.haveOwnProperty('data')
           expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
