@@ -23,7 +23,7 @@ const data = {
       solutions: [],
       keywords: [],
       processSteps: [{
-        _id: '',
+        _id: 'temp_id',
         isNewEntry: true,
         isActive: true,
         stepType: '1',
@@ -176,13 +176,17 @@ const data = {
             messages: [{
               value: 'Choices Message',
               iln: {
-                en: 'Choices Message',
-                af: 'iln_choices_message'
+                value: {
+                  en: 'Choices Message',
+                  af: 'iln_choices_message'
+                }
               }
             }],
             iln: {
-              en: 'choices',
-              af: 'iln_choices'
+              label: {
+                en: 'choices',
+                af: 'iln_choices'
+              }
             }
           }
         }],
@@ -233,13 +237,17 @@ const data = {
               messages: [{
                 value: 'Choices Message',
                 iln: {
-                  en: 'Choices Message',
-                  af: 'iln_choices_message'
+                  value: {
+                    en: 'Choices Message',
+                    af: 'iln_choices_message'
+                  }
                 }
               }],
               iln: {
-                en: 'choices',
-                af: 'iln_choices'
+                label: {
+                  en: 'choices',
+                  af: 'iln_choices'
+                }
               }
             }
           }],
@@ -322,13 +330,17 @@ const data = {
             messages: [{
               value: 'Choices Message',
               iln: {
-                en: 'Choices Message',
-                af: 'iln_choices_message'
+                value: {
+                  en: 'Choices Message',
+                  af: 'iln_choices_message'
+                }
               }
             }],
             iln: {
-              en: 'choices',
-              af: 'iln_choices'
+              label: {
+                en: 'choices',
+                af: 'iln_choices'
+              }
             }
           }
         }],
