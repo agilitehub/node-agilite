@@ -115,7 +115,8 @@ class Keywords {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValuesByProfileKey`,
       method: Enums.METHOD_POST,
-      headers: {}
+      headers: {},
+      body: {}
     }
 
     if (logProcessId !== undefined && logProcessId !== null) {
