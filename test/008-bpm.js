@@ -33,7 +33,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
   let bpmRecordId = null
   let numberingId = null
 
-  describe.only('Process Flow', () => { // eslint-disable-line
+  describe('Process Flow', () => { // eslint-disable-line
     it('Create New Record', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
       mainEntry.data.key = key
@@ -1869,7 +1869,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
         .then(done, done)
     })
 
-    it('Execute BPM Record', (done) => { // eslint-disable-line
+    it.skip('Execute BPM Record', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
@@ -2336,7 +2336,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
         .then(done, done)
     })
 
-    it('Get Record State w ProcessKey', (done) => { // eslint-disable-line
+    it.skip('Get Record State w ProcessKey', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key
@@ -2651,7 +2651,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
         .then(done, done)
     })
 
-    it('Get Record State w Record Id', (done) => { // eslint-disable-line
+    it.skip('Get Record State w Record Id', (done) => { // eslint-disable-line
       mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
       mainEntry.data.key = key
       mainEntry.data.name = 'PUT_' + key

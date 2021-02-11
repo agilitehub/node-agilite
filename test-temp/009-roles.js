@@ -35,7 +35,7 @@ describe('Agilit-e Roles \n', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No \'data\' property found in JSON Body')
+            expect(err.response.data.errorMessage).to.equal('Invalid request body. \'name\' property required')
           })
           .then(done, done)
       })
@@ -52,7 +52,7 @@ describe('Agilit-e Roles \n', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No \'data\' property found in JSON Body')
+            expect(err.response.data.errorMessage).to.equal('Invalid request body. \'name\' property required')
           })
           .then(done, done)
       })
@@ -178,7 +178,7 @@ describe('Agilit-e Roles \n', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No \'data\' property found in JSON Body')
+            expect(err.response.data.errorMessage).to.equal('Invalid request body. \'name\' property required')
           })
           .then(done, done)
       })
@@ -193,7 +193,7 @@ describe('Agilit-e Roles \n', () => {
 
             // Check if errorMessage exists and contains correct error message
             expect(err.response.data).to.haveOwnProperty('errorMessage')
-            expect(err.response.data.errorMessage).to.equal('No \'data\' property found in JSON Body')
+            expect(err.response.data.errorMessage).to.equal('Invalid request body. \'name\' property required')
           })
           .then(done, done)
       })
@@ -237,7 +237,8 @@ describe('Agilit-e Roles \n', () => {
             expect(response.data.data).to.haveOwnProperty('surrogateUser')
             expect(response.data.data.surrogateUser).to.equal(DataTemplate.modified1.data.surrogateUser)
             expect(response.data.data).to.haveOwnProperty('levels')
-            expect(response.data.data.levels[0]).to.equal(DataTemplate.modified1.data.levels[0])
+            expect(TypeDetect(response.data.data.levels[0])).to.equal(EnumsTypeDetect.OBJECT)
+            expect(response.data.data.levels[0].value).to.equal(DataTemplate.modified1.data.levels[0])
 
             // Check if unprovided values exist and have defaults
             expect(response.data).to.haveOwnProperty('_id')
@@ -362,6 +363,7 @@ describe('Agilit-e Roles \n', () => {
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(err.response.data.errorMessage).to.equal('Validation Failed. \'responsible-user\' Header parameter required')
           })
+          .then(res => { console.log(res) })
           .then(done, done)
       })
     })

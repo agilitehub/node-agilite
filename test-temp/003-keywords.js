@@ -365,7 +365,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - No Profile Key (Negative)', (done) => {
-    agilite.Keywords.getByProfileKey()
+    agilite.Keywords.getValuesByProfileKey()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -380,7 +380,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - Invalid Profile Key (Negative)', (done) => {
-    agilite.Keywords.getByProfileKey(invalidValue)
+    agilite.Keywords.getValuesByProfileKey(invalidValue)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -395,7 +395,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - Success', (done) => {
-    agilite.Keywords.getByProfileKey(key)
+    agilite.Keywords.getValuesByProfileKey(key)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -405,7 +405,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - Invalid Sort - Success', (done) => {
-    agilite.Keywords.getByProfileKey(key, invalidValue)
+    agilite.Keywords.getValuesByProfileKey(key, invalidValue)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -415,7 +415,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - Invalid Sort - Invalid Output Format - Success', (done) => {
-    agilite.Keywords.getByProfileKey(key, invalidValue, invalidValue)
+    agilite.Keywords.getValuesByProfileKey(key, invalidValue, invalidValue)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -425,7 +425,7 @@ describe('Agilit-e Keywords', () => {
   })
 
   it('Get By Profile Key - JSON Output Format - Success', (done) => {
-    agilite.Keywords.getByProfileKey(key, null, 'json')
+    agilite.Keywords.getValuesByProfileKey(key, null, 'json')
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
       })
