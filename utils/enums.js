@@ -53,6 +53,8 @@ const Enums = {
   HEADER_GROUP_NAME: 'group-name',
   HEADER_VALUE_KEY: 'value-key',
   HEADER_LABEL_KEY: 'label-key',
+  HEADER_VALUE: 'value',
+  HEADER_LABEL: 'label',
   HEADER_FILE_ID: 'file-id',
   HEADER_FILE_NAME: 'file-name',
   HEADER_FULL_NAME: 'full-name',

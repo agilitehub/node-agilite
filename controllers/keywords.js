@@ -77,9 +77,9 @@ class Keywords {
     return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_DELETE, null, headers)
   }
 
-  getByProfileKey (profileKey = '', sort = '', outputFormat = '', logProcessId = null) {
+  getValuesByProfileKey (profileKey = '', sort = '', outputFormat = '', logProcessId = null) {
     let config = {
-      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getByProfileKey`,
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getValuesByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
@@ -98,6 +98,36 @@ class Keywords {
 
     if (outputFormat !== undefined && outputFormat !== null) {
       config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  setValuesByProfileKey (profileKey = '', values = [], logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValuesByProfileKey`,
+      method: Enums.METHOD_POST,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (values !== undefined && values !== null) {
+      config.body = values
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
@@ -175,6 +205,40 @@ class Keywords {
     return Utils.executeRequest(config)
   }
 
+  setLabelByValue (profileKey = '', valueKey = '', label = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setLabelByValue`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (valueKey !== undefined && valueKey !== null) {
+      config.headers[Enums.HEADER_VALUE_KEY] = valueKey
+    }
+
+    if (label !== undefined && label !== null) {
+      config.headers[Enums.HEADER_LABEL] = label
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
   getValueByLabel (profileKey = '', label = '', outputFormat = '', logProcessId = null) {
     let config = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getValueByLabel`,
@@ -196,6 +260,40 @@ class Keywords {
 
     if (outputFormat !== undefined && outputFormat !== null) {
       config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
+    }
+
+    if (this.apiKey !== undefined && this.apiKey !== null) {
+      config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    }
+
+    if (this.teamId !== undefined && this.teamId !== null) {
+      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    }
+
+    return Utils.executeRequest(config)
+  }
+
+  setValueByLabel (profileKey = '', labelKey = '', value = '', logProcessId = null) {
+    let config = {
+      url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValueByLabel`,
+      method: Enums.METHOD_GET,
+      headers: {}
+    }
+
+    if (logProcessId !== undefined && logProcessId !== null) {
+      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    }
+
+    if (profileKey !== undefined && profileKey !== null) {
+      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    }
+
+    if (labelKey !== undefined && labelKey !== null) {
+      config.headers[Enums.HEADER_LABEL_KEY] = labelKey
+    }
+
+    if (value !== undefined && value !== null) {
+      config.headers[Enums.HEADER_VALUE] = value
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
