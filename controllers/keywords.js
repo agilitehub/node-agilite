@@ -116,7 +116,7 @@ class Keywords {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValuesByProfileKey`,
       method: Enums.METHOD_POST,
       headers: {},
-      body: {}
+      data: {}
     }
 
     if (logProcessId !== undefined && logProcessId !== null) {
@@ -128,7 +128,7 @@ class Keywords {
     }
 
     if (values !== undefined && values !== null) {
-      config.body = values
+      config.data = values
     }
 
     if (this.apiKey !== undefined && this.apiKey !== null) {
