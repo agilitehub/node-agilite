@@ -180,7 +180,7 @@ class BPM {
     return executeRequest(config)
   }
 
-  getRecordState (processKeys: Array<string> = [], bpmRecordIds: Array<string> = [], stepNames: Array<string> = [], responsibleUsers: Array<string> = [], relevantUsers: Array<string> = [], relevantRoles: Array<string> = [], eventStamps: Array<string> = [], eventStartDate: string = '', eventEndDate: string = '', includeHistory: boolean = true, includeStepOptions: boolean = true, includeVisibleObjects: boolean = true, includeKeywords: boolean = true, page: any = undefined, pageLimit: any = undefined, sort: any = undefined, isoLanguage: string = '', logProcessId: string = '') {
+  getRecordState (processKeys: Array<string> = [], bpmRecordIds: Array<string> = [], stepNames: Array<string> = [], responsibleUsers: Array<string> = [], relevantUsers: Array<string> = [], relevantRoles: Array<string> = [], eventStamps: Array<string> = [], eventStartDate: string = '', eventEndDate: string = '', includeHistory: boolean = true, includeStepOptions: boolean = true, includeVisibleObjects: boolean = true, includeKeywords: boolean = true, page: any = undefined, pageLimit: any = undefined, sort: string = '', isoLanguage: string = '', logProcessId: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
