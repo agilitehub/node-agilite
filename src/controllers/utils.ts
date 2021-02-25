@@ -427,7 +427,7 @@ class Utils {
     return executeRequest(config)
   }
 
-  importData (fileId: string, includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
+  importData (fileId: string, includeModules: boolean = false, solutionsArray: Array<string> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessId: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/importData`,
       method: Enums.METHOD_GET,
