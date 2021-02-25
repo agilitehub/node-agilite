@@ -1,14 +1,15 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class BatchActions {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
 
+  constructor (config: Config) {
     if (config) {
       this.apiServerUrl = config.apiServerUrl
       this.apiKey = config.apiKey
@@ -16,18 +17,18 @@ class BatchActions {
     }
   }
 
-  postData (data = {}, logProcessId = null) {
-    let headers = {}
+  postData (data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_POST, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
-    const headers = {}
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+    const headers: any = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -37,33 +38,33 @@ class BatchActions {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_GET, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}, logProcessId = null) {
-    const headers = {}
+  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+    const headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_PUT, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '', logProcessId = null) {
-    const headers = {}
+  deleteData (recordId: string = '', logProcessId: string = '') {
+    const headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_DELETE, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_ACTIONS, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey = '', data = {}, logProcessId = null) {
-    const config = {
+  execute (profileKey: string = '', data: any = {}, logProcessId: string = '') {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_ACTIONS}/execute`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -88,8 +89,8 @@ class BatchActions {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = BatchActions
+export default BatchActions

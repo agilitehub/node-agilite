@@ -1,14 +1,15 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class BPM {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
 
+  constructor (config: Config) {
     if (config) {
       this.apiServerUrl = config.apiServerUrl
       this.apiKey = config.apiKey
@@ -16,18 +17,18 @@ class BPM {
     }
   }
 
-  postData (data = {}, logProcessId = null) {
-    let headers = {}
+  postData (data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_POST, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
-    let headers = {}
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+    let headers: any = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -37,33 +38,33 @@ class BPM {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_GET, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}, logProcessId = null) {
-    let headers = {}
+  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_PUT, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '', logProcessId = null) {
-    let headers = {}
+  deleteData (recordId: string = '', logProcessId: string = '') {
+    let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
 
-  registerBPMRecord (processKey = '', currentUser = '', includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, isoLanguage = '', logProcessId = null) {
-    let config = {
+  registerBPMRecord (processKey: string = '', currentUser: string = '', includeHistory: boolean = true, includeStepOptions: boolean = true, includeVisibleObjects: boolean = true, includeKeywords: boolean = true, isoLanguage: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/registerBPMRecord`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -107,11 +108,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  execute (processKey = '', bpmRecordId = '', optionSelected = '', currentUser = '', currentStep = '', comments = '', data = {}, includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, isoLanguage = '', logProcessId = null) {
-    let config = {
+  execute (processKey: string = '', bpmRecordId: string = '', optionSelected: string = '', currentUser: string = '', currentStep: string = '', comments: string = '', data: any = {}, includeHistory: boolean = true, includeStepOptions: boolean = true, includeVisibleObjects: boolean = true, includeKeywords: boolean = true, isoLanguage: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/execute`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -176,11 +177,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getRecordState (processKeys = [], bpmRecordIds = [], stepNames = [], responsibleUsers = [], relevantUsers = [], relevantRoles = [], eventStamps = [], eventStartDate = '', eventEndDate = '', includeHistory = true, includeStepOptions = true, includeVisibleObjects = true, includeKeywords = true, page = undefined, pageLimit = undefined, sort = undefined, isoLanguage = '', logProcessId = null) {
-    let config = {
+  getRecordState (processKeys: Array<string> = [], bpmRecordIds: Array<string> = [], stepNames: Array<string> = [], responsibleUsers: Array<string> = [], relevantUsers: Array<string> = [], relevantRoles: Array<string> = [], eventStamps: Array<string> = [], eventStartDate: string = '', eventEndDate: string = '', includeHistory: boolean = true, includeStepOptions: boolean = true, includeVisibleObjects: boolean = true, includeKeywords: boolean = true, page: any = undefined, pageLimit: any = undefined, sort: any = undefined, isoLanguage: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getRecordState`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -266,11 +267,11 @@ class BPM {
       config.headers[Enums.HEADER_EVENT_END_DATE] = eventEndDate
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getByProfileKey (profileKey = '', logProcessId = null) {
-    let config = {
+  getByProfileKey (profileKey: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -292,11 +293,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  clearHistoryData (profileKey = '', logProcessId = null) {
-    let config = {
+  clearHistoryData (profileKey: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/clearHistoryData`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -318,11 +319,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getActiveSteps (processKey = '', isoLanguage = '', logProcessId = null) {
-    let config = {
+  getActiveSteps (processKey: string = '', isoLanguage: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getActiveSteps`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -348,11 +349,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getActiveUsers (processKey = '', logProcessId = null) {
-    let config = {
+  getActiveUsers (processKey: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getActiveUsers`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -374,11 +375,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  deleteBPMStubs (processKey = '', bpmRecordIds = '', logProcessId = null) {
-    let config = {
+  deleteBPMStubs (processKey: string = '', bpmRecordIds: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/deleteBPMStubs`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -404,11 +405,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  assignRole (processKey = '', bpmRecordId = '', roleName = '', currentUser = '', responsibleUsers = [], logProcessId = null) {
-    let config = {
+  assignRole (processKey: string = '', bpmRecordId: string = '', roleName: string = '', currentUser: string = '', responsibleUsers: Array<string> = [], logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/assignRole`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -446,11 +447,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getAssignedRoles (processKey = '', bpmRecordId = '', roleNames = [], logProcessId = null) {
-    let config = {
+  getAssignedRoles (processKey: string = '', bpmRecordId: string = '', roleNames: Array<string> = [], logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getAssignedRoles`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -480,11 +481,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  reAssignResponsibleUser (processKey = '', currentResponsibleUser = '', newResponsibleUser = '', roleNames = [], logProcessId = null) {
-    let config = {
+  reAssignResponsibleUser (processKey: string = '', currentResponsibleUser: string = '', newResponsibleUser: string = '', roleNames: Array<string> = [], logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/reAssignResponsibleUser`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -518,11 +519,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getResponsibleRoles (processKey = '', responsibleUser = '', logProcessId = null) {
-    let config = {
+  getResponsibleRoles (processKey: string = '', responsibleUser: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/getResponsibleRoles`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -548,11 +549,11 @@ class BPM {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  lockRecord (bpmRecordId = '', logProcessId = null) {
-    let config = {
+  lockRecord (bpmRecordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/lockRecord`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -574,11 +575,11 @@ class BPM {
       config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  unlockRecord (bpmRecordId = '', logProcessId = null) {
-    let config = {
+  unlockRecord (bpmRecordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BPM}/unlockRecord`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -600,8 +601,8 @@ class BPM {
       config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = BPM
+export default BPM

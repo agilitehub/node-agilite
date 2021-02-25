@@ -1,14 +1,21 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
+
+interface OutputFormat {
+  JSON: string
+  STRING: string
+}
 
 class BatchLogging {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
+  outputFormat: OutputFormat
 
+  constructor (config: Config) {
     this.outputFormat = {
       JSON: Enums.VALUE_JSON_LOWER,
       STRING: Enums.VALUE_STRING_LOWER
@@ -21,18 +28,18 @@ class BatchLogging {
     }
   }
 
-  postData (data = {}, logProcessId = null) {
-    let headers = {}
+  postData (data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_POST, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
-    let headers = {}
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+    let headers: any = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -42,33 +49,33 @@ class BatchLogging {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_GET, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}, logProcessId = null) {
-    let headers = {}
+  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_PUT, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '', logProcessId = null) {
-    let headers = {}
+  deleteData (recordId: string = '', logProcessId: string = '') {
+    let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_DELETE, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_DELETE, null, headers)
   }
 
-  getByProfileKey (profileKey = '', logProcessId = null) {
-    let config = {
+  getByProfileKey (profileKey: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -90,11 +97,11 @@ class BatchLogging {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  initLogProcess (profileKey = '', data = {}, logProcessId = null) {
-    let config = {
+  initLogProcess (profileKey: string = '', data: any = {}, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initLogProcess`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -117,11 +124,11 @@ class BatchLogging {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  completeLogProcess (logProcessId = '', data = {}) {
-    let config = {
+  completeLogProcess (logProcessId: string = '', data: any = {}) {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeLogProcess`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -140,11 +147,11 @@ class BatchLogging {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  createLogEntry (logProcessId = '', data = {}) {
-    let config = {
+  createLogEntry (logProcessId: string = '', data: any = {}) {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/createLogEntry`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -163,11 +170,11 @@ class BatchLogging {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  generateLogProcessReport (logProcessId = '', qry = null, fieldsToReturn = null, qryOptions = null, page = null, pageLimit = null) {
-    let config = {
+  generateLogProcessReport (logProcessId: string = '', qry: string = '', fieldsToReturn: string = '', qryOptions: any = null, page: any = null, pageLimit: any = null) {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/report`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -203,8 +210,8 @@ class BatchLogging {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = BatchLogging
+export default BatchLogging

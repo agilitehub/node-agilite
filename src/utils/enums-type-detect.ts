@@ -1,6 +1,35 @@
-'use strict'
+interface Constants {
+  ARRAY: string,
+  ARRAY_BUFFER: string,
+  ARGS: string,
+  BOOLEAN: string,
+  DATA_VIEW: string,
+  DATE: string,
+  FUNCTION: string,
+  FLOAT32ARRAY: string,
+  FLOAT64ARRAY: string,
+  INT8ARRAY: string,
+  INT16ARRAY: string,
+  INT32ARRAY: string,
+  MAP: string,
+  NULL: string,
+  NUMBER: string,
+  OBJECT: string,
+  PROMISE: string,
+  REGEX: string,
+  SET: string,
+  STRING: string,
+  SYMBOL: string,
+  UINT8ARRAY: string,
+  UINT8CLAMPEDARRAY: string,
+  UINT16ARRAY: string,
+  UINT32ARRAY: string,
+  UNDEFINED: string,
+  WEAK_MAP: string,
+  WEAK_SET: string
+}
 
-let constants = {
+const Constants: Constants = {
   ARRAY: 'Array',
   ARRAY_BUFFER: 'ArrayBuffer',
   ARGS: 'Arguments',
@@ -31,4 +60,4 @@ let constants = {
   WEAK_SET: 'WeakSet'
 }
 
-module.exports = constants
+export default Constants

@@ -1,14 +1,16 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class Files {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
+  responseType: any
 
+  constructor (config: Config) {
     this.responseType = {
       ARRAY_BUFFER: 'arraybuffer',
       BLOB: 'blob',
@@ -25,8 +27,8 @@ class Files {
     }
   }
 
-  getFile (recordId = '', responseType = this.responseType.ARRAY_BUFFER, logProcessId = null) {
-    let config = {
+  getFile (recordId: string = '', responseType = this.responseType.ARRAY_BUFFER, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_GET,
       headers: {},
@@ -49,11 +51,11 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getPublicFile (recordId = '', logProcessId = null) {
-    let config = {
+  getPublicFile (recordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/${recordId}`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -75,11 +77,11 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  uploadFile (fileName = '', contentType = '', data = {}, persistFile = false, isPublic = false, logProcessId = null) {
-    let config = {
+  uploadFile (fileName: string = '', contentType: string = '', data: any = {}, persistFile: boolean = false, isPublic: boolean = false, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -114,11 +116,11 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  deleteFile (recordId = '', logProcessId = null) {
-    let config = {
+  deleteFile (recordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_DELETE,
       headers: {}
@@ -140,11 +142,11 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getFileName (recordId = '', logProcessId = null) {
-    let config = {
+  getFileName (recordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/getFileName`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -166,11 +168,11 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  unzip (recordId = '', logProcessId = null) {
-    let config = {
+  unzip (recordId: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/unzip`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -192,8 +194,8 @@ class Files {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = Files
+export default Files

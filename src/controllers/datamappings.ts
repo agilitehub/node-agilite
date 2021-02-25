@@ -1,14 +1,15 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class DataMappings {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
 
+  constructor (config: Config) {
     if (config) {
       this.apiServerUrl = config.apiServerUrl
       this.apiKey = config.apiKey
@@ -16,18 +17,18 @@ class DataMappings {
     }
   }
 
-  postData (data = {}, logProcessId = null) {
-    let headers = {}
+  postData (data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_POST, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
-    let headers = {}
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
@@ -37,11 +38,11 @@ class DataMappings {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_GET, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}, logProcessId = null) {
-    let headers = {}
+  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
@@ -49,11 +50,11 @@ class DataMappings {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_PUT, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '', logProcessId = null) {
-    let headers = {}
+  deleteData (recordId: string = '', logProcessId: string = '') {
+    let headers: any = {}
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
@@ -61,11 +62,11 @@ class DataMappings {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_DELETE, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey = '', data = {}, logProcessId = null) {
-    let config = {
+  execute (profileKey: string = '', data: any = {}, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_DATA_MAPPING}/execute`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -90,8 +91,8 @@ class DataMappings {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = DataMappings
+export default DataMappings

@@ -1,14 +1,15 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class Connectors {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
 
+  constructor (config: Config) {
     if (config) {
       this.apiServerUrl = config.apiServerUrl
       this.apiKey = config.apiKey
@@ -16,18 +17,18 @@ class Connectors {
     }
   }
 
-  postData (data = {}, logProcessId = null) {
-    let headers = {}
+  postData (data: any = {}, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     }
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_POST, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys = [], recordIds = [], slimResult = true, logProcessId = null) {
-    let headers = {}
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
@@ -37,11 +38,11 @@ class Connectors {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_GET, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId = '', data = {}, resetService = false, logProcessId = null) {
-    let headers = {}
+  putData (recordId: string = '', data: any = {}, resetService: boolean = false, logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
@@ -50,11 +51,11 @@ class Connectors {
     headers[Enums.HEADER_RECORD_ID] = recordId
     headers[Enums.HEADER_RESET_SERVICE] = resetService
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_PUT, data, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId = '', logProcessId = null) {
-    let headers = {}
+  deleteData (recordId: string = '', logProcessId: string = '') {
+    let headers: any = {}
 
     if (logProcessId !== undefined && logProcessId !== null) {
       headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
@@ -62,11 +63,11 @@ class Connectors {
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    return Utils.executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_DELETE, null, headers)
+    return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_CONNECTORS, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey = '', routeKey = '', data = {}, isResponseFile = false, logProcessId = null) {
-    let config = {
+  execute (profileKey: string = '', routeKey: string = '', data: any = {}, isResponseFile: boolean = false, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_CONNECTORS}/execute`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -97,8 +98,8 @@ class Connectors {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = Connectors
+export default Connectors

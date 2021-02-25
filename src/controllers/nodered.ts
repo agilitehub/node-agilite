@@ -1,14 +1,15 @@
 'use strict'
 
-const Enums = require('../utils/enums')
-const Utils = require('../utils/utils.js')
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeRequest, executeCRUDRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
 class NodeRED {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
 
+  constructor (config: Config) {
     if (config) {
       this.apiServerUrl = config.apiServerUrl
       this.apiKey = config.apiKey
@@ -17,7 +18,7 @@ class NodeRED {
   }
 
   getFlows () {
-    const config = {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getFlows`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -27,11 +28,11 @@ class NodeRED {
       config.headers[Enums.HEADER_API_KEY] = this.apiKey
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  saveFlows (data) {
-    const config = {
+  saveFlows (data: any) {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/saveFlows`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -46,11 +47,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
   getCredentials () {
-    const config = {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getCredentials`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -64,11 +65,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  saveCredentials (data) {
-    const config = {
+  saveCredentials (data: any) {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/saveCredentials`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -83,11 +84,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
   getSettings () {
-    const config = {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getSettings`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -101,11 +102,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  saveSettings (data) {
-    const config = {
+  saveSettings (data: any) {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/saveSettings`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -120,11 +121,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
   getSessions () {
-    const config = {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getSessions`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -138,11 +139,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  saveSessions (data) {
-    const config = {
+  saveSessions (data: any) {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/saveSessions`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -157,11 +158,11 @@ class NodeRED {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 
-  getFlowData (profileKey) {
-    const config = {
+  getFlowData (profileKey: string) {
+    const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_NODE_RED}/getFlowData`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -179,8 +180,8 @@ class NodeRED {
       config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     }
 
-    return Utils.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = NodeRED
+export default NodeRED

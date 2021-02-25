@@ -1,14 +1,23 @@
-'use strict'
+import Enums, { AxiosConfig } from '../utils/enums'
+import { executeRequest } from '../utils/utils.js'
+import { Config } from './agilite'
 
-const Enums = require('../utils/enums')
-const Utilities = require('../utils/utils.js')
+interface ResponseType {
+  ARRAY_BUFFER: string
+  BLOB: string
+  DOCUMENT: string
+  JSON: string
+  TEXT: string
+  STREAM: string
+}
 
 class Utils {
-  constructor (config) {
-    this.apiServerUrl = null
-    this.apiKey = null
-    this.teamId = null
+  apiServerUrl: string = ''
+  apiKey: string = ''
+  teamId: string = ''
+  responseType: ResponseType
 
+  constructor (config: Config) {
     this.responseType = {
       ARRAY_BUFFER: 'arraybuffer',
       BLOB: 'blob',
@@ -25,8 +34,8 @@ class Utils {
     }
   }
 
-  encodeXML (data = '', logProcessId = null) {
-    let config = {
+  encodeXML (data: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/encodeXML`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -47,11 +56,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  decodeXML (data = '', logProcessId = null) {
-    let config = {
+  decodeXML (data: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/decodeXML`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -72,11 +81,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  XMLToJS (data = '', logProcessId = null) {
-    let config = {
+  XMLToJS (data: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/XMLToJS`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -97,11 +106,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  JSToXML (data = {}, logProcessId = null) {
-    let config = {
+  JSToXML (data: any = {}, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/JSToXML`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -122,11 +131,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  html2json (data = '', logProcessId = null) {
-    let config = {
+  html2json (data: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/html2json`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -147,11 +156,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  jsonDiff (data = '', logProcessId = null) {
-    let config = {
+  jsonDiff (data: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/jsonDiff`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -172,11 +181,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  generateOCR (recordId, logProcessId = null) {
-    let config = {
+  generateOCR (recordId: string, logProcessId = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateOCR`,
       method: Enums.METHOD_POST,
       headers: {}
@@ -200,11 +209,11 @@ class Utils {
       config.headers[Enums.HEADER_RECORD_ID] = recordId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  generateUsername (fullName, data = [], logProcessId = null) {
-    let config = {
+  generateUsername (fullName: string, data: any = [], logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUsername`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -229,11 +238,11 @@ class Utils {
       config.headers[Enums.HEADER_FULL_NAME] = fullName
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  generatePDF (data = {}, logProcessId = null) {
-    let config = {
+  generatePDF (data: any = {}, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generatePDF`,
       method: Enums.METHOD_POST,
       headers: {},
@@ -254,11 +263,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  generateUUID (logProcessId = null) {
-    let config = {
+  generateUUID (logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUUID`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -276,11 +285,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  formatDateTime (dateTimeValue = '', formatKey = '', logProcessId = null) {
-    let config = {
+  formatDateTime (dateTimeValue: string = '', formatKey: string = '', logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/formatDateTime`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -306,11 +315,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  account (logProcessId = null) {
-    let config = {
+  account (logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_ADMIN}/account`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -328,11 +337,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  dashboardReports (startDate, endDate, logProcessId = null) {
-    let config = {
+  dashboardReports (startDate: string, endDate: string, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_REPORTS}/dashboard`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -358,11 +367,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
   homePageReports () {
-    let config = {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_REPORTS}/homePage`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -376,11 +385,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  exportData (includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
-    let config = {
+  exportData (includeModules: boolean = false, solutionsArray: Array<any> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessId: string = '') {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
       method: Enums.METHOD_GET,
       headers: {},
@@ -415,11 +424,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
-  importData (fileId, includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
-    let config = {
+  importData (fileId: string, includeModules = null, solutionsArray = null, includeData = null, includeCredentials = null, logProcessId = null) {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/importData`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -457,11 +466,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
   getIP () {
-    let config = {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/ip`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -475,11 +484,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
   getUserAgent () {
-    let config = {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/useragent`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -493,11 +502,11 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 
   returnISOLanguages () {
-    let config = {
+    let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/isoLanguages`,
       method: Enums.METHOD_GET,
       headers: {}
@@ -511,8 +520,8 @@ class Utils {
       config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     }
 
-    return Utilities.executeRequest(config)
+    return executeRequest(config)
   }
 }
 
-module.exports = Utils
+export default Utils
