@@ -44,17 +44,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -69,17 +61,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -94,17 +78,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -119,17 +95,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -144,17 +112,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -169,17 +129,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -193,21 +145,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
 
     return executeRequest(config)
   }
@@ -222,21 +163,10 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
-
-    if (fullName !== undefined && fullName !== null) {
-      config.headers[Enums.HEADER_FULL_NAME] = fullName
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    if (fullName) config.headers[Enums.HEADER_FULL_NAME] = fullName
 
     return executeRequest(config)
   }
@@ -251,17 +181,9 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -273,17 +195,9 @@ class Utils {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -295,25 +209,11 @@ class Utils {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (dateTimeValue !== undefined && dateTimeValue !== null) {
-      config.headers[Enums.HEADER_DATE_TIME_VALUE] = dateTimeValue
-    }
-
-    if (formatKey !== undefined && formatKey !== null) {
-      config.headers[Enums.HEADER_FORMAT_KEY] = formatKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (dateTimeValue) config.headers[Enums.HEADER_DATE_TIME_VALUE] = dateTimeValue
+    if (formatKey) config.headers[Enums.HEADER_FORMAT_KEY] = formatKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -325,17 +225,9 @@ class Utils {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -347,25 +239,11 @@ class Utils {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (startDate !== undefined && startDate !== null) {
-      config.headers[Enums.HEADER_START_DATE] = startDate
-    }
-
-    if (endDate !== undefined && endDate !== null) {
-      config.headers[Enums.HEADER_END_DATE] = endDate
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (startDate) config.headers[Enums.HEADER_START_DATE] = startDate
+    if (endDate) config.headers[Enums.HEADER_END_DATE] = endDate
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -377,13 +255,8 @@ class Utils {
       headers: {}
     }
 
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -396,33 +269,13 @@ class Utils {
       responseType: 'arraybuffer'
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (includeModules !== undefined && includeModules !== null) {
-      config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
-    }
-
-    if (solutionsArray !== undefined && solutionsArray !== null) {
-      config.headers.solutions = solutionsArray
-    }
-
-    if (includeData !== undefined && includeData !== null) {
-      config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
-    }
-
-    if (includeCredentials !== undefined && includeCredentials !== null) {
-      config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (includeModules) config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    if (solutionsArray) config.headers.solutions = solutionsArray
+    if (includeData) config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
+    if (includeCredentials) config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -434,37 +287,14 @@ class Utils {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (fileId !== undefined && fileId !== null) {
-      config.headers[Enums.HEADER_FILE_ID] = fileId
-    }
-
-    if (includeModules !== undefined && includeModules !== null) {
-      config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
-    }
-
-    if (solutionsArray !== undefined && solutionsArray !== null) {
-      config.headers.solutions = solutionsArray
-    }
-
-    if (includeData !== undefined && includeData !== null) {
-      config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
-    }
-
-    if (includeCredentials !== undefined && includeCredentials !== null) {
-      config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (fileId) config.headers[Enums.HEADER_FILE_ID] = fileId
+    if (includeModules) config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
+    if (solutionsArray) config.headers.solutions = solutionsArray
+    if (includeData) config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
+    if (includeCredentials) config.headers[Enums.HEADER_INCLUDE_CREDENTIALS] = includeCredentials
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -476,13 +306,8 @@ class Utils {
       headers: {}
     }
 
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -494,13 +319,8 @@ class Utils {
       headers: {}
     }
 
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -512,13 +332,8 @@ class Utils {
       headers: {}
     }
 
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }

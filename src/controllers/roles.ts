@@ -21,9 +21,7 @@ class Roles {
   postData (data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_ROLES, Enums.METHOD_POST, data, headers)
   }
@@ -35,9 +33,7 @@ class Roles {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_ROLES, Enums.METHOD_GET, null, headers)
   }
@@ -46,9 +42,7 @@ class Roles {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_ROLES, Enums.METHOD_PUT, data, headers)
   }
@@ -57,9 +51,7 @@ class Roles {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_ROLES, Enums.METHOD_DELETE, null, headers)
   }
@@ -74,25 +66,11 @@ class Roles {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (roleNames !== undefined && roleNames !== null) {
-      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (conditionalLevels !== undefined && conditionalLevels !== null) {
-      config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (roleNames) config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    if (conditionalLevels) config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -104,25 +82,11 @@ class Roles {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (conditionalLevels !== undefined && conditionalLevels !== null) {
-      config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (conditionalLevels) config.headers[Enums.HEADER_CONDITIONAL_LEVELS] = conditionalLevels.join(Enums.SEPARATOR_COMMA)
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -134,25 +98,10 @@ class Roles {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (responsibleUser !== undefined && responsibleUser !== null) {
-      config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }

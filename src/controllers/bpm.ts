@@ -20,9 +20,7 @@ class BPM {
   postData (data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_POST, data, headers)
   }
@@ -34,9 +32,7 @@ class BPM {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_GET, null, headers)
   }
@@ -45,9 +41,7 @@ class BPM {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_PUT, data, headers)
   }
@@ -56,9 +50,7 @@ class BPM {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BPM, Enums.METHOD_DELETE, null, headers)
   }
@@ -70,43 +62,16 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (currentUser !== undefined && currentUser !== null) {
-      config.headers[Enums.HEADER_CURRENT_USER] = currentUser
-    }
-
-    if (includeHistory !== undefined && includeHistory !== null) {
-      config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
-    }
-
-    if (includeStepOptions !== undefined && includeStepOptions !== null) {
-      config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
-    }
-
-    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
-      config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
-    }
-
-    if (includeKeywords !== undefined && includeKeywords !== null) {
-      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
-    }
-
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey !== undefined && processKey !== null) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    if (currentUser !== undefined && currentUser !== null) config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    if (includeHistory !== undefined && includeHistory !== null) config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
+    if (includeStepOptions !== undefined && includeStepOptions !== null) config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
+    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    if (includeKeywords !== undefined && includeKeywords !== null) config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
     if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -121,61 +86,20 @@ class BPM {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (bpmRecordId !== undefined && bpmRecordId !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    }
-
-    if (optionSelected !== undefined && optionSelected !== null) {
-      config.headers[Enums.HEADER_OPTION_SELECTED] = optionSelected
-    }
-
-    if (currentUser !== undefined && currentUser !== null) {
-      config.headers[Enums.HEADER_CURRENT_USER] = currentUser
-    }
-
-    if (currentStep !== undefined && currentStep !== null) {
-      config.headers[Enums.HEADER_CURRENT_STEP] = currentStep
-    }
-
-    if (comments !== undefined && comments !== null) {
-      config.headers[Enums.HEADER_COMMENTS] = comments
-    }
-
-    if (includeHistory !== undefined && includeHistory !== null) {
-      config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
-    }
-
-    if (includeStepOptions !== undefined && includeStepOptions !== null) {
-      config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
-    }
-
-    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
-      config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
-    }
-
-    if (includeKeywords !== undefined && includeKeywords !== null) {
-      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
-    }
-
-    if (isoLanguage !== undefined && isoLanguage !== null) {
-      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    if (bpmRecordId) config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    if (optionSelected) config.headers[Enums.HEADER_OPTION_SELECTED] = optionSelected
+    if (currentUser) config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    if (currentStep) config.headers[Enums.HEADER_CURRENT_STEP] = currentStep
+    if (comments) config.headers[Enums.HEADER_COMMENTS] = comments
+    if (includeHistory) config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
+    if (includeStepOptions) config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
+    if (includeVisibleObjects) config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    if (includeKeywords) config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
+    if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -187,85 +111,26 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKeys !== undefined && processKeys !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEYS] = processKeys.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (bpmRecordIds !== undefined && bpmRecordIds !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_IDS] = bpmRecordIds.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (stepNames !== undefined && stepNames !== null) {
-      config.headers[Enums.HEADER_STEP_NAMES] = stepNames.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (responsibleUsers !== undefined && responsibleUsers !== null) {
-      config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (relevantUsers !== undefined && relevantUsers !== null) {
-      config.headers[Enums.HEADER_RELEVANT_USERS] = relevantUsers.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (relevantRoles !== undefined && relevantRoles !== null) {
-      config.headers[Enums.HEADER_RELEVANT_ROLES] = relevantRoles.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (eventStamps !== undefined && eventStamps !== null) {
-      config.headers[Enums.HEADER_EVENT_STAMPS] = eventStamps.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (includeHistory !== undefined && includeHistory !== null) {
-      config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
-    }
-
-    if (includeStepOptions !== undefined && includeStepOptions !== null) {
-      config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
-    }
-
-    if (includeVisibleObjects !== undefined && includeVisibleObjects !== null) {
-      config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
-    }
-
-    if (includeKeywords !== undefined && includeKeywords !== null) {
-      config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
-    }
-
-    if (isoLanguage !== undefined && isoLanguage !== null) {
-      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
-
-    if (page !== undefined && page !== null) {
-      config.headers[Enums.HEADER_PAGE] = page
-    }
-
-    if (pageLimit !== undefined && pageLimit !== null) {
-      config.headers[Enums.HEADER_PAGE_LIMIT] = pageLimit
-    }
-
-    if (sort !== undefined && sort !== null) {
-      config.headers[Enums.HEADER_SORT_BY] = sort
-    }
-
-    if (eventStartDate !== undefined && eventStartDate !== null) {
-      config.headers[Enums.HEADER_EVENT_START_DATE] = eventStartDate
-    }
-
-    if (eventEndDate !== undefined && eventEndDate !== null) {
-      config.headers[Enums.HEADER_EVENT_END_DATE] = eventEndDate
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKeys) config.headers[Enums.HEADER_PROCESS_KEYS] = processKeys.join(Enums.SEPARATOR_COMMA)
+    if (bpmRecordIds) config.headers[Enums.HEADER_BPM_RECORD_IDS] = bpmRecordIds.join(Enums.SEPARATOR_COMMA)
+    if (stepNames) config.headers[Enums.HEADER_STEP_NAMES] = stepNames.join(Enums.SEPARATOR_COMMA)
+    if (responsibleUsers) config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
+    if (relevantUsers) config.headers[Enums.HEADER_RELEVANT_USERS] = relevantUsers.join(Enums.SEPARATOR_COMMA)
+    if (relevantRoles) config.headers[Enums.HEADER_RELEVANT_ROLES] = relevantRoles.join(Enums.SEPARATOR_COMMA)
+    if (eventStamps) config.headers[Enums.HEADER_EVENT_STAMPS] = eventStamps.join(Enums.SEPARATOR_COMMA)
+    if (includeHistory) config.headers[Enums.HEADER_INCLUDE_HISTORY] = includeHistory
+    if (includeStepOptions) config.headers[Enums.HEADER_INCLUDE_STEP_OPTIONS] = includeStepOptions
+    if (includeVisibleObjects) config.headers[Enums.HEADER_INCLUDE_VISIBLE_OBJECTS] = includeVisibleObjects
+    if (includeKeywords) config.headers[Enums.HEADER_INCLUDE_KEYWORDS] = includeKeywords
+    if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    if (page) config.headers[Enums.HEADER_PAGE] = page
+    if (pageLimit) config.headers[Enums.HEADER_PAGE_LIMIT] = pageLimit
+    if (sort) config.headers[Enums.HEADER_SORT_BY] = sort
+    if (eventStartDate) config.headers[Enums.HEADER_EVENT_START_DATE] = eventStartDate
+    if (eventEndDate) config.headers[Enums.HEADER_EVENT_END_DATE] = eventEndDate
 
     return executeRequest(config)
   }
@@ -277,21 +142,10 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (profileKey !== undefined && profileKey !== null) {
-      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -303,21 +157,10 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (profileKey !== undefined && profileKey !== null) {
-      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -329,25 +172,11 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (isoLanguage !== undefined && isoLanguage !== null) {
-      config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -359,21 +188,10 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -385,25 +203,11 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (bpmRecordIds !== undefined && bpmRecordIds !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_IDS] = bpmRecordIds
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (bpmRecordIds) config.headers[Enums.HEADER_ISO_LANGUAGE] = bpmRecordIds
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -415,37 +219,14 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (bpmRecordId !== undefined && bpmRecordId !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    }
-
-    if (roleName !== undefined && roleName !== null) {
-      config.headers[Enums.HEADER_ROLE_NAME] = roleName
-    }
-
-    if (currentUser !== undefined && currentUser !== null) {
-      config.headers[Enums.HEADER_CURRENT_USER] = currentUser
-    }
-
-    if (responsibleUsers !== undefined && responsibleUsers !== null) {
-      config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (bpmRecordId) config.headers[Enums.HEADER_PROFILE_KEY] = bpmRecordId
+    if (roleName) config.headers[Enums.HEADER_ROLE_NAME] = roleName
+    if (currentUser) config.headers[Enums.HEADER_CURRENT_USER] = currentUser
+    if (responsibleUsers) config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -457,29 +238,12 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (bpmRecordId !== undefined && bpmRecordId !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    }
-
-    if (roleNames !== undefined && roleNames !== null) {
-      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    if (bpmRecordId) config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    if (roleNames) config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -491,33 +255,13 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (currentResponsibleUser !== undefined && currentResponsibleUser !== null) {
-      config.headers[Enums.HEADER_CURRENT_RESPONSIBLE_USER] = currentResponsibleUser
-    }
-
-    if (newResponsibleUser !== undefined && newResponsibleUser !== null) {
-      config.headers[Enums.HEADER_NEW_RESPONSIBLE_USER] = newResponsibleUser
-    }
-
-    if (roleNames !== undefined && roleNames !== null) {
-      config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    if (currentResponsibleUser) config.headers[Enums.HEADER_CURRENT_RESPONSIBLE_USER] = currentResponsibleUser
+    if (newResponsibleUser) config.headers[Enums.HEADER_NEW_RESPONSIBLE_USER] = newResponsibleUser
+    if (roleNames) config.headers[Enums.HEADER_ROLE_NAMES] = roleNames.join(Enums.SEPARATOR_COMMA)
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -529,25 +273,11 @@ class BPM {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (processKey !== undefined && processKey !== null) {
-      config.headers[Enums.HEADER_PROCESS_KEY] = processKey
-    }
-
-    if (responsibleUser !== undefined && responsibleUser !== null) {
-      config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
+    if (responsibleUser) config.headers[Enums.HEADER_RESPONSIBLE_USER] = responsibleUser
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -559,21 +289,10 @@ class BPM {
       headers: {}
     }
 
-    if (bpmRecordId !== undefined && bpmRecordId !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
-
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (bpmRecordId) config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeRequest(config)
   }
@@ -585,21 +304,10 @@ class BPM {
       headers: {}
     }
 
-    if (bpmRecordId !== undefined && bpmRecordId !== null) {
-      config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
-
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (bpmRecordId) config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeRequest(config)
   }

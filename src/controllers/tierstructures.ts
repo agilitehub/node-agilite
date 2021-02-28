@@ -35,9 +35,7 @@ class TierStructures {
   postData (data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TIER_STRUCTURES, Enums.METHOD_POST, data, headers)
   }
@@ -45,9 +43,7 @@ class TierStructures {
   getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -59,9 +55,7 @@ class TierStructures {
   putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
@@ -71,9 +65,7 @@ class TierStructures {
   deleteData (recordId: string = '', logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
@@ -87,41 +79,15 @@ class TierStructures {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (tierKeys !== undefined && tierKeys !== null) {
-      config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
-    }
-
-    if (includeValues !== undefined && includeValues !== null) {
-      config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
-    }
-
-    if (includeMetaData !== undefined && includeMetaData !== null) {
-      config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData
-    }
-
-    if (includeTierEntries !== undefined && includeTierEntries !== null) {
-      config.headers[Enums.HEADER_INCLUDE_TIER_ENTRIES] = includeTierEntries
-    }
-
-    if (sortValues !== undefined && sortValues !== null) {
-      config.headers[Enums.HEADER_SORT_VALUES] = sortValues
-    }
-
-    if (valuesOutputFormat !== undefined && valuesOutputFormat !== null) {
-      config.headers[Enums.HEADER_VALUES_OUTPUT_FORMAT] = valuesOutputFormat
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (tierKeys) config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
+    if (includeValues) config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
+    if (includeMetaData) config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData
+    if (includeTierEntries) config.headers[Enums.HEADER_INCLUDE_TIER_ENTRIES] = includeTierEntries
+    if (sortValues) config.headers[Enums.HEADER_SORT_VALUES] = sortValues
+    if (valuesOutputFormat) config.headers[Enums.HEADER_VALUES_OUTPUT_FORMAT] = valuesOutputFormat
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }

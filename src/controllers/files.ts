@@ -35,21 +35,10 @@ class Files {
       responseType
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -61,21 +50,10 @@ class Files {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -88,33 +66,13 @@ class Files {
       data
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (fileName && fileName !== '') {
-      config.headers[Enums.HEADER_FILE_NAME] = fileName
-    }
-
-    if (contentType && contentType !== '') {
-      config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
-    }
-
-    if (persistFile) {
-      config.headers[Enums.HEADER_PERSIST_FILE] = persistFile
-    }
-
-    if (isPublic) {
-      config.headers[Enums.HEADER_IS_PUBLIC] = isPublic
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (fileName) config.headers[Enums.HEADER_FILE_NAME] = fileName
+    if (contentType) config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
+    if (persistFile) config.headers[Enums.HEADER_PERSIST_FILE] = persistFile
+    if (isPublic) config.headers[Enums.HEADER_IS_PUBLIC] = isPublic
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -126,21 +84,10 @@ class Files {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -152,21 +99,10 @@ class Files {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -178,21 +114,10 @@ class Files {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (recordId !== undefined && recordId !== null) {
-      config.headers[Enums.HEADER_RECORD_ID] = recordId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }

@@ -1,7 +1,7 @@
 'use strict'
 
 import Axios from 'axios'
-import Enums from './enums'
+import Enums, { AxiosConfig } from './enums'
 
 export const executeRequest = (config: any) => {
   config.maxContentLength = 99999999
@@ -9,7 +9,7 @@ export const executeRequest = (config: any) => {
 }
 
 export const executeCRUDRequest = (apiServerUrl: string = '', apiKey: string = '', teamId: string = '', appName: string = '', method: string = '', data: any = {}, headers: any = {}) => {
-  const config: any = {
+  const config: AxiosConfig = {
     url: `${apiServerUrl}/${appName}/${Enums.STRING_DATA}`,
     method,
     headers,
@@ -23,7 +23,6 @@ export const executeCRUDRequest = (apiServerUrl: string = '', apiKey: string = '
     case Enums.METHOD_POST:
     case Enums.METHOD_PUT:
       config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
-
       break
   }
 
@@ -33,7 +32,7 @@ export const executeCRUDRequest = (apiServerUrl: string = '', apiKey: string = '
 export const authenticateToken = (apiServerUrl: string = '', apiKey: string = '') => {
   const config: any = {
     url: `${apiServerUrl}`,
-    method: 'GET',
+    method: Enums.METHOD_GET,
     headers: {}
   }
 

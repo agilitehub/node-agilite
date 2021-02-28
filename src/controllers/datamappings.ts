@@ -20,9 +20,7 @@ class DataMappings {
   postData (data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_POST, data, headers)
   }
@@ -30,9 +28,7 @@ class DataMappings {
   getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -46,9 +42,7 @@ class DataMappings {
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_PUT, data, headers)
   }
@@ -58,9 +52,7 @@ class DataMappings {
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_DATA_MAPPING, Enums.METHOD_DELETE, null, headers)
   }
@@ -75,21 +67,10 @@ class DataMappings {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (profileKey !== undefined && profileKey !== null) {
-      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }

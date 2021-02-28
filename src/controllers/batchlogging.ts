@@ -31,9 +31,7 @@ class BatchLogging {
   postData (data: any = {}, logProcessId: string = '') {
     let headers: any = {}
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_POST, data, headers)
   }
@@ -45,9 +43,7 @@ class BatchLogging {
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_GET, null, headers)
   }
@@ -56,9 +52,7 @@ class BatchLogging {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_PUT, data, headers)
   }
@@ -67,9 +61,7 @@ class BatchLogging {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
+    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_DELETE, null, headers)
   }
@@ -81,21 +73,10 @@ class BatchLogging {
       headers: {}
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (profileKey !== undefined && profileKey !== null) {
-      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -108,21 +89,10 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (profileKey !== undefined && profileKey !== null) {
-      config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -135,17 +105,9 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -158,17 +120,9 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId !== undefined && logProcessId !== null) {
-      config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
@@ -182,33 +136,13 @@ class BatchLogging {
 
     config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
 
-    if (qry !== undefined && qry !== null) {
-      config.headers.qry = qry
-    }
-
-    if (fieldsToReturn !== undefined && fieldsToReturn !== null) {
-      config.headers['fields-to-return'] = fieldsToReturn
-    }
-
-    if (qryOptions !== undefined && qryOptions !== null) {
-      config.headers['qry-options'] = qryOptions
-    }
-
-    if (page !== undefined && page !== null) {
-      config.headers.page = page
-    }
-
-    if (pageLimit !== undefined && pageLimit !== null) {
-      config.headers['page-limit'] = pageLimit
-    }
-
-    if (this.apiKey !== undefined && this.apiKey !== null) {
-      config.headers[Enums.HEADER_API_KEY] = this.apiKey
-    }
-
-    if (this.teamId !== undefined && this.teamId !== null) {
-      config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
-    }
+    if (qry) config.headers.qry = qry
+    if (fieldsToReturn) config.headers[Enums.HEADER_FIELDS_TO_RETURN] = fieldsToReturn
+    if (qryOptions) config.headers[Enums.HEADER_QRY_OPTIONS] = qryOptions
+    if (page) config.headers.page = page
+    if (pageLimit) config.headers[Enums.HEADER_PAGE_LIMIT] = pageLimit
+    if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
+    if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
