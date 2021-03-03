@@ -173,7 +173,7 @@ class BPM {
     }
 
     if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
     if (isoLanguage) config.headers[Enums.HEADER_ISO_LANGUAGE] = isoLanguage
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -189,7 +189,7 @@ class BPM {
     }
 
     if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
-    if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
+    if (processKey) config.headers[Enums.HEADER_PROCESS_KEY] = processKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
@@ -221,7 +221,7 @@ class BPM {
 
     if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
     if (processKey) config.headers[Enums.HEADER_PROFILE_KEY] = processKey
-    if (bpmRecordId) config.headers[Enums.HEADER_PROFILE_KEY] = bpmRecordId
+    if (bpmRecordId) config.headers[Enums.HEADER_BPM_RECORD_ID] = bpmRecordId
     if (roleName) config.headers[Enums.HEADER_ROLE_NAME] = roleName
     if (currentUser) config.headers[Enums.HEADER_CURRENT_USER] = currentUser
     if (responsibleUsers) config.headers[Enums.HEADER_RESPONSIBLE_USERS] = responsibleUsers.join(Enums.SEPARATOR_COMMA)
