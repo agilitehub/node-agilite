@@ -6,7 +6,7 @@ export interface AxiosConfig {
   responseType?: string
 }
 
-interface Enums {
+interface EnumsInterface {
   URL_API_SERVER: string,
   STRING_EMPTY: string,
   STRING_DATA: string,
@@ -114,7 +114,7 @@ interface Enums {
   SEPARATOR_COMMA: string
 }
 
-const Enums: Enums = {
+export const Enums: EnumsInterface = {
   URL_API_SERVER: 'https://api.agilite.io',
   STRING_EMPTY: '',
   STRING_DATA: 'data',
@@ -221,5 +221,3 @@ const Enums: Enums = {
   VALUE_JSON_LOWER: 'json',
   SEPARATOR_COMMA: ','
 }
-
-export default Enums

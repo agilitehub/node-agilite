@@ -1,6 +1,6 @@
 'use strict'
 
-import Enums from '../utils/enums'
+import { Enums } from '../utils/enums'
 import ApiKeys from './api-keys'
 import Keywords from './keywords'
 import Numbering from './numbering'

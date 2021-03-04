@@ -1,4 +1,4 @@
-import Enums from '../utils/enums'
+import { Enums } from '../utils/enums'
 import { executeCRUDRequest } from '../utils/utils.js'
 import { Config } from './agilite'
 

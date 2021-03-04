@@ -1,6 +1,6 @@
 'use strict'
 
-import Enums, { AxiosConfig } from '../utils/enums'
+import { Enums, AxiosConfig } from '../utils/enums'
 import { executeCRUDRequest, executeRequest } from '../utils/utils.js'
 import { Config } from './agilite'
 

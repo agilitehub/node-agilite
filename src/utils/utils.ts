@@ -1,7 +1,7 @@
 'use strict'
 
 import Axios from 'axios'
-import Enums, { AxiosConfig } from './enums'
+import { Enums, AxiosConfig } from './enums'
 
 export const executeRequest = (config: any) => {
   config.maxContentLength = 99999999

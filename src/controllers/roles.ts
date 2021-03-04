@@ -2,7 +2,7 @@
 
 import { Config } from "./agilite"
 
-import Enums, { AxiosConfig } from '../utils/enums'
+import { Enums, AxiosConfig } from '../utils/enums'
 import { executeRequest, executeCRUDRequest } from '../utils/utils.js'
 
 class Roles {

@@ -1,4 +1,4 @@
-import Enums, { AxiosConfig } from '../utils/enums'
+import { Enums, AxiosConfig } from '../utils/enums'
 import { executeRequest } from '../utils/utils.js'
 import { Config } from './agilite'
 
