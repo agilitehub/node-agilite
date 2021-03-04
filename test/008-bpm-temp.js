@@ -5,7 +5,7 @@ const expect = require('chai').expect
 const TypeDetect = require('agilite-utils/type-detect')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
 
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const MochaAgiliteCon = require('../mocha-agilite/controller')
 const BPMModel = require('../test-models/bpm')
 const DataTemplates = require('../test-data-templates/bpm')

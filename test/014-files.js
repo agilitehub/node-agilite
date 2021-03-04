@@ -4,9 +4,9 @@ require('agilite-utils/dotenv').config()
 const fs = require('fs')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const Enums = require('../utils/enums')
+const { Enums } = require('../dist/utils/enums')
 
 const agilite = new Agilite({
   apiServerUrl: process.env.API_SERVER_URL,

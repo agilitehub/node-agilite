@@ -4,17 +4,18 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const Enums = require('../utils/enums')
-const DataTemplate = require('../data-templates/templates')
+const { Enums } = require('../dist/utils/enums')
+const DataTemplate = require('../data-templates/connectors')
 
 const agilite = new Agilite({
   apiServerUrl: process.env.API_SERVER_URL,
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e Templates', () => {
+describe('Agilit-e Connectors', () => {
+  const groupName = UUID.v1()
   const invalidValue = 'invalid_value'
 
   let mainEntry = null
@@ -23,7 +24,7 @@ describe('Agilit-e Templates', () => {
   let key = UUID.v1()
 
   it('Create New Record - No Params (Negative)', (done) => {
-    agilite.Templates.postData()
+    agilite.Connectors.postData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -40,7 +41,7 @@ describe('Agilit-e Templates', () => {
   it('Create New Record - Empty Object (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
 
-    agilite.Templates.postData(mainEntry)
+    agilite.Connectors.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -57,7 +58,7 @@ describe('Agilit-e Templates', () => {
   it('Create New Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.Templates.postData(mainEntry)
+    agilite.Connectors.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -71,17 +72,37 @@ describe('Agilit-e Templates', () => {
       .then(done, done)
   })
 
+  it('Create New Record - No Profile Name (Negative)', (done) => {
+    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
+    mainEntry.data.key = key
+
+    agilite.Connectors.postData(mainEntry)
+      .catch((err) => {
+        expect(err).to.haveOwnProperty('response')
+        expect(err.response.status).to.equal(400)
+        expect(err.response).to.haveOwnProperty('data')
+        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+
+        // Check if errorMessage exists and contains correct error message
+        expect(err.response.data).to.haveOwnProperty('errorMessage')
+        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'name\'')
+      })
+      .then(done, done)
+  })
+
   it('Create New Record - Success', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
     mainEntry.data.key = key
+    mainEntry.data.name = key
 
-    agilite.Templates.postData(mainEntry)
+    agilite.Connectors.postData(mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if provided values match
         expect(response.data.data).to.haveOwnProperty('key')
         expect(response.data.data.key).to.equal(key)
+        expect(response.data.data.name).to.equal(key)
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -100,18 +121,10 @@ describe('Agilit-e Templates', () => {
         expect(response.data.data.isActive).to.equal(true)
         expect(response.data.data).to.haveOwnProperty('groupName')
         expect(response.data.data.groupName).to.equal(Enums.STRING_EMPTY)
-        expect(response.data.data).to.haveOwnProperty('description')
-        expect(response.data.data.description).to.equal(Enums.STRING_EMPTY)
-        expect(response.data.data).to.haveOwnProperty('data')
-        expect(response.data.data.data).to.equal('Response')
-        expect(response.data.data).to.haveOwnProperty('mode')
-        expect(response.data.data.mode).to.equal('plain_text')
-        expect(response.data.data).to.haveOwnProperty('theme')
-        expect(response.data.data.theme).to.equal('monokai')
-        expect(response.data.data).to.haveOwnProperty('templateType')
-        expect(response.data.data.templateType).to.equal('std')
-        expect(response.data.data).to.haveOwnProperty('editorType')
-        expect(response.data.data.editorType).to.equal('design')
+        expect(response.data.data).to.haveOwnProperty('connectionType')
+        expect(response.data.data.connectionType).to.equal('1')
+        expect(response.data.data).to.haveOwnProperty('routes')
+        expect(TypeDetect(response.data.data.routes)).to.equal(EnumsTypeDetect.ARRAY)
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -120,7 +133,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Get Data - Slim Result - Find Record By Id - Success', (done) => {
-    agilite.Templates.getData()
+    agilite.Connectors.getData()
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -152,7 +165,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Update Existing Record - No Params (Negative)', (done) => {
-    agilite.Templates.putData()
+    agilite.Connectors.putData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -167,7 +180,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Update Existing Record - No Data Param (Negative)', (done) => {
-    agilite.Templates.putData(recordId)
+    agilite.Connectors.putData(recordId)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -182,7 +195,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Update Existing Record - Empty Object Data Param (Negative)', (done) => {
-    agilite.Templates.putData(recordId, {})
+    agilite.Connectors.putData(recordId, {})
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -199,7 +212,7 @@ describe('Agilit-e Templates', () => {
   it('Update Existing Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.Templates.putData(recordId, mainEntry)
+    agilite.Connectors.putData(recordId, mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -217,26 +230,19 @@ describe('Agilit-e Templates', () => {
     key = 'PUT_' + key
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
     mainEntry.data.key = key
+    mainEntry.data.name = key
 
-    agilite.Templates.putData(recordId, mainEntry)
+    agilite.Connectors.putData(recordId, mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if provided values match
         expect(response.data.data).to.haveOwnProperty('key')
         expect(response.data.data.key).to.equal(key)
+        expect(response.data.data).to.haveOwnProperty('name')
+        expect(response.data.data.name).to.equal(key)
         expect(response.data.data).to.haveOwnProperty('groupName')
         expect(response.data.data.groupName).to.equal(DataTemplate.modified.data.groupName)
-        expect(response.data.data).to.haveOwnProperty('description')
-        expect(response.data.data.description).to.equal(DataTemplate.modified.data.description)
-        expect(response.data.data).to.haveOwnProperty('data')
-        expect(response.data.data.data).to.equal(DataTemplate.modified.data.data)
-        expect(response.data.data).to.haveOwnProperty('mode')
-        expect(response.data.data.mode).to.equal(DataTemplate.modified.data.mode)
-        expect(response.data.data).to.haveOwnProperty('theme')
-        expect(response.data.data.theme).to.equal(DataTemplate.modified.data.theme)
-        expect(response.data.data).to.haveOwnProperty('templateType')
-        expect(response.data.data.templateType).to.equal(DataTemplate.modified.data.templateType)
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -253,6 +259,10 @@ describe('Agilit-e Templates', () => {
         expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
         expect(response.data.data).to.haveOwnProperty('isActive')
         expect(response.data.data.isActive).to.equal(true)
+        expect(response.data.data).to.haveOwnProperty('connectionType')
+        expect(response.data.data.connectionType).to.equal('1')
+        expect(response.data.data).to.haveOwnProperty('routes')
+        expect(TypeDetect(response.data.data.routes)).to.equal(EnumsTypeDetect.ARRAY)
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -260,8 +270,8 @@ describe('Agilit-e Templates', () => {
       .then(done, done)
   })
 
-  it('Execute Template - No Params (Negative)', (done) => {
-    agilite.Templates.execute()
+  it('Execute - No Params (Negative)', (done) => {
+    agilite.Connectors.execute()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -275,8 +285,8 @@ describe('Agilit-e Templates', () => {
       .then(done, done)
   })
 
-  it('Execute Template - Invalid Key (Negative)', (done) => {
-    agilite.Templates.execute('invalid')
+  it('Execute - No Route Key (Negative)', (done) => {
+    agilite.Connectors.execute(key)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -285,31 +295,22 @@ describe('Agilit-e Templates', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Active Template Profile cannot be found - invalid')
+        expect(err.response.data.errorMessage).to.equal('No Route Key was specified in the \'route-key\' header parameter')
       })
       .then(done, done)
   })
 
-  it('Execute Template - Null as Data - Success', (done) => {
-    agilite.Templates.execute(key, null)
+  it('Execute - Success', (done) => {
+    agilite.Connectors.execute(key, 'ping')
       .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
-        expect(response.data).to.equal('Response')
-      })
-      .then(done, done)
-  })
-
-  it('Execute Template - Object as Data - Success', (done) => {
-    agilite.Templates.execute(key, null)
-      .then((response) => {
-        expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.STRING)
-        expect(response.data).to.equal('Response')
+        expect(response).to.haveOwnProperty('data')
+        expect(response.data).to.equal('pong')
       })
       .then(done, done)
   })
 
   it('Delete Record - No Record Id (Negative)', (done) => {
-    agilite.Templates.deleteData()
+    agilite.Connectors.deleteData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -324,7 +325,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Delete Record - Invalid Record Id (Negative)', (done) => {
-    agilite.Templates.deleteData(invalidValue)
+    agilite.Connectors.deleteData(invalidValue)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -339,7 +340,7 @@ describe('Agilit-e Templates', () => {
   })
 
   it('Delete Record - Success', (done) => {
-    agilite.Templates.deleteData(recordId)
+    agilite.Connectors.deleteData(recordId)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
         expect(JSON.stringify(response.data)).to.equal('{}')

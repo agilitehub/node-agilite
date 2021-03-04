@@ -4,18 +4,17 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const Enums = require('../utils/enums')
-const DataTemplate = require('../data-templates/connectors')
+const { Enums } = require('../dist/utils/enums')
+const DataTemplate = require('../data-templates/events')
 
 const agilite = new Agilite({
   apiServerUrl: process.env.API_SERVER_URL,
   apiKey: process.env.API_KEY
 })
 
-describe('Agilit-e Connectors', () => {
-  const groupName = UUID.v1()
+describe('Agilit-e Events', () => {
   const invalidValue = 'invalid_value'
 
   let mainEntry = null
@@ -24,7 +23,7 @@ describe('Agilit-e Connectors', () => {
   let key = UUID.v1()
 
   it('Create New Record - No Params (Negative)', (done) => {
-    agilite.Connectors.postData()
+    agilite.Events.postData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -41,7 +40,7 @@ describe('Agilit-e Connectors', () => {
   it('Create New Record - Empty Object (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyObject))
 
-    agilite.Connectors.postData(mainEntry)
+    agilite.Events.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -58,7 +57,7 @@ describe('Agilit-e Connectors', () => {
   it('Create New Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.Connectors.postData(mainEntry)
+    agilite.Events.postData(mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -67,25 +66,7 @@ describe('Agilit-e Connectors', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'key\'')
-      })
-      .then(done, done)
-  })
-
-  it('Create New Record - No Profile Name (Negative)', (done) => {
-    mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
-    mainEntry.data.key = key
-
-    agilite.Connectors.postData(mainEntry)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
-
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'name\'')
+        expect(err.response.data.errorMessage).to.equal('Please provide a valid Event \'key\'')
       })
       .then(done, done)
   })
@@ -93,16 +74,14 @@ describe('Agilit-e Connectors', () => {
   it('Create New Record - Success', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.new))
     mainEntry.data.key = key
-    mainEntry.data.name = key
 
-    agilite.Connectors.postData(mainEntry)
+    agilite.Events.postData(mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if provided values match
         expect(response.data.data).to.haveOwnProperty('key')
         expect(response.data.data.key).to.equal(key)
-        expect(response.data.data.name).to.equal(key)
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -121,10 +100,10 @@ describe('Agilit-e Connectors', () => {
         expect(response.data.data.isActive).to.equal(true)
         expect(response.data.data).to.haveOwnProperty('groupName')
         expect(response.data.data.groupName).to.equal(Enums.STRING_EMPTY)
-        expect(response.data.data).to.haveOwnProperty('connectionType')
-        expect(response.data.data.connectionType).to.equal('1')
-        expect(response.data.data).to.haveOwnProperty('routes')
-        expect(TypeDetect(response.data.data.routes)).to.equal(EnumsTypeDetect.ARRAY)
+        expect(response.data.data).to.haveOwnProperty('description')
+        expect(response.data.data.description).to.equal(Enums.STRING_EMPTY)
+        expect(response.data.data).to.haveOwnProperty('actions')
+        expect(response.data.data).to.haveOwnProperty('subscriptions')
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -133,7 +112,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Get Data - Slim Result - Find Record By Id - Success', (done) => {
-    agilite.Connectors.getData()
+    agilite.Events.getData()
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.ARRAY)
         expect(response.data.length).to.be.greaterThan(0)
@@ -165,7 +144,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Update Existing Record - No Params (Negative)', (done) => {
-    agilite.Connectors.putData()
+    agilite.Events.putData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -180,7 +159,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Update Existing Record - No Data Param (Negative)', (done) => {
-    agilite.Connectors.putData(recordId)
+    agilite.Events.putData(recordId)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -195,7 +174,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Update Existing Record - Empty Object Data Param (Negative)', (done) => {
-    agilite.Connectors.putData(recordId, {})
+    agilite.Events.putData(recordId, {})
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -212,7 +191,7 @@ describe('Agilit-e Connectors', () => {
   it('Update Existing Record - No Profile Key (Negative)', (done) => {
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.emptyDataObject))
 
-    agilite.Connectors.putData(recordId, mainEntry)
+    agilite.Events.putData(recordId, mainEntry)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -221,7 +200,7 @@ describe('Agilit-e Connectors', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('Please provide a valid Profile \'key\'')
+        expect(err.response.data.errorMessage).to.equal('Please provide a valid Event \'key\'')
       })
       .then(done, done)
   })
@@ -230,19 +209,20 @@ describe('Agilit-e Connectors', () => {
     key = 'PUT_' + key
     mainEntry = JSON.parse(JSON.stringify(DataTemplate.modified))
     mainEntry.data.key = key
-    mainEntry.data.name = key
 
-    agilite.Connectors.putData(recordId, mainEntry)
+    agilite.Events.putData(recordId, mainEntry)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
         // Check if provided values match
         expect(response.data.data).to.haveOwnProperty('key')
         expect(response.data.data.key).to.equal(key)
-        expect(response.data.data).to.haveOwnProperty('name')
-        expect(response.data.data.name).to.equal(key)
         expect(response.data.data).to.haveOwnProperty('groupName')
         expect(response.data.data.groupName).to.equal(DataTemplate.modified.data.groupName)
+        expect(response.data.data).to.haveOwnProperty('description')
+        expect(response.data.data.description).to.equal(DataTemplate.modified.data.description)
+        expect(response.data.data).to.haveOwnProperty('actions')
+        expect(response.data.data).to.haveOwnProperty('subscriptions')
 
         // Check if unprovided values exist and have defaults
         expect(response.data).to.haveOwnProperty('_id')
@@ -259,10 +239,6 @@ describe('Agilit-e Connectors', () => {
         expect(response.data.updatedAt).to.not.equal(Enums.STRING_EMPTY)
         expect(response.data.data).to.haveOwnProperty('isActive')
         expect(response.data.data.isActive).to.equal(true)
-        expect(response.data.data).to.haveOwnProperty('connectionType')
-        expect(response.data.data.connectionType).to.equal('1')
-        expect(response.data.data).to.haveOwnProperty('routes')
-        expect(TypeDetect(response.data.data.routes)).to.equal(EnumsTypeDetect.ARRAY)
 
         // Store Record Id to be used later
         recordId = response.data._id
@@ -270,47 +246,54 @@ describe('Agilit-e Connectors', () => {
       .then(done, done)
   })
 
-  it('Execute - No Params (Negative)', (done) => {
-    agilite.Connectors.execute()
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  // it('Execute Event - No Params (Negative)', (done) => {
+  //   agilite.Events.execute()
+  //     .catch((err) => {
+  //       expect(err).to.haveOwnProperty('response')
+  //       expect(err.response.status).to.equal(400)
+  //       expect(err.response).to.haveOwnProperty('data')
+  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
-      })
-      .then(done, done)
-  })
+  //       // Check if errorMessage exists and contains correct error message
+  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
+  //       expect(err.response.data.errorMessage).to.equal('No Profile Key was specified in the \'profile-key\' header parameter')
+  //     })
+  //     .then(done, done)
+  // })
 
-  it('Execute - No Route Key (Negative)', (done) => {
-    agilite.Connectors.execute(key)
-      .catch((err) => {
-        expect(err).to.haveOwnProperty('response')
-        expect(err.response.status).to.equal(400)
-        expect(err.response).to.haveOwnProperty('data')
-        expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  // it('Execute Event - Invalid Key (Negative)', (done) => {
+  //   agilite.Events.execute('invalid')
+  //     .catch((err) => {
+  //       expect(err).to.haveOwnProperty('response')
+  //       expect(err.response.status).to.equal(400)
+  //       expect(err.response).to.haveOwnProperty('data')
+  //       expect(TypeDetect(err.response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
-        // Check if errorMessage exists and contains correct error message
-        expect(err.response.data).to.haveOwnProperty('errorMessage')
-        expect(err.response.data.errorMessage).to.equal('No Route Key was specified in the \'route-key\' header parameter')
-      })
-      .then(done, done)
-  })
+  //       // Check if errorMessage exists and contains correct error message
+  //       expect(err.response.data).to.haveOwnProperty('errorMessage')
+  //       expect(err.response.data.errorMessage).to.equal('Active Profile cannot be found - invalid')
+  //     })
+  //     .then(done, done)
+  // })
 
-  it('Execute - Success', (done) => {
-    agilite.Connectors.execute(key, 'ping')
-      .then((response) => {
-        expect(response).to.haveOwnProperty('data')
-        expect(response.data).to.equal('pong')
-      })
-      .then(done, done)
-  })
+  // it('Execute Event - Null as Data - Success', (done) => {
+  //   agilite.Events.execute(key, null)
+  //     .then((response) => {
+  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  //     })
+  //     .then(done, done)
+  // })
+
+  // it('Execute Event - Object as Data - Success', (done) => {
+  //   agilite.Events.execute(key, null)
+  //     .then((response) => {
+  //       expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
+  //     })
+  //     .then(done, done)
+  // })
 
   it('Delete Record - No Record Id (Negative)', (done) => {
-    agilite.Connectors.deleteData()
+    agilite.Events.deleteData()
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -325,7 +308,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Delete Record - Invalid Record Id (Negative)', (done) => {
-    agilite.Connectors.deleteData(invalidValue)
+    agilite.Events.deleteData(invalidValue)
       .catch((err) => {
         expect(err).to.haveOwnProperty('response')
         expect(err.response.status).to.equal(400)
@@ -340,7 +323,7 @@ describe('Agilit-e Connectors', () => {
   })
 
   it('Delete Record - Success', (done) => {
-    agilite.Connectors.deleteData(recordId)
+    agilite.Events.deleteData(recordId)
       .then((response) => {
         expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
         expect(JSON.stringify(response.data)).to.equal('{}')

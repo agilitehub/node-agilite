@@ -4,9 +4,9 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const Enums = require('../utils/enums')
+const { Enums } = require('../dist/utils/enums')
 const DataTemplate = require('../data-templates/keywords')
 
 const agilite = new Agilite({

@@ -4,7 +4,7 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
 const DataTemplate = require('../data-templates/numbering')
 
@@ -390,7 +390,7 @@ describe('Agilit-e Numbering', () => {
 
         // Check if errorMessage exists and contains correct error message
         expect(error).to.haveOwnProperty('errorMessage')
-        expect(error.errorMessage).to.equal('Cast to ObjectId failed for value "test" at path "_id" for model "unit_testing_team_numbering"')
+        expect(error.errorMessage).to.equal(`Cast to ObjectId failed for value "test" at path "_id" for model "${process.env.TEAM_NAME}_numbering"`)
 
         // Check if additionalMessages exists and is blank array
         expect(error).to.haveOwnProperty('additionalMessages')

@@ -4,9 +4,9 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
-const Enums = require('../utils/enums')
+const { Enums } = require('../dist/utils/enums')
 const DataTemplate = require('../data-templates/roles')
 
 const agilite = new Agilite({
@@ -363,7 +363,7 @@ describe('Agilit-e Roles \n', () => {
             expect(err.response.data).to.haveOwnProperty('errorMessage')
             expect(err.response.data.errorMessage).to.equal('Validation Failed. \'responsible-user\' Header parameter required')
           })
-          .then(res => { console.log(res) })
+          .then(res => {})
           .then(done, done)
       })
     })

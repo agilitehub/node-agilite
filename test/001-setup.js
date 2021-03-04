@@ -13,8 +13,8 @@
 
 require('agilite-utils/dotenv').config()
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
-const Enums = require('../utils/enums')
+const Agilite = require('../dist/controllers/agilite')
+const { Enums } = require('../dist/utils/enums')
 
 const agilite = new Agilite({
   apiServerUrl: process.env.API_SERVER_URL,

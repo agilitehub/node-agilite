@@ -4,10 +4,10 @@ require('agilite-utils/dotenv').config()
 const UUID = require('agilite-utils/uuid')
 const TypeDetect = require('agilite-utils/type-detect')
 const expect = require('chai').expect
-const Agilite = require('../controllers/agilite')
+const Agilite = require('../dist/controllers/agilite')
 const EnumsTypeDetect = require('agilite-utils/enums-type-detect')
 const DataTemplate = require('../data-templates/bpm')
-const Enums = require('../utils/enums')
+const { Enums } = require('../dist/utils/enums')
 const MochaAgiliteCon = require('../mocha-agilite/controller')
 const BPMModel = require('../test-models/bpm')
 
@@ -784,7 +784,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
 
       agilite.BPM.registerBPMRecord(key, user)
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           expect(response).to.haveOwnProperty('data')
           expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
@@ -1974,7 +1974,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
       //   expect(TypeDetect(response.data.keywords)).to.equal(EnumsTypeDetect.ARRAY)
       // })
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           expect(response).to.haveOwnProperty('data')
           expect(TypeDetect(response.data)).to.equal(EnumsTypeDetect.OBJECT)
 
@@ -2135,7 +2135,7 @@ describe('\nAgilit-e BPM Custom Tests\n', async () => { // eslint-disable-line
             expect(TypeDetect(response.data.history[x].toStepName)).to.equal(EnumsTypeDetect.STRING)
             expect(response.data.history[x].toStepName).to.equal(mainEntry.data.processSteps[x].name)
 
-            console.log(response.data.history[x].eventStamp)
+            // console.log(response.data.history[x].eventStamp)
             expect(response.data.history[x]).to.haveOwnProperty('eventStamp')
             expect(TypeDetect(response.data.history[x].eventStamp)).to.equal(EnumsTypeDetect.ARRAY)
             expect(TypeDetect(response.data.history[x].eventStamp[0])).to.equal(EnumsTypeDetect.STRING)
