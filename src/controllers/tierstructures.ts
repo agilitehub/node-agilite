@@ -32,18 +32,18 @@ class TierStructures {
     }
   }
 
-  postData (data: any = {}, logProcessId: string = '') {
+  postData (data: any = {}, logProcessKey: string = '') {
     let headers: any = {}
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TIER_STRUCTURES, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessKey: string = '') {
     let headers: any = {}
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -52,34 +52,34 @@ class TierStructures {
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TIER_STRUCTURES, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+  putData (recordId: string = '', data: any = {}, logProcessKey: string = '') {
     let headers: any = {}
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TIER_STRUCTURES, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId: string = '', logProcessId: string = '') {
+  deleteData (recordId: string = '', logProcessKey: string = '') {
     let headers: any = {}
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_TIER_STRUCTURES, Enums.METHOD_DELETE, null, headers)
   }
 
-  getTierByKey (tierKeys: Array<string> = [], includeValues: boolean = true, includeMetaData: boolean = false, includeTierEntries: boolean = false, sortValues: string = '', valuesOutputFormat: string = '', logProcessId: string = '') {
+  getTierByKey (tierKeys: Array<string> = [], includeValues: boolean = true, includeMetaData: boolean = false, includeTierEntries: boolean = false, sortValues: string = '', valuesOutputFormat: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_TIER_STRUCTURES}/getTierByKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (tierKeys) config.headers[Enums.HEADER_TIER_KEYS] = tierKeys.join(Enums.SEPARATOR_COMMA)
     if (includeValues) config.headers[Enums.HEADER_INCLUDE_VALUES] = includeValues
     if (includeMetaData) config.headers[Enums.HEADER_INCLUDE_META_DATA] = includeMetaData

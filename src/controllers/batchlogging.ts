@@ -28,52 +28,52 @@ class BatchLogging {
     }
   }
 
-  postData (data: any = {}, logProcessId: string = '') {
+  postData (data: any = {}, logProcessKey: string = '') {
     let headers: any = {}
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessId: string = '') {
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessKey: string = '') {
     let headers: any = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId: string = '', data: any = {}, logProcessId: string = '') {
+  putData (recordId: string = '', data: any = {}, logProcessKey: string = '') {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId: string = '', logProcessId: string = '') {
+  deleteData (recordId: string = '', logProcessKey: string = '') {
     let headers: any = {}
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessId) headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_BATCH_LOGGING, Enums.METHOD_DELETE, null, headers)
   }
 
-  getByProfileKey (profileKey: string = '', logProcessId: string = '') {
+  getByProfileKey (profileKey: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/getByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -81,7 +81,7 @@ class BatchLogging {
     return executeRequest(config)
   }
 
-  initLogProcess (profileKey: string = '', data: any = {}, logProcessId: string = '') {
+  initLogProcess (profileKey: string = '', data: any = {}, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/initLogProcess`,
       method: Enums.METHOD_POST,
@@ -89,7 +89,7 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -97,7 +97,7 @@ class BatchLogging {
     return executeRequest(config)
   }
 
-  completeLogProcess (logProcessId: string = '', data: any = {}) {
+  completeLogProcess (logProcessKey: string = '', data: any = {}) {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/completeLogProcess`,
       method: Enums.METHOD_POST,
@@ -105,14 +105,14 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  createLogEntry (logProcessId: string = '', data: any = {}) {
+  createLogEntry (logProcessKey: string = '', data: any = {}) {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/createLogEntry`,
       method: Enums.METHOD_POST,
@@ -120,21 +120,21 @@ class BatchLogging {
       data
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  generateLogProcessReport (logProcessId: string = '', qry: string = '', fieldsToReturn: string = '', qryOptions: any = null, page: any = null, pageLimit: any = null) {
+  generateLogProcessReport (logProcessKey: string = '', qry: string = '', fieldsToReturn: string = '', qryOptions: any = null, page: any = null, pageLimit: any = null) {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_BATCH_LOGGING}/report`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
 
     if (qry) config.headers.qry = qry
     if (fieldsToReturn) config.headers[Enums.HEADER_FIELDS_TO_RETURN] = fieldsToReturn

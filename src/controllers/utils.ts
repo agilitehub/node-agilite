@@ -34,7 +34,7 @@ class Utils {
     }
   }
 
-  encodeXML (data: string = '', logProcessId: string = '') {
+  encodeXML (data: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/encodeXML`,
       method: Enums.METHOD_POST,
@@ -44,14 +44,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  decodeXML (data: string = '', logProcessId: string = '') {
+  decodeXML (data: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/decodeXML`,
       method: Enums.METHOD_POST,
@@ -61,14 +61,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  XMLToJS (data: string = '', logProcessId: string = '') {
+  XMLToJS (data: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/XMLToJS`,
       method: Enums.METHOD_POST,
@@ -78,14 +78,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  JSToXML (data: any = {}, logProcessId: string = '') {
+  JSToXML (data: any = {}, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/JSToXML`,
       method: Enums.METHOD_POST,
@@ -95,14 +95,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  html2json (data: string = '', logProcessId: string = '') {
+  html2json (data: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/html2json`,
       method: Enums.METHOD_POST,
@@ -112,14 +112,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_TEXT_PLAIN
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  jsonDiff (data: string = '', logProcessId: string = '') {
+  jsonDiff (data: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/jsonDiff`,
       method: Enums.METHOD_POST,
@@ -129,14 +129,14 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  generateOCR (recordId: string, logProcessId = '') {
+  generateOCR (recordId: string, logProcessKey = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateOCR`,
       method: Enums.METHOD_POST,
@@ -145,7 +145,7 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
@@ -153,7 +153,7 @@ class Utils {
     return executeRequest(config)
   }
 
-  generateUsername (fullName: string, data: any = [], logProcessId: string = '') {
+  generateUsername (fullName: string, data: any = [], logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUsername`,
       method: Enums.METHOD_POST,
@@ -163,7 +163,7 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
     if (fullName) config.headers[Enums.HEADER_FULL_NAME] = fullName
@@ -171,7 +171,7 @@ class Utils {
     return executeRequest(config)
   }
 
-  generatePDF (data: any = {}, logProcessId: string = '') {
+  generatePDF (data: any = {}, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generatePDF`,
       method: Enums.METHOD_POST,
@@ -181,35 +181,35 @@ class Utils {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  generateUUID (logProcessId: string = '') {
+  generateUUID (logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/generateUUID`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  formatDateTime (dateTimeValue: string = '', formatKey: string = '', logProcessId: string = '') {
+  formatDateTime (dateTimeValue: string = '', formatKey: string = '', logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/formatDateTime`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (dateTimeValue) config.headers[Enums.HEADER_DATE_TIME_VALUE] = dateTimeValue
     if (formatKey) config.headers[Enums.HEADER_FORMAT_KEY] = formatKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -218,28 +218,28 @@ class Utils {
     return executeRequest(config)
   }
 
-  account (logProcessId: string = '') {
+  account (logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_ADMIN}/account`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
 
     return executeRequest(config)
   }
 
-  dashboardReports (startDate: string, endDate: string, logProcessId: string = '') {
+  dashboardReports (startDate: string, endDate: string, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_REPORTS}/dashboard`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (startDate) config.headers[Enums.HEADER_START_DATE] = startDate
     if (endDate) config.headers[Enums.HEADER_END_DATE] = endDate
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -261,7 +261,7 @@ class Utils {
     return executeRequest(config)
   }
 
-  exportData (includeModules: boolean = false, solutionsArray: Array<any> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessId: string = '') {
+  exportData (includeModules: boolean = false, solutionsArray: Array<any> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/exportAllData`,
       method: Enums.METHOD_GET,
@@ -269,7 +269,7 @@ class Utils {
       responseType: 'arraybuffer'
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (includeModules) config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
     if (solutionsArray) config.headers.solutions = solutionsArray
     if (includeData) config.headers[Enums.HEADER_INCLUDE_DATA] = includeData
@@ -280,14 +280,14 @@ class Utils {
     return executeRequest(config)
   }
 
-  importData (fileId: string, includeModules: boolean = false, solutionsArray: Array<string> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessId: string = '') {
+  importData (fileId: string, includeModules: boolean = false, solutionsArray: Array<string> = [], includeData: boolean = false, includeCredentials: boolean = false, logProcessKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_UTILS}/importData`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessId) config.headers[Enums.HEADER_LOG_PROCESS_ID] = logProcessId
+    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
     if (fileId) config.headers[Enums.HEADER_FILE_ID] = fileId
     if (includeModules) config.headers[Enums.HEADER_INCLUDE_MODULES] = includeModules
     if (solutionsArray) config.headers.solutions = solutionsArray
