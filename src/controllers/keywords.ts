@@ -42,18 +42,18 @@ class Keywords {
     }
   }
 
-  postData (data: any = {}, logProcessKey: string = '') {
+  postData (data: any = {}, logProfileKey: string = '') {
     let headers: any = {}
 
-    if (logProcessKey)  headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey)  headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessKey: string = '') {
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProfileKey: string = '') {
     let headers: any = {}
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
@@ -62,34 +62,34 @@ class Keywords {
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId: string = '', data: any = {}, logProcessKey: string = '') {
+  putData (recordId: string = '', data: any = {}, logProfileKey: string = '') {
     let headers: any = {}
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId: string = '', logProcessKey: string = '') {
+  deleteData (recordId: string = '', logProfileKey: string = '') {
     let headers: any = {}
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     headers[Enums.HEADER_RECORD_ID] = recordId
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_KEYWORDS, Enums.METHOD_DELETE, null, headers)
   }
 
-  getValuesByProfileKey (profileKey: string = '', sort: string = '', outputFormat: string = '', logProcessKey: string = '') {
+  getValuesByProfileKey (profileKey: string = '', sort: string = '', outputFormat: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getValuesByProfileKey`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (sort) config.headers[Enums.HEADER_SORT] = sort
     if (outputFormat) config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
@@ -99,7 +99,7 @@ class Keywords {
     return executeRequest(config)
   }
 
-  setValuesByProfileKey (profileKey: string = '', values: Array<Values> = [], logProcessKey: string = '') {
+  setValuesByProfileKey (profileKey: string = '', values: Array<Values> = [], logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValuesByProfileKey`,
       method: Enums.METHOD_POST,
@@ -107,7 +107,7 @@ class Keywords {
       data: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (values) config.data = values
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -116,14 +116,14 @@ class Keywords {
     return executeRequest(config)
   }
 
-  getProfileKeysByGroup (groupName: string = '', sort: string = '', logProcessKey: string = '') {
+  getProfileKeysByGroup (groupName: string = '', sort: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getProfileKeysByGroup`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (groupName) config.headers[Enums.HEADER_GROUP_NAME] = groupName
     if (sort) config.headers[Enums.HEADER_SORT] = sort
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
@@ -132,14 +132,14 @@ class Keywords {
     return executeRequest(config)
   }
 
-  getLabelByValue (profileKey: string = '', value: string = '', outputFormat: string = '', logProcessKey: string = '') {
+  getLabelByValue (profileKey: string = '', value: string = '', outputFormat: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getLabelByValue`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (value) config.headers[Enums.HEADER_VALUE_KEY] = value
     if (outputFormat) config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
@@ -149,14 +149,14 @@ class Keywords {
     return executeRequest(config)
   }
 
-  setLabelByValue (profileKey: string = '', valueKey: string = '', label: string = '', logProcessKey: string = '') {
+  setLabelByValue (profileKey: string = '', valueKey: string = '', label: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setLabelByValue`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (valueKey) config.headers[Enums.HEADER_VALUE_KEY] = valueKey
     if (label) config.headers[Enums.HEADER_LABEL] = label
@@ -166,14 +166,14 @@ class Keywords {
     return executeRequest(config)
   }
 
-  getValueByLabel (profileKey: string = '', label: string = '', outputFormat: string = '', logProcessKey: string = '') {
+  getValueByLabel (profileKey: string = '', label: string = '', outputFormat: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/getValueByLabel`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (label) config.headers[Enums.HEADER_LABEL_KEY] = label
     if (outputFormat) config.headers[Enums.HEADER_OUTPUT_FORMAT] = outputFormat
@@ -183,14 +183,14 @@ class Keywords {
     return executeRequest(config)
   }
 
-  setValueByLabel (profileKey: string = '', labelKey: string = '', value: string = '', logProcessKey: string = '') {
+  setValueByLabel (profileKey: string = '', labelKey: string = '', value: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_KEYWORDS}/setValueByLabel`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (labelKey) config.headers[Enums.HEADER_LABEL_KEY] = labelKey
     if (value) config.headers[Enums.HEADER_VALUE] = value

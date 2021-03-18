@@ -17,47 +17,47 @@ class Events {
     }
   }
 
-  postData (data: any = {}, logProcessKey: string = '') {
+  postData (data: any = {}, logProfileKey: string = '') {
     let headers: any = {}
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_EVENTS, Enums.METHOD_POST, data, headers)
   }
 
-  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProcessKey: string = '') {
+  getData (profileKeys: Array<string> = [], recordIds: Array<string> = [], slimResult: boolean = true, logProfileKey: string = '') {
     const headers: any = {}
 
     headers[Enums.HEADER_PROFILE_KEYS] = profileKeys.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_RECORD_IDS] = recordIds.join(Enums.SEPARATOR_COMMA)
     headers[Enums.HEADER_SLIM_RESULT] = slimResult
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_EVENTS, Enums.METHOD_GET, null, headers)
   }
 
-  putData (recordId: string = '', data: any = {}, logProcessKey: string = '') {
+  putData (recordId: string = '', data: any = {}, logProfileKey: string = '') {
     const headers: any = {}
   
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_EVENTS, Enums.METHOD_PUT, data, headers)
   }
 
-  deleteData (recordId: string = '', logProcessKey: string = '') {
+  deleteData (recordId: string = '', logProfileKey: string = '') {
     const headers: any = {}
   
     headers[Enums.HEADER_RECORD_ID] = recordId
 
-    if (logProcessKey) headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
 
     return executeCRUDRequest(this.apiServerUrl, this.apiKey, this.teamId, Enums.MODULE_KEY_EVENTS, Enums.METHOD_DELETE, null, headers)
   }
 
-  execute (profileKey: string = '', data: any = {}, logProcessKey: string = '') {
+  execute (profileKey: string = '', data: any = {}, logProfileKey: string = '') {
     const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_EVENTS}/execute`,
       method: Enums.METHOD_POST,
@@ -67,7 +67,7 @@ class Events {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -75,7 +75,7 @@ class Events {
     return executeRequest(config)
   }
 
-  subscribe (profileKey: string = '', data: any = {}, logProcessKey: string = '') {
+  subscribe (profileKey: string = '', data: any = {}, logProfileKey: string = '') {
     const config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_EVENTS}/subscribe`,
       method: Enums.METHOD_POST,
@@ -85,7 +85,7 @@ class Events {
 
     config.headers[Enums.HEADER_CONTENT_TYPE] = Enums.HEADER_APPLICATION_JSON
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (profileKey) config.headers[Enums.HEADER_PROFILE_KEY] = profileKey
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId

@@ -27,7 +27,7 @@ class Files {
     }
   }
 
-  getFile (recordId: string = '', responseType = this.responseType.ARRAY_BUFFER, logProcessKey: string = '') {
+  getFile (recordId: string = '', responseType = this.responseType.ARRAY_BUFFER, logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_GET,
@@ -35,7 +35,7 @@ class Files {
       responseType
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -43,14 +43,14 @@ class Files {
     return executeRequest(config)
   }
 
-  getPublicFile (recordId: string = '', logProcessKey: string = '') {
+  getPublicFile (recordId: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/${recordId}`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -58,7 +58,7 @@ class Files {
     return executeRequest(config)
   }
 
-  uploadFile (fileName: string = '', contentType: string = '', data: any = {}, persistFile: boolean = false, isPublic: boolean = false, logProcessKey: string = '') {
+  uploadFile (fileName: string = '', contentType: string = '', data: any = {}, persistFile: boolean = false, isPublic: boolean = false, logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_POST,
@@ -66,7 +66,7 @@ class Files {
       data
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (fileName) config.headers[Enums.HEADER_FILE_NAME] = fileName
     if (contentType) config.headers[Enums.HEADER_CONTENT_TYPE] = contentType
     if (persistFile) config.headers[Enums.HEADER_PERSIST_FILE] = persistFile
@@ -77,14 +77,14 @@ class Files {
     return executeRequest(config)
   }
 
-  deleteFile (recordId: string = '', logProcessKey: string = '') {
+  deleteFile (recordId: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}`,
       method: Enums.METHOD_DELETE,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -92,14 +92,14 @@ class Files {
     return executeRequest(config)
   }
 
-  getFileName (recordId: string = '', logProcessKey: string = '') {
+  getFileName (recordId: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/getFileName`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
@@ -107,14 +107,14 @@ class Files {
     return executeRequest(config)
   }
 
-  unzip (recordId: string = '', logProcessKey: string = '') {
+  unzip (recordId: string = '', logProfileKey: string = '') {
     let config: AxiosConfig = {
       url: `${this.apiServerUrl}/${Enums.MODULE_KEY_FILES}/unzip`,
       method: Enums.METHOD_GET,
       headers: {}
     }
 
-    if (logProcessKey) config.headers[Enums.HEADER_LOG_PROCESS_KEY] = logProcessKey
+    if (logProfileKey) config.headers[Enums.HEADER_LOG_PROFILE_KEY] = logProfileKey
     if (recordId) config.headers[Enums.HEADER_RECORD_ID] = recordId
     if (this.apiKey) config.headers[Enums.HEADER_API_KEY] = this.apiKey
     if (this.teamId) config.headers[Enums.HEADER_TEAM_NAME] = this.teamId
