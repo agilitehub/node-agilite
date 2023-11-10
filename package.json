@@ -45,6 +45,6 @@
   },
   "dependencies": {
     "agilite-utils": "7.2.12",
-    "axios": "0.21.1"
+    "axios": "1.6.0"
   }
 }
